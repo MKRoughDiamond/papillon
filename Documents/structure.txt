@@ -1,0 +1,83 @@
+ITEM
+	name(string)
+	description(string)
+	recipe(Recipe list)
+	requirements(string list)
+	effects(Effects list)
+	num of items(int) <- limit(int)
+
+RECIPE
+	result(string)
+	ingredients(item list)
+	number of results(int)
+
+RESEARCH
+	available(Tech list)
+	done(Tech list)
+	Techtree(Tech tree)
+
+TECH
+	name(string)
+	description(string)
+	research point(int)
+	current point(int)
+	isDone(bool)
+	requirements(String list)
+	effects(Effects list)
+
+AREA
+	name(string)
+	type(string)
+	feature(Effects list)
+	isBase(bool)
+	base(Base)
+	map for item farming(itemFarming)
+
+ITEMFARMING
+	size_x(int)
+	size_y(int)
+	itemspawns(spawn list)
+	objectspawns(spawn list)
+
+SPAWN
+	name(int)
+	size_x(int)
+	size_y(int)
+	position_x(int)
+	position_y(int)
+	requirements to break(string list)
+	results(item list)
+
+BASE
+	curr room(Room pointer or string?)
+	lab(Room)
+	agricultural complex(Room)
+	factory(Room)
+	storage(item list)
+	position(area list)
+
+ROOM
+	type(string)
+	size(int) - cube
+	size upgrade(Recipe)
+	machines(Machine list)
+	
+MACHINE
+	name(string)
+	size_x(int)
+	size_y(int)
+	position_x(int)
+	positino_y(int)		//left-top
+	
+PLAYER
+	inventory(item list)
+	health(int)
+	hunger(int)
+	armor(int)
+	buff(Effects list)
+
+GAMEPLAY
+	MAP(Area graph)
+	Left most area(Area list)
+	PLAYER(Player)
+	turn(int)
