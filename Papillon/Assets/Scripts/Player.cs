@@ -57,7 +57,7 @@ public class Player : MonoBehaviour {
 
     public bool useItem(int id) {
         foreach(Item item in items) {
-            if(item.id == id) {
+            if(item.id == id && item.isUsable) {
                 // TODO: try use item
                 return true;
             }
