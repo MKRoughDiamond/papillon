@@ -12,13 +12,46 @@ public class BoardManager : MonoBehaviour {
 
     public void boardSetup(int scene) {
         switch (scene) {
-            case SCENES.RESEARCH:
-                researchSetup();
+            case SCENES.ITEMCOLLECT:
+                itemCollectSetup();
+                break;
+            case SCENES.FACTORY:
+                factorySetup();
+                break;
+            case SCENES.LAB:
+                labSetup();
+                break;
+            case SCENES.FARM:
+                farmSetup();
+                break;
+            case SCENES.MAP:
+                mapSetup();
                 break;
         }
     }
 
-    private void researchSetup() {
+    private void itemCollectSetup()
+    {
+        return;
+    }
+
+    private void factorySetup()
+    {
+        return;
+    }
+
+    private void labSetup()
+    {
+        return;
+    }
+
+    private void farmSetup()
+    {
+        return;
+    }
+
+    private void mapSetup()
+    {
         return;
     }
 }

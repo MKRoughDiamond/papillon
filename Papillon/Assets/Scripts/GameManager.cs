@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         boardManager = GetComponent<BoardManager>();
-        scene = SCENES.RESEARCH;
+        scene = SCENES.ITEMCOLLECT;
 
         initGame();
     }
@@ -30,6 +30,17 @@ public class GameManager : MonoBehaviour {
     }
 }
 
+//SCENES
+/*ITEMCOLLECT                    0
+  FACTORY(FOR PRODUCTION)        1
+  LAB(FOR RESEARCH)              2
+  FARM(FOR FARMING)              3
+  MAP                            4 */
+    
 public static class SCENES {
-    public const int RESEARCH = 0;
+    public const int ITEMCOLLECT = 0;
+    public const int FACTORY = 1;
+    public const int LAB = 2;
+    public const int FARM = 3;
+    public const int MAP = 4;
 }
