@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gm = null;
 
     private BoardManager boardManager;
+    private Player player;
     private int scene;
 
     private void Awake() {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         boardManager = GetComponent<BoardManager>();
+        player = new Player(100, 100, 0, 100);          // TODO: Better initialise different way.
         scene = SCENES.LAB;
 
         initGame();
@@ -33,6 +35,10 @@ public class GameManager : MonoBehaviour {
 
     private void initGame() {
         boardManager.boardSetup(scene);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }
 

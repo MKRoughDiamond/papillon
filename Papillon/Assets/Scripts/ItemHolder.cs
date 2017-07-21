@@ -7,13 +7,33 @@ using UnityEngine;
 /// </summary>
 public class ItemHolder : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public int itemId;
+    public int count;
+
+    private GameManager gm;
+    private Player player;
+
+    private void Awake() {
+        gm = GameManager.gm;
+        player = gm.getPlayer();
+    }
+
+    public void dropItem() {
+        player.getItems(itemId, 1);
+        count--;
+
+        if(count < 1) {
+            destroyItem();
+        }
+    }
+
+    public void dropAllItems() {
+        player.getItems(itemId, count);
+        destroyItem();
+    }
+
+    private void destroyItem() {
+        // someDestoryEvent();
+        Destroy(gameObject);
+    }
 }

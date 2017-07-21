@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     public float ItemWeightsSum;            // Sum of item weights
     public bool ItemOverLoaded;             // ItemWeightsSum > max_weight ?
 
-    public bool inBuff;                     // player is getting buff
+    //public bool inBuff;                     // player is getting buff
 
 
     public Player(int max_health, int max_satiety, int max_armor, float max_weight) {
@@ -28,6 +28,7 @@ public class Player : MonoBehaviour {
         initializeStates();
     }
 
+    // initialize player's states
     private void initializeStates() {
         health = max_health;
         satiety = max_satiety;
@@ -51,13 +52,28 @@ public class Player : MonoBehaviour {
         return ItemOverLoaded == true;
     }
 
-    public bool isOnBuff() {
-        return inBuff == true;
+    //public bool isOnBuff() {
+    //    return inBuff == true;
+    //}
+
+    // get item from object(itemholder)
+    public void getItems(int id, int count) {
+        Item item = ItemDatabase.findItem(id);
+
+        for(int i = 0; i < count; i++) {
+            if(item.getType() == ITEMTYPE.WEARABLE) {
+                // someGetItemEvent(id); (update research point, etc...)
+                changeArmor(item.armor);
+            }
+            items.Add(item);
+        }
+        updateItemWeightsSum();
     }
 
+    // use item
     public bool useItem(int id) {
         foreach(Item item in items) {
-            if(item.id == id && item.isUsable) {
+            if(item.id == id && item.getType() == ITEMTYPE.USABLE) {
                 // TODO: try use item
                 return true;
             }
@@ -66,6 +82,7 @@ public class Player : MonoBehaviour {
         return false;
     }
 
+    // update total weight player holds, need to be called whenever player use or get item
     private void updateItemWeightsSum() {
         float sum = 0.0f;
         foreach (Item item in items) {
