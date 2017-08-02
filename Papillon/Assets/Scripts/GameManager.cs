@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour {
     private int scene;
 
     private void Awake() {
-        
         // Singleton object
         if (gm == null)
             gm = this;
@@ -23,7 +22,7 @@ public class GameManager : MonoBehaviour {
 
         boardManager = GetComponent<BoardManager>();
         player = new Player(100, 100, 0, 100);          // TODO: Better initialise different way.
-        scene = SCENES.LAB;
+        scene = SCENES.ITEMCOLLECT;
 
         initGame();
     }
@@ -35,6 +34,7 @@ public class GameManager : MonoBehaviour {
 
     private void initGame() {
         boardManager.boardSetup(scene);
+        SceneManager.LoadScene(scene);
     }
 
     public Player getPlayer() {
@@ -55,4 +55,5 @@ public static class SCENES {
     public const int FACTORY = 2;
     public const int FARM = 3;
     public const int MAP = 4;
+    public const int MAIN = 5;
 }
