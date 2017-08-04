@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour {
+public class Item {
 
     private int id;                  // Unique ID of item
     private string name;             // Name of item
@@ -28,19 +28,21 @@ public class Item : MonoBehaviour {
         LoadIcon();
     }
 
-    public Item(int id, string name, string description, float weight, int type, int armor) {
+    public Item(int id, string name, string description, float weight, int type)
+    {
         this.id = id;
         this.name = name;
         this.description = description;
         this.weight = weight;
-
         this.type = type;
+        effect = null;
 
         LoadIcon();
     }
 
-    private void LoadIcon() {
-        // TODO: icon load
+    private void LoadIcon()
+    {
+        icon = Resources.Load<Texture2D>("icon/" + name);
     }
 
     public int getId() {

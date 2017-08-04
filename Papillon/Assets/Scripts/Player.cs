@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player {
 
     public int max_health;
     public int max_satiety;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
         this.max_satiety = max_satiety;
         this.max_armor = max_armor;
         this.max_weight = max_weight;
-
+        inventory = new List<InventoryElement>();
         initializeStates();
     }
 
