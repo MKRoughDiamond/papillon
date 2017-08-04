@@ -19,7 +19,7 @@ public class ItemHolder : MonoBehaviour {
     }
 
     public void dropItem() {
-        player.getItems(itemId, 1);
+        player.addItem(itemId, 1);
         count--;
 
         if(count < 1) {
@@ -28,7 +28,7 @@ public class ItemHolder : MonoBehaviour {
     }
 
     public void dropAllItems() {
-        player.getItems(itemId, count);
+        player.addItem(itemId, count);
         destroyItem();
     }
 

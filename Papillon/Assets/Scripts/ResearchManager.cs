@@ -18,8 +18,8 @@ public class ResearchManager : MonoBehaviour {
 
     }
 
-    public void researchInit() {
-        List<Technology> lockedList = TechnologyDatabase.load();
+    public void init() {
+        lockedList = TechnologyDatabase.load();
 
         // move basic technologies to available
         for(int i = lockedList.Count-1; i>=0; i--) {
@@ -54,7 +54,7 @@ public class ResearchManager : MonoBehaviour {
 
     // update technologies' requirements
     private void spreadResearchDone(int id) {
-        for(int i=lockedList.Count-1; i>=0; i++) {
+        for(int i=lockedList.Count-1; i>=0; i--) {
 
             // update
             lockedList[i].updateRequirements(id);
