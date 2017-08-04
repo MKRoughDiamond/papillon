@@ -15,7 +15,7 @@ public class ItemHolder : MonoBehaviour {
 
     private void Awake() {
         gm = GameManager.gm;
-        player = gm.getPlayer();
+        //player = gm.getPlayer();
     }
 
     public void dropItem() {
