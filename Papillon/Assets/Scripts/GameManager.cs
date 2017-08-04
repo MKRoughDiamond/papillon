@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gm = null;
 
     private BoardManager boardManager;
+    private ItemDatabase itemDB;
     private Player player;
     private int scene;
 
@@ -21,13 +22,13 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         boardManager = GetComponent<BoardManager>();
-        player = new Player(100, 100, 0, 100);          // TODO: Better initialise different way.
+        player = new Player(100, 100, 0, 100f);          // TODO: Better initialise different way.
+        ItemDatabase.init();
         scene = SCENES.ITEMCOLLECT;
-
         initGame();
     }
 
-    private void OnLevelWasLoaded(int level) {
+    private void OnSceneLoaded(int level) {
         scene = level;
         boardManager.boardSetup(scene);
     }
