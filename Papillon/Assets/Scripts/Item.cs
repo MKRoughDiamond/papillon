@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Item : MonoBehaviour {
 
-    public int id;                  // Unique ID of item
-    public string name;             // Name of item
-    public string description;      // Item description
-    public float weight;            // Item weight
-    public int armor;               // Item armor value
-    public int type;           // Usable item
+    private int id;                  // Unique ID of item
+    private string name;             // Name of item
+    private string description;      // Item description
+    private float weight;            // Item weight
+    private int armor;               // Item armor value
+    private int type;           // Usable item
 
     public delegate IEnumerator ItemEffect(Item item);
-    public ItemEffect effect;       // Item effect
+    private ItemEffect effect;       // Item effect
 
     private Texture2D icon;         // Item icon
 
@@ -43,6 +43,9 @@ public class Item : MonoBehaviour {
         // TODO: icon load
     }
 
+    public int getId() {
+        return id;
+    }
 
     public float getWeight() {
         return weight;

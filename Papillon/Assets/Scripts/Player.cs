@@ -12,9 +12,9 @@ public class Player : MonoBehaviour {
     public int health;
     public int satiety;
     public int armor;
-    public List<Item> items;                // Items that player holds
-    public float ItemWeightsSum;            // Sum of item weights
-    public bool ItemOverLoaded;             // ItemWeightsSum > max_weight ?
+    public List<InventoryElement> inventory;    // Items that player holds
+    public float itemWeightsSum;                // Sum of item weights
+    public bool itemOverLoaded;                 // ItemWeightsSum > max_weight ?
 
     //public bool inBuff;                     // player is getting buff
 
@@ -49,7 +49,7 @@ public class Player : MonoBehaviour {
     }
 
     public bool isOverLoaded() {
-        return ItemOverLoaded == true;
+        return itemOverLoaded == true;
     }
 
     //public bool isOnBuff() {
@@ -57,23 +57,32 @@ public class Player : MonoBehaviour {
     //}
 
     // get item from object(itemholder)
-    public void getItems(int id, int count) {
+    public void addItem(int id, int count) {
         Item item = ItemDatabase.findItem(id);
+        bool haveItem = checkItemPossession(id, 1);
 
-        for(int i = 0; i < count; i++) {
-            if(item.getType() == ITEMTYPE.WEARABLE) {
-                // someGetItemEvent(id); (update research point, etc...)
-                changeArmor(item.armor);
+        // if don't have that item, add new element to Inventory
+        if (!haveItem)
+            inventory.Add(new InventoryElement(item, 0));
+
+        // update count
+        for(int i = 0; i < inventory.Count; i++) {
+            if(inventory[i].item.getId() == id) {
+                inventory[i].updateCount(count);
+
+                if(item.getType() == ITEMTYPE.WEARABLE) {
+                    changeArmor(item.getArmor());
+                }
             }
-            items.Add(item);
         }
+
         updateItemWeightsSum();
     }
 
     // use item
     public bool useItem(int id) {
-        foreach(Item item in items) {
-            if(item.id == id && item.getType() == ITEMTYPE.USABLE) {
+        foreach(InventoryElement e in inventory) {
+            if(e.item.getId() == id && e.item.getType() == ITEMTYPE.USABLE) {
                 // TODO: try use item
                 return true;
             }
@@ -82,17 +91,62 @@ public class Player : MonoBehaviour {
         return false;
     }
 
+    // remove item
+    // used for crafting or discarding
+    public bool removeItem(int id, int count) {
+        for (int i = inventory.Count - 1; i >= 0; i--) {
+            if (inventory[i].item.getId() == id) {
+
+                if(inventory[i].count > count) {
+                    inventory[i].updateCount(-count);
+                    return true;
+                } else if(inventory[i].count == count) {
+                    inventory[i].updateCount(-count);
+                    inventory.RemoveAt(i);
+                    return true;
+                } else {
+                    Debug.Log("ERROR : removeItem() fail - not enough items");
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    // check if player have item with enough count
+    // used for crafting, adding item
+    public bool checkItemPossession(int id, int count) {
+        foreach (InventoryElement e in inventory) {
+            if (e.item.getId() == id)
+                return e.count >= count;
+        }
+        return false;
+    }
+
     // update total weight player holds, need to be called whenever player use or get item
     private void updateItemWeightsSum() {
         float sum = 0.0f;
-        foreach (Item item in items) {
-            sum += item.getWeight();
+        foreach (InventoryElement e in inventory) {
+            sum += e.item.getWeight() * e.count;
         }
 
-        ItemOverLoaded = sum > max_weight;
-        ItemWeightsSum = sum;
+        itemOverLoaded = sum > max_weight;
+        itemWeightsSum = sum;
+    }
+}
+
+public class InventoryElement {
+    public Item item;
+    public int count;
+
+    public InventoryElement(Item item, int count) {
+        this.item = item;
+        this.count = count;
     }
 
-
-
+    public void updateCount(int delta) {
+        count += delta;
+    }
 }
+
