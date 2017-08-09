@@ -37,6 +37,7 @@ public class Item {
         this.type = type;
         effect = null;
 
+
         LoadIcon();
     }
 
