@@ -6,14 +6,15 @@ public class BoardManager : MonoBehaviour {
 
     private GameManager gm;
 
-    private void Awake() {
+    private void Awake()
+    {
         gm = GameManager.gm;
     }
 
     public void boardSetup(int scene) {
         switch (scene) {
-            case SCENES.ITEMCOLLECT:
-                itemCollectSetup();
+            case SCENES.FIELD:
+                fieldSetup();
                 break;
             case SCENES.FACTORY:
                 factorySetup();
@@ -30,7 +31,7 @@ public class BoardManager : MonoBehaviour {
         }
     }
 
-    private void itemCollectSetup()
+    private void fieldSetup()
     {
         return;
     }
