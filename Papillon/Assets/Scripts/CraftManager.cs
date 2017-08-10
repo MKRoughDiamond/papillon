@@ -22,25 +22,37 @@ public class CraftManager : MonoBehaviour {
     }
 
     // craft Item
-    public bool craft(Recipe recipe, int craftCount) {
+    public bool craft(int recipeId, int craftCount) {
+        Recipe recipe = getRecipe(recipeId);
         List<RecipeElement> ingredients = recipe.getIngredients();
         RecipeElement product = recipe.getProduct();
         
         foreach(RecipeElement e in ingredients) {
             // player don't have enough item
-            if(!player.checkItemPossession(e.id, e.count * craftCount)) {
+            if(!player.checkItemPossession(e.item.getId(), e.count * craftCount)) {
                 return false;
             }
         }
         
         foreach(RecipeElement e in ingredients) {
-            player.removeItem(e.id, e.count * craftCount);
+            player.removeItem(e.item.getId(), e.count * craftCount);
         }
-        player.addItem(product.id, product.count);
+        player.addItem(product.item.getId(), product.count);
         return true;
     }
 
     public List<Recipe> getRecipeList() {
         return recipeList;
+    }
+
+    private Recipe getRecipe(int id) {
+        foreach(Recipe recipe in recipeList) {
+            if(recipe.getId() == id) {
+                return recipe;
+            }
+        }
+
+        // if no matching recipe found
+        return null;
     }
 }

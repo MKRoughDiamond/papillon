@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager gm = null;
 
     private BoardManager boardManager;
+    private CraftManager craftManager;
     private ItemDatabase itemDB;
     private Player player;
     private int scene;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         boardManager = GetComponent<BoardManager>();
+        craftManager = GetComponent<CraftManager>();
         player = new Player(100, 100, 0, 100f);          // TODO: Better initialise different way.
         ItemDatabase.init();
         scene = SCENES.ITEMCOLLECT;
@@ -40,6 +42,10 @@ public class GameManager : MonoBehaviour {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public CraftManager getCraftManager() {
+        return craftManager;
     }
 }
 

@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class RecipeDatabase : MonoBehaviour {
 
+    private static List<Recipe> itemList;
+
+    public static void init() {
+
+        // NOT IMPLEMENTED
+
+        // below is for test
+
+        itemList = new List<Recipe>();
+    }
+
     public static Recipe findRecipe(int id) {
         //TODO: implement
         //return found_recipe;

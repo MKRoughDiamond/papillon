@@ -14,6 +14,10 @@ public class Recipe : MonoBehaviour {
         this.product = product;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public List<RecipeElement> getIngredients() {
         return ingredients;
     }
@@ -25,11 +29,12 @@ public class Recipe : MonoBehaviour {
 
 public class RecipeElement {
 
-    public int id;
+    public Item item;
     public int count;
 
     public RecipeElement(int id, int count) {
-        this.id = id;
+        // this.id = id;
+        this.item = ItemDatabase.findItem(id);
         this.count = count;
     }
 }
