@@ -7,7 +7,18 @@ using UnityEngine;
 /// </summary>
 public class Panel : MonoBehaviour {
 
+    // panel consists of multiple layout of panelElements
     public GameObject panelElement;
+
+    // switch open/close state
+    public virtual void switchPanel() {
+        if (gameObject.activeInHierarchy) {
+            close();
+        }
+        else {
+            open();
+        }
+    }
 
     // open panel
     // display all things

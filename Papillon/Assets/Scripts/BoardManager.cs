@@ -6,7 +6,7 @@ public class BoardManager : MonoBehaviour {
 
     private GameManager gm;
 
-    private void Awake()
+    public void init()
     {
         gm = GameManager.gm;
     }

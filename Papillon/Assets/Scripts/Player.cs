@@ -75,8 +75,10 @@ public class Player {
                 }
             }
         }
-
         updateItemWeightsSum();
+
+        // FOR DEBUG
+        printInventory();
     }
 
     // use item
@@ -117,6 +119,11 @@ public class Player {
     // check if player have item with enough count
     // used for crafting, adding item
     public bool checkItemPossession(int id, int count) {
+
+        // special case
+        if(count == 0)
+            return true;
+
         foreach (InventoryElement e in inventory) {
             if (e.item.getId() == id)
                 return e.count >= count;
@@ -133,6 +140,14 @@ public class Player {
 
         itemOverLoaded = sum > max_weight;
         itemWeightsSum = sum;
+    }
+
+    // 디버그용 함수, 인벤토리 관련 GUI가 완성되면 고쳐서 사용하던가 폐기하기.
+    private void printInventory() {
+        Debug.Log("---Player inventory---");
+        foreach(InventoryElement e in inventory) {
+            Debug.Log(e.item.getName() + '/' + e.count.ToString());
+        }
     }
 }
 

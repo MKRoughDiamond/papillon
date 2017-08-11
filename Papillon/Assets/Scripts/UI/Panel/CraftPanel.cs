@@ -18,13 +18,19 @@ public class CraftPanel : Panel {
 
         gameObject.SetActive(false);
     }
-
+    
+    // construct craft list that will be shown on the panel
     private void makeCraftList() {
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
-            GameObject element = Instantiate(panelElement, transform.Find("Scroll View/ViewPort/CraftList"));
+            // Generate elements
+            GameObject element = Instantiate(panelElement);
             element.GetComponent<CraftPanelElement>().init(recipe);
+
+            // Attach it to panel scroll list
+            // If you change name of object in inspector, you must change below code
+            element.transform.parent = transform.Find("Scroll/Viewport/CraftList");
         }
     }
 

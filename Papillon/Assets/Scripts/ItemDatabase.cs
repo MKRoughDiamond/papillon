@@ -16,7 +16,6 @@ public class ItemDatabase : MonoBehaviour {
         {
             string line;
             string[] words;
-            int itemCode = 0;
 
             StreamReader reader = new StreamReader("./Assets/Resources/Data/Item.txt", Encoding.Default);
 
@@ -25,14 +24,16 @@ public class ItemDatabase : MonoBehaviour {
                 line = reader.ReadLine();
                 while (line != null)
                 {
-                    itemCode++;
                     words = line.Split(' ');
-                    if (words.Length == 4)
-                        itemList.Add(new Item(itemCode,
-                            words[0].Replace('_',' '),
-                            words[1].Replace('_', ' '),
-                            System.Convert.ToSingle(words[2]),
-                            System.Convert.ToInt32(words[3])));
+                    if (words.Length == 5)
+                        // ITEM DB : 'ID NAME DESCRIPTION WEIGHT TYPE'
+                        itemList.Add(new Item(
+                            int.Parse(words[0]),
+                            words[1].Replace('_',' '),
+                            words[2].Replace('_', ' '),
+                            float.Parse(words[3]),
+                            int.Parse(words[4])
+                            ));
                     else
                     {
                         //TODO : ITEM EFFECT

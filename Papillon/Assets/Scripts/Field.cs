@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Field : MonoBehaviour {
+public class Field {
 
     private int type;
     // private effects

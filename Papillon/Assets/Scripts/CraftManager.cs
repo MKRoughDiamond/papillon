@@ -12,12 +12,9 @@ public class CraftManager : MonoBehaviour {
     private Player player;
     List<Recipe> recipeList;
 
-    private void Awake() {
+    public void init() {
         gm = GameManager.gm;
         player = gm.getPlayer();
-    }
-
-    public void init() {
         recipeList = RecipeDatabase.load();
     }
 
@@ -30,6 +27,7 @@ public class CraftManager : MonoBehaviour {
         foreach(RecipeElement e in ingredients) {
             // player don't have enough item
             if(!player.checkItemPossession(e.item.getId(), e.count * craftCount)) {
+                Debug.Log("NOT ENOUGH ITEM T.T");
                 return false;
             }
         }
@@ -38,6 +36,7 @@ public class CraftManager : MonoBehaviour {
             player.removeItem(e.item.getId(), e.count * craftCount);
         }
         player.addItem(product.item.getId(), product.count);
+        Debug.Log("Craft Done");
         return true;
     }
 

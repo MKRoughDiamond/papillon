@@ -16,6 +16,11 @@ public class GameManager : MonoBehaviour {
     private int scene;
 
     private void Start() {
+
+        /*
+         * GameManager Base Initializing
+         */
+
         // Singleton object
         if (gm == null)
             gm = this;
@@ -24,15 +29,39 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
-        boardManager = GetComponent<BoardManager>();
-        craftManager = GetComponent<CraftManager>();
-        map = GetComponent<Map>();
-        map.init();
-		
-        player = new Player(100, 100, 0, 100f);          // TODO: Better initialise different way.
-        ItemDatabase.init();
+        /*
+         *  Initializing player
+         *  TODO: Better initialize different way.
+         */
+        player = new Player(100, 100, 0, 100f);
 
+        /*
+         * Initializing Databases
+         * 
+         */
+        ItemDatabase.init();
+        RecipeDatabase.init();
+
+        /*
+         * Other Managers Initializing
+         * 
+         * **CAUTION**
+         * You must initialize managers after initializing databases, player
+         * because initializing managers contain loading object, data from database, player
+         */
+        boardManager = GetComponent<BoardManager>();
+        boardManager.init();
+        craftManager = GetComponent<CraftManager>();
+        craftManager.init();
+
+
+        map = GetComponent<Map>();
+        map.init();    
+
+        // default scene
         scene = SCENES.MAP;
+
+        // start game
         initGame();
     }
 
@@ -55,11 +84,13 @@ public class GameManager : MonoBehaviour {
 }
 
 //SCENES
-/*ITEMCOLLECT                    0
-  LAB(FOR RESEARCH)              1
-  FACTORY(FOR PRODUCTION)        2
-  FARM(FOR FARMING)              3
-  MAP                            4 */
+/*
+ * FIELD                          0
+ * LAB(FOR RESEARCH)              1
+ * FACTORY(FOR PRODUCTION)        2
+ * FARM(FOR FARMING)              3
+ * MAP                            4
+ */
 
 public static class SCENES {
     public const int FIELD = 0;

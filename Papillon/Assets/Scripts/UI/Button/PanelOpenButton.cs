@@ -13,6 +13,6 @@ public class PanelOpenButton : MonoBehaviour {
     }
 
     public void onClick() {
-        panelScript.open();
+        panelScript.switchPanel();
     }
 }

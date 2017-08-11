@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Recipe : MonoBehaviour {
+public class Recipe {
 
     public int id;                              // recipe unique id
     public List<RecipeElement> ingredients;     // ingredients needed to generate product
