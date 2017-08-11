@@ -18,9 +18,25 @@ public class Map : MonoBehaviour {
     }
 
     public void init() {
+        int eyesight = 5;
+
         fields.Add(new List<Field>());
         fields[0].Add(new Field(FIELDTYPE.WILD));
         playerPosition = new Vector2(0, 0);
+        for(int i=1;i<=eyesight;i++)
+        {
+            fields.Add(new List<Field>());
+            fields[i].Add(new Field(FIELDTYPE.WILD));
+            if (i % 2 == 1)
+                for(int j=1;j<i;j++)
+                fields[i].Add(new Field(FIELDTYPE.WILD));
+        }
+    }
+
+    public void Awake()
+    {
+        init();
+        displayMap();
     }
 
     // move player position
@@ -55,7 +71,6 @@ public class Map : MonoBehaviour {
 
     // display map on the scene
     public void displayMap() {
-
         // remove currently displaying fields
         foreach(Transform t in transform) {
             Destroy(t.gameObject);
@@ -65,9 +80,9 @@ public class Map : MonoBehaviour {
         for(int x=0; x<fields.Count; x++) {
             for(int y=0; y<fields[x].Count; y++) {
                 if(playerPosition.x == x && playerPosition.y == y) {
-                    generateField(userIcon, x, y);
+                    generateField(userIcon, x, y-(fields[x].Count/2));
                 } else {
-                    generateField(fieldIcon, x, y);
+                    generateField(fieldIcon, x, y - (fields[x].Count / 2));
                 }
             }
         }
@@ -75,7 +90,9 @@ public class Map : MonoBehaviour {
 
     private void generateField(GameObject icon, int x, int y) {
 
-        int padx = 50;
+        Debug.Log(x + " " + y);
+
+        int padx = 100;
         int pady = 50;
 
         GameObject field = Instantiate(icon, new Vector3(x * padx, y * pady, 0), Quaternion.identity) as GameObject;

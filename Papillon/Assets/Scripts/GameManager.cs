@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour {
 
     private BoardManager boardManager;
     private CraftManager craftManager;
+    protected Map map;
+	
     private ItemDatabase itemDB;
     private Player player;
     private int scene;
 
-    private void Awake() {
+    private void Start() {
         // Singleton object
         if (gm == null)
             gm = this;
@@ -24,20 +26,19 @@ public class GameManager : MonoBehaviour {
 
         boardManager = GetComponent<BoardManager>();
         craftManager = GetComponent<CraftManager>();
+        map = GetComponent<Map>();
+        map.init();
+		
         player = new Player(100, 100, 0, 100f);          // TODO: Better initialise different way.
         ItemDatabase.init();
-        scene = SCENES.ITEMCOLLECT;
+
+        scene = SCENES.MAP;
         initGame();
     }
 
-    private void OnSceneLoaded(int level) {
-        scene = level;
-        boardManager.boardSetup(scene);
-    }
-
     private void initGame() {
-        boardManager.boardSetup(scene);
         SceneManager.LoadScene(scene);
+        boardManager.boardSetup(scene);
     }
 
     public Player getPlayer() {
@@ -46,6 +47,10 @@ public class GameManager : MonoBehaviour {
 
     public CraftManager getCraftManager() {
         return craftManager;
+	}
+		
+    public Map getMap(){
+        return map;
     }
 }
 
@@ -57,7 +62,7 @@ public class GameManager : MonoBehaviour {
   MAP                            4 */
 
 public static class SCENES {
-    public const int ITEMCOLLECT = 0;
+    public const int FIELD = 0;
     public const int LAB = 1;
     public const int FACTORY = 2;
     public const int FARM = 3;

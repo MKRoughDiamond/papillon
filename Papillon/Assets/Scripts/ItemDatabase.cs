@@ -10,6 +10,8 @@ public class ItemDatabase : MonoBehaviour {
 
     public static void init()
     {
+        itemList = new List<Item>();
+
         try
         {
             string line;
@@ -37,6 +39,7 @@ public class ItemDatabase : MonoBehaviour {
                     }
                     line = reader.ReadLine();
                 }
+                reader.Close();
             }
         }
         catch (System.Exception e)
