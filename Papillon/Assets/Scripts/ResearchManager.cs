@@ -10,16 +10,13 @@ public class ResearchManager : MonoBehaviour {
     List<Technology> availableList;
     List<Technology> doneList;
 
-    private void Awake() {
+    public void init() {
+
         gm = GameManager.gm;
-        lockedList = new List<Technology>();
+
+        lockedList = new List<Technology>(TechnologyDatabase.load());
         availableList = new List<Technology>();
         doneList = new List<Technology>();
-
-    }
-
-    public void init() {
-        lockedList = TechnologyDatabase.load();
 
         // move basic technologies to available
         for(int i = lockedList.Count-1; i>=0; i--) {
@@ -35,7 +32,7 @@ public class ResearchManager : MonoBehaviour {
         for(int i = 0; i < availableList.Count; i++) {
 
             // according technology found
-            if (availableList[i].getID() == id) {
+            if (availableList[i].getId() == id) {
 
                 // update point
                 availableList[i].progress(point);
@@ -65,5 +62,35 @@ public class ResearchManager : MonoBehaviour {
                 lockedList.RemoveAt(i);
             }
         }
+    }
+
+    // check technology is done
+    public bool checkTechDone(int id) {
+        foreach(Technology tech in doneList) {
+            if (tech.getId() == id)
+                return true;
+        }
+        return false;
+    }
+
+    // check technology is done
+    public bool checkTechDone(string name) {
+        foreach (Technology tech in doneList) {
+            if (tech.getName() == name)
+                return true;
+        }
+        return false;
+    }
+
+    public List<Technology> getLockedList() {
+        return lockedList;
+    }
+
+    public List<Technology> getAvailableList() {
+        return availableList;
+    }
+
+    public List<Technology> getDoneList() {
+        return doneList;
     }
 }

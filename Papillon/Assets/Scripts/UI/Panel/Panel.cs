@@ -31,4 +31,9 @@ public class Panel : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+    // panels might have multiple panes or not
+    public virtual void switchPane(string paneName) {
+        return;
+    }
+
 }

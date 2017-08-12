@@ -11,21 +11,22 @@ public class Technology : MonoBehaviour {
     public int researchPoint;           // point for research done
     public int currentPoint;            // current point
 
-    public delegate IEnumerator TechEffect(Technology tech);
-    public TechEffect effect;           // Technology effect
-
     private bool isDone;                 // Technology research Done Check
     private bool isSatisfied;            // Technology requirements Done Check
     private Texture2D icon;
 
 
-    public Technology(int id, string name, string description, int researchPoint, TechEffect effect) {
+    public Technology(int id, string name, string description, int researchPoint, List<int> requirements) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.researchPoint = researchPoint;
         this.currentPoint = 0;
-        this.effect = effect;
+
+        this.requirements = new List<Requirement>();
+        foreach(int r in requirements) {
+            this.requirements.Add(new Requirement(r));
+        }
 
         LoadIcon();
     }
@@ -34,9 +35,26 @@ public class Technology : MonoBehaviour {
         // TODO: icon load
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
+
+    public string getName() {
+        return name;
+    }
+
+    public string getDescription() {
+        return description;
+    }
+
+    public int getCurrentPoint() {
+        return currentPoint;
+    }
+
+    public int getResearchPoint() {
+        return researchPoint;
+    }
+
 
     // progress technology research
     public bool progress(int point) {
@@ -53,7 +71,6 @@ public class Technology : MonoBehaviour {
             return true;
         else if (researchPoint <= currentPoint) {
             isDone = true;
-            effect(this);
             return true;
         } else
             return false;
@@ -67,7 +84,7 @@ public class Technology : MonoBehaviour {
     // update technology requirements satisfaction
     public void updateRequirements(int id) {
         for(int i = 0; i < requirements.Count; i++) {
-            if(requirements[i].id == id) {
+            if(requirements[i].tech.getId() == id) {
                 requirements[i].done = true;
                 return;
             }
@@ -78,7 +95,7 @@ public class Technology : MonoBehaviour {
     private bool RequirementsDone() {
 
         foreach (Requirement r in requirements) {
-            if(r.done == false) {
+            if(!r.done) {
                 return false;
             }
         }
@@ -90,6 +107,17 @@ public class Technology : MonoBehaviour {
 }
 
 public class Requirement {
-    public int id;
+    //public int id;
+    public Technology tech;
     public bool done;
+
+    public Requirement(int id) {
+        this.tech = TechnologyDatabase.findTechnology(id);
+        this.done = false;
+    }
+
+    public Requirement(int id, bool done) {
+        this.tech = TechnologyDatabase.findTechnology(id);
+        this.done = done;
+    }
 }

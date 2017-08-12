@@ -62,12 +62,17 @@ public class Map : MonoBehaviour {
         return true;
     }
 
-    // display map on the scene
-    public void displayMap() {
-        // remove currently displaying fields
-        foreach(Transform t in canvas.transform) {
+    // remove currently displaying fields
+    public void clearMap() {
+        foreach (Transform t in canvas.transform) {
             Destroy(t.gameObject);
         }
+    }
+
+    // display map on the scene
+    public void displayMap() {
+
+        clearMap();
 
         // display fields
         for(int x=0; x<fields.Count; x++) {

@@ -15,6 +15,9 @@ public class BoardManager : MonoBehaviour {
     }
 
     public void boardSetup(int scene) {
+
+        map.clearMap();
+
         switch (scene) {
             case SCENES.FIELD:
                 fieldSetup();

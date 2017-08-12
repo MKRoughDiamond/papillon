@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour {
 
     private BoardManager boardManager;
     private CraftManager craftManager;
+    private ResearchManager researchManager;
 	
     private ItemDatabase itemDB;
     private Player player;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
          */
         ItemDatabase.init();
         RecipeDatabase.init();
+        TechnologyDatabase.init();
 
         /*
          * Other Managers Initializing
@@ -51,7 +53,9 @@ public class GameManager : MonoBehaviour {
         boardManager = GetComponent<BoardManager>();
         boardManager.init();
         craftManager = GetComponent<CraftManager>();
-        craftManager.init();  
+        craftManager.init();
+        researchManager = GetComponent<ResearchManager>();
+        researchManager.init();
 
         // default scene
         scene = SCENES.MAP;
@@ -65,13 +69,25 @@ public class GameManager : MonoBehaviour {
         boardManager.boardSetup(scene);
     }
 
+    private void OnLevelWasLoaded(int level) {
+        boardManager.boardSetup(level);
+    }
+
     public Player getPlayer() {
         return player;
+    }
+
+    public BoardManager getBoardManager() {
+        return boardManager;
     }
 
     public CraftManager getCraftManager() {
         return craftManager;
 	}
+
+    public ResearchManager getResearchManager() {
+        return researchManager;
+    }
 }
 
 //SCENES
