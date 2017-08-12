@@ -5,10 +5,13 @@ using UnityEngine;
 public class BoardManager : MonoBehaviour {
 
     private GameManager gm;
+    private Map map;
 
     public void init()
     {
         gm = GameManager.gm;
+        map = GetComponent<Map>();
+        map.init();
     }
 
     public void boardSetup(int scene) {
@@ -53,6 +56,7 @@ public class BoardManager : MonoBehaviour {
 
     private void mapSetup()
     {
-        return;
+        map.displayMap();
+        Debug.Log("display map");
     }
 }

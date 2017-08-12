@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour {
 
     private BoardManager boardManager;
     private CraftManager craftManager;
-    protected Map map;
 	
     private ItemDatabase itemDB;
     private Player player;
@@ -52,11 +51,7 @@ public class GameManager : MonoBehaviour {
         boardManager = GetComponent<BoardManager>();
         boardManager.init();
         craftManager = GetComponent<CraftManager>();
-        craftManager.init();
-
-
-        map = GetComponent<Map>();
-        map.init();    
+        craftManager.init();  
 
         // default scene
         scene = SCENES.MAP;
@@ -77,10 +72,6 @@ public class GameManager : MonoBehaviour {
     public CraftManager getCraftManager() {
         return craftManager;
 	}
-		
-    public Map getMap(){
-        return map;
-    }
 }
 
 //SCENES

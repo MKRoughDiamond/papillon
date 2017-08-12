@@ -7,19 +7,18 @@ using UnityEngine;
 /// </summary>
 public class Map : MonoBehaviour {
 
+    
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
 
+    public GameObject canvas;
     public GameObject fieldIcon;
     public GameObject userIcon;
-
-    public Map() {
-        fields = new List<List<Field>>();
-    }
 
     public void init() {
         int eyesight = 5;
 
+        fields = new List<List<Field>>();
         fields.Add(new List<Field>());
         fields[0].Add(new Field(FIELDTYPE.WILD));
         playerPosition = new Vector2(0, 0);
@@ -31,12 +30,6 @@ public class Map : MonoBehaviour {
                 for(int j=1;j<i;j++)
                 fields[i].Add(new Field(FIELDTYPE.WILD));
         }
-    }
-
-    public void Awake()
-    {
-        init();
-        displayMap();
     }
 
     // move player position
@@ -72,13 +65,14 @@ public class Map : MonoBehaviour {
     // display map on the scene
     public void displayMap() {
         // remove currently displaying fields
-        foreach(Transform t in transform) {
+        foreach(Transform t in canvas.transform) {
             Destroy(t.gameObject);
         }
 
         // display fields
         for(int x=0; x<fields.Count; x++) {
             for(int y=0; y<fields[x].Count; y++) {
+                Debug.Log("displaying map");
                 if(playerPosition.x == x && playerPosition.y == y) {
                     generateField(userIcon, x, y-(fields[x].Count/2));
                 } else {
@@ -92,15 +86,17 @@ public class Map : MonoBehaviour {
 
         Debug.Log(x + " " + y);
 
+        int startx = -300;
+        int starty = 0;
         int padx = 100;
         int pady = 50;
 
-        GameObject field = Instantiate(icon, new Vector3(x * padx, y * pady, 0), Quaternion.identity) as GameObject;
+        GameObject field = Instantiate(icon, new Vector3(startx + x * padx, starty + y * pady, 0), Quaternion.identity) as GameObject;
         field.GetComponent<UserMoveButton>().updatePosition(x, y);
-        field.transform.parent = transform;
+        field.transform.SetParent(canvas.transform, false);
 
         // might be better solution?...
-        field.transform.localPosition = new Vector3(x * padx, y * pady, 0);
+        //field.transform.localPosition = new Vector3(x * padx, y * pady, 0);
     }
 
     public List<List<Field>> getFields() {
