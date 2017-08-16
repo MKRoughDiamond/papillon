@@ -54,6 +54,10 @@ public class Item {
         return name;
     }
 
+    public string getDescription() {
+        return description;
+    }
+
     public float getWeight() {
         return weight;
     }

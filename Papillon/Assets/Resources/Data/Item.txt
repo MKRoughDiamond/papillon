@@ -2,3 +2,4 @@
 2 big_brick big_brick 1 0
 3 huge_brick huge_brick 10 0
 4 fucking_huge_brick fucking_huge_brick 100 0
+5 HP_potion yes_this_is_potion 1 1

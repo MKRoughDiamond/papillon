@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player {
+public class Player : MonoBehaviour{
 
     public int max_health;
     public int max_satiety;
@@ -17,7 +17,6 @@ public class Player {
     public bool itemOverLoaded;                 // ItemWeightsSum > max_weight ?
 
     //public bool inBuff;                     // player is getting buff
-
 
     public Player(int max_health, int max_satiety, int max_armor, float max_weight) {
         this.max_health = max_health;
@@ -83,13 +82,22 @@ public class Player {
 
     // use item
     public bool useItem(int id) {
-        foreach(InventoryElement e in inventory) {
-            if(e.item.getId() == id && e.item.getType() == ITEMTYPE.USABLE) {
-                // TODO: try use item
+        for (int i = inventory.Count - 1; i >= 0; i--) {
+            if (inventory[i].item.getId() == id && inventory[i].item.getType() == ITEMTYPE.USABLE) {
+
+                // doSomeEffect(item)
+                inventory[i].count--;
+  
+                if(inventory[i].count == 0) {
+                    inventory.RemoveAt(i);
+                }
+
+                Debug.Log("USED ITEM");
                 return true;
             }
         }
 
+        Debug.Log("NOT USABLE ITEM");
         return false;
     }
 
@@ -148,6 +156,10 @@ public class Player {
         foreach(InventoryElement e in inventory) {
             Debug.Log(e.item.getName() + '/' + e.count.ToString());
         }
+    }
+
+    public List<InventoryElement> getInventory() {
+        return inventory;
     }
 }
 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Technology : MonoBehaviour {
+public class Technology {
 
     public int id;                      // Unique ID of tech
     public string name;                 // name of tech

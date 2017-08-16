@@ -10,12 +10,14 @@ public class GameManager : MonoBehaviour {
     private BoardManager boardManager;
     private CraftManager craftManager;
     private ResearchManager researchManager;
-	
-    private ItemDatabase itemDB;
     private Player player;
+
+    public GameObject inventory;
+
     private int scene;
 
-    private void Start() {
+    // think this better be Awake.
+    private void Awake() {
 
         /*
          * GameManager Base Initializing
@@ -57,6 +59,12 @@ public class GameManager : MonoBehaviour {
         researchManager = GetComponent<ResearchManager>();
         researchManager.init();
 
+        /*
+         * get Inventory
+         */
+
+        inventory = transform.Find("Canvas/InventoryPanel").gameObject;
+
         // default scene
         scene = SCENES.MAP;
 
@@ -69,7 +77,7 @@ public class GameManager : MonoBehaviour {
         boardManager.boardSetup(scene);
     }
 
-    private void OnLevelWasLoaded(int level) {
+    private void OnLevelWasLoaded (int level) {
         boardManager.boardSetup(level);
     }
 
@@ -87,6 +95,10 @@ public class GameManager : MonoBehaviour {
 
     public ResearchManager getResearchManager() {
         return researchManager;
+    }
+
+    public GameObject getInventory() {
+        return inventory;
     }
 }
 
