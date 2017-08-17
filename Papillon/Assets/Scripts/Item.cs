@@ -14,7 +14,7 @@ public class Item {
     public delegate IEnumerator ItemEffect(Item item);
     private ItemEffect effect;       // Item effect
 
-    private Texture2D icon;         // Item icon
+    private Sprite icon;         // Item icon
 
 
     public Item(int id, string name, string description, float weight, int type, ItemEffect effect) {
@@ -43,7 +43,16 @@ public class Item {
 
     private void LoadIcon()
     {
-        icon = Resources.Load<Texture2D>("icon/" + name);
+        Sprite newIcon = Resources.Load<Sprite>("Icon/" + name);
+        if (newIcon)
+            icon = newIcon;
+        else
+            Debug.Log("There is no icon\t" + name);
+    }
+
+    public Sprite getIcon()
+    {
+        return icon;
     }
 
     public int getId() {

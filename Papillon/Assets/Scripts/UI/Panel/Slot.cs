@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 public class Slot : MonoBehaviour{
 
-    public Image icon;
+    public Sprite icon;
     public Text count;
-
-    
-
     
     private GameManager gm;
     private Player player;
@@ -32,7 +29,7 @@ public class Slot : MonoBehaviour{
         name = e.item.getName();
         description = e.item.getDescription();
 
-        // icon = e.item.getIcon();
+        icon = e.item.getIcon();
     }
 
     public string getName() {

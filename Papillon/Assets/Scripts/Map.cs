@@ -10,25 +10,34 @@ public class Map : MonoBehaviour {
     
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
+    private int eyesight = 7;           // eyesight of player
 
     public GameObject canvas;
     public GameObject fieldIcon;
     public GameObject userIcon;
 
     public void init() {
-        int eyesight = 5;
 
         fields = new List<List<Field>>();
-        fields.Add(new List<Field>());
-        fields[0].Add(new Field(FIELDTYPE.WILD));
-        playerPosition = new Vector2(0, 0);
-        for(int i=1;i<=eyesight;i++)
+        for (int i = 0; i < eyesight * 2; i++)
+            generateMap(i);
+        playerPosition = new Vector2(1, 0);
+    }
+
+    public void generateMap(int x)
+    {
+        Debug.Log("Asdf");
+        if(x % 2 == 0)
+        {
+
+            fields.Add(new List<Field>());
+            for (int i = 0; i < Random.Range(1, 5); i++)
+                fields[x].Add(new Field(FIELDTYPE.WILD));
+        }
+        else
         {
             fields.Add(new List<Field>());
-            fields[i].Add(new Field(FIELDTYPE.WILD));
-            if (i % 2 == 1)
-                for(int j=1;j<i;j++)
-                fields[i].Add(new Field(FIELDTYPE.WILD));
+            fields[x].Add(new Field(FIELDTYPE.WILD));
         }
     }
 
@@ -71,17 +80,21 @@ public class Map : MonoBehaviour {
 
     // display map on the scene
     public void displayMap() {
-
+        int leftMost = (playerPosition.x - 1 < 0) ? 0 : (int)playerPosition.x - 1;
         clearMap();
 
         // display fields
-        for(int x=0; x<fields.Count; x++) {
-            for(int y=0; y<fields[x].Count; y++) {
-                Debug.Log("displaying map");
-                if(playerPosition.x == x && playerPosition.y == y) {
-                    generateField(userIcon, x, y-(fields[x].Count/2));
-                } else {
-                    generateField(fieldIcon, x, y - (fields[x].Count / 2));
+        for(int x=leftMost; x< leftMost+eyesight; x++) {
+            if(x >= fields.Count)
+                generateMap(x);
+            for (int y=0; y< fields[x].Count; y++) {
+                if (playerPosition.x == x && playerPosition.y == y)
+                {
+                    generateField(userIcon, x, y);
+                }
+                else
+                {
+                    generateField(fieldIcon, x, y);
                 }
             }
         }
@@ -89,14 +102,12 @@ public class Map : MonoBehaviour {
 
     private void generateField(GameObject icon, int x, int y) {
 
-        Debug.Log(x + " " + y);
-
-        int startx = -300;
+        int startx = -400;
         int starty = 0;
         int padx = 100;
         int pady = 50;
 
-        GameObject field = Instantiate(icon, new Vector3(startx + x * padx, starty + y * pady, 0), Quaternion.identity) as GameObject;
+        GameObject field = Instantiate(icon, new Vector3(startx + (x-playerPosition.x+2) * padx, starty + (y - (fields[x].Count / 2)) * pady, 0), Quaternion.identity) as GameObject;
         field.GetComponent<UserMoveButton>().updatePosition(x, y);
         field.transform.SetParent(canvas.transform, false);
 
