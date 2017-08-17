@@ -1,5 +1,10 @@
-1 brick small_brick 0.1 0
-2 big_brick big_brick 1 0
-3 huge_brick huge_brick 10 0
-4 fucking_huge_brick fucking_huge_brick 100 0
-5 HP_potion yes_this_is_potion 1 1
+﻿# ID NAME DESCRIPTION WEIGHT TYPE
+# TYPES - 0 : MATERIAL / 1 : USABLE / 2 : WEARABLE
+#
+# MATERIALS
+1 나무_조각 단단한_나무_조각 0.1 0
+2 목재 설비_제작에_사용되는_소재 0.5 0
+3 돌맹이 단단한_돌맹이 0.5 0
+# USABLES
+4 과일 정체를_모르는_과일 0.1 1
+# WEARABLES

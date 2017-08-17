@@ -24,18 +24,23 @@ public class ItemDatabase : MonoBehaviour {
                 line = reader.ReadLine();
                 while (line != null)
                 {
+                    // for database comment
+                    if(line[0] == '#') {
+                        line = reader.ReadLine();
+                        continue;
+                    }
+                        
                     words = line.Split(' ');
-                    if (words.Length == 5)
+                    if (words.Length == 5) {
                         // ITEM DB : 'ID NAME DESCRIPTION WEIGHT TYPE'
                         itemList.Add(new Item(
                             int.Parse(words[0]),
-                            words[1].Replace('_',' '),
+                            words[1].Replace('_', ' '),
                             words[2].Replace('_', ' '),
                             float.Parse(words[3]),
                             int.Parse(words[4])
                             ));
-                    else
-                    {
+                    } else {
                         //TODO : ITEM EFFECT
                     }
                     line = reader.ReadLine();
@@ -53,6 +58,21 @@ public class ItemDatabase : MonoBehaviour {
         foreach(Item item in itemList)
             if(item.getId() == id)
                 return item;
+
         return new Item(0, "notExists", "", 0.0f, ITEMTYPE.MATERIAL, null);
+    }
+
+    public static int findIdByName(string name) {
+        foreach (Item item in itemList)
+            if (item.getName() == name)
+                return item.getId();
+        return -1;
+    }
+
+    public static string findNameById(int id) {
+        foreach (Item item in itemList)
+            if (item.getId() == id)
+                return item.getName();
+        return "notExists";
     }
 }

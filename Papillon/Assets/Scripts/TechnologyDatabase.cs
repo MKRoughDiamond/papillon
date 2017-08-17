@@ -19,6 +19,13 @@ public class TechnologyDatabase : MonoBehaviour {
             using (reader) {
                 line = reader.ReadLine();
                 while(line != null) {
+
+                    // for database comment
+                    if (line[0] == '#') {
+                        line = reader.ReadLine();
+                        continue;
+                    }
+
                     string[] words = line.Split(' ');
 
                     // TECH DB : 'ID NAME DESCRIPTION POINT (REQUIRE1 REQUIRE2 ... )

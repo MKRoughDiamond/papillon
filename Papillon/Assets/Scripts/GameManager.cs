@@ -42,9 +42,10 @@ public class GameManager : MonoBehaviour {
          * 
          */
         ItemDatabase.init();
+        FieldDropDatabase.init();
         RecipeDatabase.init();
         TechnologyDatabase.init();
-
+        
         /*
          * Other Managers Initializing
          * 

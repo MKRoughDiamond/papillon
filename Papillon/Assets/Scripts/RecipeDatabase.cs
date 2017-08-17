@@ -21,6 +21,13 @@ public class RecipeDatabase : MonoBehaviour {
             using (reader) {
                 line = reader.ReadLine();
                 while(line != null) {
+
+                    // for database comment
+                    if (line[0] == '#') {
+                        line = reader.ReadLine();
+                        continue;
+                    }
+
                     string[] words = line.Split(' ');
 
                     // RECIPE DB : 'ID ING1 NUM1 ING2 NUM2 ING3 NUM3 ... | PRODUCT_NUM'

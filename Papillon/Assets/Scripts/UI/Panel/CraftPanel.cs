@@ -28,7 +28,7 @@ public class CraftPanel : Panel {
             // Generate elements
             GameObject element = Instantiate(panelElement);
             element.GetComponent<CraftPanelElement>().init(recipe);
-            element.transform.GetChild(2).GetComponent<Image>().sprite = element.GetComponent<CraftPanelElement>().icon;
+            element.transform.Find("CraftIcon").GetComponent<Image>().sprite = element.GetComponent<CraftPanelElement>().icon;
 
             // Attach it to panel scroll list
             // If you change name of object in inspector, you must change below code

@@ -26,18 +26,17 @@ public class Map : MonoBehaviour {
 
     public void generateMap(int x)
     {
-        Debug.Log("Asdf");
         if(x % 2 == 0)
         {
 
             fields.Add(new List<Field>());
             for (int i = 0; i < Random.Range(1, 5); i++)
-                fields[x].Add(new Field(FIELDTYPE.WILD));
+                fields[x].Add(new Field(FIELDTYPE.FOREST));
         }
         else
         {
             fields.Add(new List<Field>());
-            fields[x].Add(new Field(FIELDTYPE.WILD));
+            fields[x].Add(new Field(FIELDTYPE.FOREST));
         }
     }
 
@@ -98,6 +97,11 @@ public class Map : MonoBehaviour {
                 }
             }
         }
+    }
+
+    // return field that player is now positioned
+    public Field getPlayerPositionField() {
+        return fields[(int)playerPosition.x][(int)playerPosition.y];
     }
 
     private void generateField(GameObject icon, int x, int y) {

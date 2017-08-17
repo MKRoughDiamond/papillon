@@ -37,17 +37,16 @@ public class Item {
         this.type = type;
         effect = null;
 
-
         LoadIcon();
     }
 
     private void LoadIcon()
     {
-        Sprite newIcon = Resources.Load<Sprite>("Icon/" + name);
+        Sprite newIcon = Resources.Load<Sprite>("Icon/Item/" + name);
         if (newIcon)
             icon = newIcon;
         else
-            Debug.Log("There is no icon\t" + name);
+            Debug.Log("There is no item icon\t" + name);
     }
 
     public Sprite getIcon()
