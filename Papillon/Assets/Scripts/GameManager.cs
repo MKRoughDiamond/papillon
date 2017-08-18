@@ -112,9 +112,7 @@ public class GameManager : MonoBehaviour {
         return inventory;
     }
 
-    /*
-     * Game Play Related Methods
-     */
+#region Game Play Related Methods
 
     public int getDay() {
         return day;
@@ -127,6 +125,8 @@ public class GameManager : MonoBehaviour {
         moveChance = true;
 
         boardManager.nextDay(scene);
+
+        player.changeSatiety(SATIETYPOINTS.SLEEP);
     }
 
     // check player can explore
@@ -155,6 +155,20 @@ public class GameManager : MonoBehaviour {
     public void useMoveChance() {
         moveChance = false;
     }
+
+#endregion
+
+#region Game System Related Methods
+
+    public void gameOver() {
+        Debug.Log("GAMEOVER");
+    }
+
+    public void gamePause() {
+        Debug.Log("GAME PAUSE");
+    }
+
+#endregion
 }
 
 //SCENES
@@ -167,4 +181,18 @@ public static class SCENES {
     //public const int FARM = 3;
     //public const int MAP = 4;
     //public const int MAIN = 5;
+}
+
+/*
+ * 특정 행동에 따른 플레이어 체력, 허기 변화를 지정해놓은 것
+ * 한 곳에 몰아두는 게 좋아보여서 따로 만들어 놓음
+ */
+
+public static class HEALTHPOINTS {
+
+}
+
+public static class SATIETYPOINTS {
+    public const int MOVE = -10; // when player move on map
+    public const int SLEEP = -5; // when player go to sleep (next day)
 }

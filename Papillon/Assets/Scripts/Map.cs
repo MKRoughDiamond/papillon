@@ -9,7 +9,8 @@ using UnityEngine.UI;
 public class Map : MonoBehaviour {
 
     private GameManager gm;
-    
+    private Player player;
+
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
     private int eyesight = 7;           // eyesight of player
@@ -21,6 +22,7 @@ public class Map : MonoBehaviour {
     public void init() {
 
         gm = GameManager.gm;
+        player = gm.getPlayer();
 
         fields = new List<List<Field>>();
         for (int i = 0; i < eyesight * 2; i++)
@@ -57,6 +59,7 @@ public class Map : MonoBehaviour {
         //  return false;
 
         playerPosition = position;
+        player.changeSatiety(SATIETYPOINTS.MOVE);
         return true;
     }
 

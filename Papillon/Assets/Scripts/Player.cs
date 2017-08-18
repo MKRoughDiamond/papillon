@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player {
 
+    private GameManager gm;
+
     public int max_health;
     public int max_satiety;
     public int max_armor;
@@ -24,6 +26,9 @@ public class Player {
         this.max_armor = max_armor;
         this.max_weight = max_weight;
         inventory = new List<InventoryElement>();
+
+        gm = GameManager.gm;
+
         initializeStates();
     }
 
@@ -37,10 +42,18 @@ public class Player {
 
     public void changeHealth(int d) {
         health = Mathf.Min(max_health, health + d);
+
+        if(health <= 0) {
+            gm.gameOver();
+        }
     }
 
     public void changeSatiety(int d) {
         satiety = Mathf.Min(max_satiety, satiety + d);
+
+        if(satiety <= 0) {
+            gm.gameOver();
+        }
     }
 
     public void changeArmor(int d) {
