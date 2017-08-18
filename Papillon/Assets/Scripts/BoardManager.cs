@@ -39,6 +39,7 @@ public class BoardManager : MonoBehaviour {
 
     private void fieldSetup()
     {
+        // 상당히 안 좋은 구조...
         FieldGenerator fieldGenerator = GameObject.Find("FieldGenerator").GetComponent<FieldGenerator>();
         Field field = map.getPlayerPositionField();
         fieldGenerator.displayField(field);
