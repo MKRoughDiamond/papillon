@@ -40,8 +40,25 @@ public class ItemDatabase : MonoBehaviour {
                             float.Parse(words[3]),
                             int.Parse(words[4])
                             ));
+                    } else if(words.Length > 5){
+                        // ITEM DB : 'ID NAME DESCRIPTION WEIGHT TYPE EFFECT_NAME EFFECT_PARAMETERS'
+
+                        List<int> effect_param = new List<int>();
+                        for(int i = 6; i < words.Length; i++) {
+                            effect_param.Add(int.Parse(words[i]));
+                        }
+                        ItemEffect effect = new ItemEffect(words[5], effect_param);
+
+                        itemList.Add(new Item(
+                            int.Parse(words[0]),
+                            words[1].Replace('_', ' '),
+                            words[2].Replace('_', ' '),
+                            float.Parse(words[3]),
+                            int.Parse(words[4]),
+                            effect
+                            ));
                     } else {
-                        //TODO : ITEM EFFECT
+                        Debug.Log("ERROR : wrong item format");
                     }
                     line = reader.ReadLine();
                 }

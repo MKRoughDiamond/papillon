@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour {
     private CraftManager craftManager;
     private ResearchManager researchManager;
     private Player player;
+
+    private EffectProcessor effectProcessor;
+
     private GameObject inventory;
     private int scene;
 
@@ -71,6 +74,14 @@ public class GameManager : MonoBehaviour {
         researchManager.init();
 
         /*
+         * Effect Processor Initializing
+         * **CAUTION**
+         * You must initialize this after all other initializing done
+         */
+        effectProcessor = new EffectProcessor();
+        effectProcessor.init();
+
+        /*
          * get Inventory
          */
 
@@ -89,6 +100,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnLevelWasLoaded (int level) {
+        getInventory().SetActive(false);
         boardManager.boardSetup(level);
     }
 
@@ -113,6 +125,10 @@ public class GameManager : MonoBehaviour {
     }
 
 #region Game Play Related Methods
+
+    public bool doEffect(Effect effect) {
+        return effectProcessor.process(effect);
+    }
 
     public int getDay() {
         return day;

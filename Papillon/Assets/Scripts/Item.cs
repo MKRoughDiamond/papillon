@@ -11,8 +11,7 @@ public class Item {
     private int armor;               // Item armor value
     private int type;           // Usable item
 
-    public delegate IEnumerator ItemEffect(Item item);
-    private ItemEffect effect;       // Item effect
+    public ItemEffect effect;           // item effect
 
     private Sprite icon;         // Item icon
 
@@ -77,6 +76,10 @@ public class Item {
         return armor;
     }
 
+    public ItemEffect getEffect() {
+        return effect;
+    }
+
     public float getType() {
         return type;
     }
@@ -86,4 +89,14 @@ public static class ITEMTYPE {
     public const int MATERIAL = 0;
     public const int USABLE = 1;
     public const int WEARABLE = 2;
+}
+
+public class ItemEffect : Effect {
+
+    public List<int> parameters;
+
+    public ItemEffect(string name, List<int> parameters) {
+        this.name = name;
+        this.parameters = new List<int>(parameters);
+    }
 }

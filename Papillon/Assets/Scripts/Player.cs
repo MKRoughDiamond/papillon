@@ -130,9 +130,9 @@ public class Player {
         for (int i = inventory.Count - 1; i >= 0; i--) {
             if (inventory[i].item.getId() == id && inventory[i].item.getType() == ITEMTYPE.USABLE) {
 
-                // doSomeEffect(item)
+                gm.doEffect(inventory[i].item.effect);
                 inventory[i].count--;
-  
+
                 if(inventory[i].count == 0) {
                     inventory.RemoveAt(i);
                 }

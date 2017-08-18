@@ -1,4 +1,5 @@
 ﻿# ID NAME DESCRIPTION WEIGHT TYPE
+# ID NAME DESCRIPTION WEIGHT TYPE EFFECT_NAME EFFECT_PARAM1 EFFECT_PARAM2 ...
 # TYPES - 0 : MATERIAL / 1 : USABLE / 2 : WEARABLE
 #
 # MATERIALS
@@ -6,5 +7,5 @@
 2 목재 설비_제작에_사용되는_소재 0.5 0
 3 돌맹이 단단한_돌맹이 0.5 0
 # USABLES
-4 과일 정체를_모르는_과일 0.1 1
+4 과일 정체를_모르는_과일 0.1 1 Satiety_Restore 50
 # WEARABLES
