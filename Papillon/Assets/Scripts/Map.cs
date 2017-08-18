@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 전체 맵을 나타내며 해당 신에서 필요한 여러 작업들을 수행하는 클래스
 /// </summary>
 public class Map : MonoBehaviour {
 
+    private GameManager gm;
     
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
@@ -17,6 +19,8 @@ public class Map : MonoBehaviour {
     public GameObject userIcon;
 
     public void init() {
+
+        gm = GameManager.gm;
 
         fields = new List<List<Field>>();
         for (int i = 0; i < eyesight * 2; i++)
@@ -97,11 +101,31 @@ public class Map : MonoBehaviour {
                 }
             }
         }
+        activateButtons();
     }
 
     // return field that player is now positioned
     public Field getPlayerPositionField() {
         return fields[(int)playerPosition.x][(int)playerPosition.y];
+    }
+
+    // check player's position is base
+    public bool isPlayerOnBase() {
+        return getPlayerPositionField().isBase();
+    }
+
+    public bool setBase() {
+        if (isPlayerOnBase())
+            return false;
+        else {
+            Field f = getPlayerPositionField();
+            if (f.setBase()) {
+                gm.useExploreChance();
+                activateButtons();
+                return true;
+            }
+            return false;
+        }
     }
 
     private void generateField(GameObject icon, int x, int y) {
@@ -117,6 +141,27 @@ public class Map : MonoBehaviour {
 
         // might be better solution?...
         //field.transform.localPosition = new Vector3(x * padx, y * pady, 0);
+    }
+
+    // set buttons interactivity
+    public void activateButtons() {
+        GameObject setBaseButton = GameObject.Find("Canvas/setBase");
+        GameObject toBaseButton = GameObject.Find("Canvas/toBase");
+        GameObject toFieldButton = GameObject.Find("Canvas/toField");
+
+        // if player is on base field player can go to base, and not to field, vise versa
+        // if explore chance is already used, then player can't build base, can't go to field neither
+
+        if (isPlayerOnBase()) {
+            setBaseButton.GetComponent<Button>().interactable = false;
+            toBaseButton.GetComponent<Button>().interactable = true;
+            toFieldButton.GetComponent<Button>().interactable = false;
+        }
+        else {
+            setBaseButton.GetComponent<Button>().interactable = gm.canPlayerExplore();
+            toBaseButton.GetComponent<Button>().interactable = false;
+            toFieldButton.GetComponent<Button>().interactable = gm.canPlayerExplore();
+        }  
     }
 
     public List<List<Field>> getFields() {

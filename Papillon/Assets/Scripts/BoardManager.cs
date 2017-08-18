@@ -22,19 +22,26 @@ public class BoardManager : MonoBehaviour {
             case SCENES.FIELD:
                 fieldSetup();
                 break;
-            case SCENES.FACTORY:
-                factorySetup();
-                break;
-            case SCENES.LAB:
-                labSetup();
-                break;
-            case SCENES.FARM:
-                farmSetup();
-                break;
             case SCENES.MAP:
                 mapSetup();
                 break;
+            case SCENES.BASE:
+                baseSetup();
+                break;
+            default:
+                break;
         }
+    }
+
+    // if day changed
+    public void nextDay(int scene) {
+        if(scene == SCENES.MAP) {
+            map.displayMap();
+        }
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     private void fieldSetup()
@@ -43,26 +50,17 @@ public class BoardManager : MonoBehaviour {
         FieldGenerator fieldGenerator = GameObject.Find("FieldGenerator").GetComponent<FieldGenerator>();
         Field field = map.getPlayerPositionField();
         fieldGenerator.displayField(field);
+
+        gm.useExploreChance();
     }
 
-    private void factorySetup()
-    {
-        return;
-    }
-
-    private void labSetup()
-    {
-        return;
-    }
-
-    private void farmSetup()
+    private void baseSetup()
     {
         return;
     }
 
     private void mapSetup()
     {
-        map.displayMap();
-        Debug.Log("display map");
+        map.displayMap();     
     }
 }

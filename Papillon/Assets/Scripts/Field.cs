@@ -30,8 +30,10 @@ public class Field {
 
     // set this field to base
     public bool setBase() {
-        if (isBase()) 
+        if (isBase()) {
+            Debug.Log("ALREADY BASE");
             return false;
+        }
 
         isBaseField = true;
         // doSomeInitialize();

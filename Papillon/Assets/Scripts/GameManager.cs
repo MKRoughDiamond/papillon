@@ -11,10 +11,14 @@ public class GameManager : MonoBehaviour {
     private CraftManager craftManager;
     private ResearchManager researchManager;
     private Player player;
-
-    public GameObject inventory;
-
+    private GameObject inventory;
     private int scene;
+
+    // game play related variables
+    public int day;
+    public bool exploreChance;  // whether player can go field or not
+    public bool moveChance;     // whether player can move map or not
+    
 
     // think this better be Awake.
     private void Awake() {
@@ -31,9 +35,15 @@ public class GameManager : MonoBehaviour {
 
         DontDestroyOnLoad(gameObject);
 
+        // initialize game
+        initGame();
+    }
+
+    private void initGame() {
+
         /*
          *  Initializing player
-         *  TODO: Better initialize different way.
+         *  
          */
         player = new Player(100, 100, 0, 100f);
 
@@ -45,7 +55,7 @@ public class GameManager : MonoBehaviour {
         FieldDropDatabase.init();
         RecipeDatabase.init();
         TechnologyDatabase.init();
-        
+
         /*
          * Other Managers Initializing
          * 
@@ -69,13 +79,13 @@ public class GameManager : MonoBehaviour {
         // default scene
         scene = SCENES.MAP;
 
-        // start game
-        initGame();
-    }
+        // game play variables initialize
+        day = 0;
+        exploreChance = true;
+        moveChance = true;
 
-    private void initGame() {
+        // start game
         SceneManager.LoadScene(scene);
-        boardManager.boardSetup(scene);
     }
 
     private void OnLevelWasLoaded (int level) {
@@ -101,22 +111,60 @@ public class GameManager : MonoBehaviour {
     public GameObject getInventory() {
         return inventory;
     }
+
+    /*
+     * Game Play Related Methods
+     */
+
+    public int getDay() {
+        return day;
+    }
+
+    // go to next day
+    public void goNextDay() {
+        day += 1;
+        exploreChance = true;
+        moveChance = true;
+
+        boardManager.nextDay(scene);
+    }
+
+    // check player can explore
+    public bool canPlayerExplore() {
+        return exploreChance;
+    }
+
+    // check player can move
+    public bool canPlayerMove() {
+        return moveChance;
+    }
+
+    /*
+     * use explore chance
+     *  - when user go to field
+     *  - when user built base
+     *  - when user do some research in base
+     */
+    public void useExploreChance() {
+        exploreChance = false;
+    }
+
+    /*
+     *  use move chance
+     */
+    public void useMoveChance() {
+        moveChance = false;
+    }
 }
 
 //SCENES
-/*
- * FIELD                          0
- * LAB(FOR RESEARCH)              1
- * FACTORY(FOR PRODUCTION)        2
- * FARM(FOR FARMING)              3
- * MAP                            4
- */
-
 public static class SCENES {
     public const int FIELD = 0;
-    public const int LAB = 1;
-    public const int FACTORY = 2;
-    public const int FARM = 3;
-    public const int MAP = 4;
-    public const int MAIN = 5;
+    public const int MAP = 1;
+    public const int BASE = 2;
+    //public const int LAB = 1;
+    //public const int FACTORY = 2;
+    //public const int FARM = 3;
+    //public const int MAP = 4;
+    //public const int MAIN = 5;
 }

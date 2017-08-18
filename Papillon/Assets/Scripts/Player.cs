@@ -51,6 +51,38 @@ public class Player {
         return itemOverLoaded == true;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMaxHealth() {
+        return max_health;
+    }
+    
+    public int getSatiety() {
+        return satiety;
+    }
+
+    public int getMaxSatiety() {
+        return max_satiety;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public int getMaxArmor() {
+        return max_armor;
+    }
+
+    public float getItemWeight() {
+        return itemWeightsSum;
+    }
+
+    public float getMaxItemWeight() {
+        return max_weight;
+    }
+
     //public bool isOnBuff() {
     //    return inBuff == true;
     //}

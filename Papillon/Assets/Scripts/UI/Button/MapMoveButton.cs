@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MapMoveButton : MonoBehaviour {
-
+ 
     // Set up in inspector
     public int scene;
 
