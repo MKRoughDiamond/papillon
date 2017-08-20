@@ -1,4 +1,4 @@
 ﻿# ID NAME DESCRIPTION POINT (REQUIRE1 REQUIRE2 ... )
-1 기술1 기술입니다 100
+1 기초가공 기초가공기술입니다 100
 2 tech2 this_is_advanced_tech 100 1
 3 tech3 this_is_fucking_awesome_tech 100 1 2

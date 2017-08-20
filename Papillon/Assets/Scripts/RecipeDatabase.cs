@@ -41,11 +41,20 @@ public class RecipeDatabase : MonoBehaviour {
                     // if recipe can generate multiple product, code below need to be fixed.
                     RecipeElement product = new RecipeElement(int.Parse(words[section+1]), int.Parse(words[section+2]));
 
-                    recipeList.Add(new Recipe(
-                        int.Parse(words[0]),
-                        ingredients,
-                        product
-                        ));
+                    // ADDITIONAL RECIPE : '~ REQUIRED TECH'
+                    if(section+4 == words.Length)
+                        recipeList.Add(new Recipe(
+                            int.Parse(words[0]),
+                            ingredients,
+                            product,
+                            words[section+3]
+                            ));
+                    else
+                        recipeList.Add(new Recipe(
+                            int.Parse(words[0]),
+                            ingredients,
+                            product
+                            ));
 
                     line = reader.ReadLine();
                 }

@@ -49,6 +49,7 @@ public class ItemHolder : MonoBehaviour {
     // drop one item is holds
     public void dropItem() {
         player.addItem(possesion.item.getId(), 1);
+        player.changeSatiety(SATIETYPOINTS.COLLECT);
         possesion.currentCount--;
 
         if(possesion.currentCount < 1) {

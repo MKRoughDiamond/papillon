@@ -13,11 +13,12 @@ public class Map : MonoBehaviour {
 
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
-    private int eyesight = 7;           // eyesight of player
+    private int eyesight = 8;           // eyesight of player
 
     public GameObject canvas;
     public GameObject fieldIcon;
     public GameObject userIcon;
+    public GameObject baseIcon;
 
     public void init() {
 
@@ -71,11 +72,12 @@ public class Map : MonoBehaviour {
         //    gameOver()
         //}
 
-        fields.RemoveAt(0);
         playerPosition = new Vector2(playerPosition.x - 1, playerPosition.y);
 
         if (playerPosition.x < 0)
             return false;
+
+        fields.RemoveAt(0);
         return true;
     }
 
@@ -102,7 +104,10 @@ public class Map : MonoBehaviour {
                 }
                 else
                 {
-                    generateField(fieldIcon, x, y);
+                    if (fields[x][y].isBase())
+                        generateField(baseIcon, x, y);
+                    else
+                        generateField(fieldIcon, x, y);
                 }
             }
         }

@@ -29,6 +29,9 @@ public class ResearchManager : MonoBehaviour {
 
     // progress research
     public void progress(int id, int point) {
+        if (!gm.canPlayerResearch())
+            return;
+
         for(int i = 0; i < availableList.Count; i++) {
 
             // according technology found
@@ -47,6 +50,8 @@ public class ResearchManager : MonoBehaviour {
                 }
             }
         }
+
+        gm.useResearchChance();
     }
 
     // update technologies' requirements

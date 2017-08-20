@@ -48,7 +48,7 @@ public class ResearchPanelElement : MonoBehaviour {
     public void onClick() {
         // 나중에 유동값으로 바꾸자
         if(panel.getState() == "AVAILABLE") {
-            rm.progress(tech.id, 10);
+            rm.progress(tech.id, 20);
             panel.makeResearchList();
         }
     }

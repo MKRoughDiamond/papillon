@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour {
     public int day;
     public bool exploreChance;  // whether player can go field or not
     public bool moveChance;     // whether player can move map or not
-    
+    public bool researchChance;     // whether player can research or not
+
 
     // think this better be Awake.
     private void Awake() {
@@ -94,6 +95,7 @@ public class GameManager : MonoBehaviour {
         day = 1;
         exploreChance = true;
         moveChance = true;
+        researchChance = true;
 
         // start game
         SceneManager.LoadScene(scene);
@@ -139,6 +141,7 @@ public class GameManager : MonoBehaviour {
         day += 1;
         exploreChance = true;
         moveChance = true;
+        researchChance = true;
 
         boardManager.nextDay(scene, day);
 
@@ -153,6 +156,12 @@ public class GameManager : MonoBehaviour {
     // check player can move
     public bool canPlayerMove() {
         return moveChance;
+    }
+
+    // check player can research
+    public bool canPlayerResearch()
+    {
+        return researchChance;
     }
 
     /*
@@ -170,6 +179,13 @@ public class GameManager : MonoBehaviour {
      */
     public void useMoveChance() {
         moveChance = false;
+    }
+    
+    /*
+     *  use research chance
+     */
+    public void useResearchChance() {
+        researchChance = false;
     }
 
 #endregion
@@ -212,4 +228,5 @@ public static class HEALTHPOINTS {
 public static class SATIETYPOINTS {
     public const int MOVE = -10; // when player move on map
     public const int SLEEP = -5; // when player go to sleep (next day)
+    public const int COLLECT = -1; // when player get item from field
 }

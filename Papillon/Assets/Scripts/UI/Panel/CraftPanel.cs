@@ -9,11 +9,13 @@ public class CraftPanel : Panel {
     private GameManager gm;
     private Player player;
     private CraftManager cm;
+    private ResearchManager rm;
 
     private void Start() {
         gm = GameManager.gm;
         player = gm.getPlayer();
         cm = gm.getCraftManager();
+        rm = gm.getResearchManager();
 
         makeCraftList();
 
@@ -25,7 +27,7 @@ public class CraftPanel : Panel {
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
-            if (recipe.getId() >= 1000)
+            if (recipe.getId() >= 1000 || !(recipe.getRequireTech()=="" || rm.checkTechDone(recipe.getRequireTech())))
                 continue;
             // Generate elements
             GameObject element = Instantiate(panelElement);
