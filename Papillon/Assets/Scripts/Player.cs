@@ -103,6 +103,10 @@ public class Player {
     // get item from object(itemholder)
     public void addItem(int id, int count) {
         Item item = ItemDatabase.findItem(id);
+
+        if (item.getType() == 3)
+            return;
+
         bool haveItem = checkItemPossession(id, 1);
 
         // if don't have that item, add new element to Inventory

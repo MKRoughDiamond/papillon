@@ -80,7 +80,7 @@ public class Item {
         return effect;
     }
 
-    public float getType() {
+    public int getType() {
         return type;
     }
 }

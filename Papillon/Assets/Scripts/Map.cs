@@ -62,7 +62,7 @@ public class Map : MonoBehaviour {
         player.changeSatiety(SATIETYPOINTS.MOVE);
         return true;
     }
-
+    
     // distory map by blackhole
     public bool destroyFrontField() {
         
@@ -74,6 +74,8 @@ public class Map : MonoBehaviour {
         fields.RemoveAt(0);
         playerPosition = new Vector2(playerPosition.x - 1, playerPosition.y);
 
+        if (playerPosition.x < 0)
+            return false;
         return true;
     }
 
@@ -110,6 +112,10 @@ public class Map : MonoBehaviour {
     // return field that player is now positioned
     public Field getPlayerPositionField() {
         return fields[(int)playerPosition.x][(int)playerPosition.y];
+    }
+    
+    public Vector2 getPlayerPosition() {
+        return playerPosition;
     }
 
     // check player's position is base

@@ -25,6 +25,8 @@ public class CraftPanel : Panel {
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
+            if (recipe.getId() >= 1000)
+                continue;
             // Generate elements
             GameObject element = Instantiate(panelElement);
             element.GetComponent<CraftPanelElement>().init(recipe);

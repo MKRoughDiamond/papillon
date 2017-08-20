@@ -16,10 +16,10 @@ public class UserMoveButton : MonoBehaviour {
     }
 
     public void onClick() {
-        if (gm.canPlayerMove()) {
+        Map map = gameObject.GetComponentInParent<Map>();
+        if (gm.canPlayerMove() && map.getPlayerPosition() != position) {
             gm.useMoveChance();
 
-            Map map = gameObject.GetComponentInParent<Map>();
             map.movePlayer(position);
             map.displayMap();
         }

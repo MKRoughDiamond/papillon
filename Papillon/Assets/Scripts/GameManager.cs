@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour {
         scene = SCENES.MAP;
 
         // game play variables initialize
-        day = 0;
+        day = 1;
         exploreChance = true;
         moveChance = true;
 
@@ -140,7 +140,7 @@ public class GameManager : MonoBehaviour {
         exploreChance = true;
         moveChance = true;
 
-        boardManager.nextDay(scene);
+        boardManager.nextDay(scene, day);
 
         player.changeSatiety(SATIETYPOINTS.SLEEP);
     }
@@ -178,6 +178,7 @@ public class GameManager : MonoBehaviour {
 
     public void gameOver() {
         Debug.Log("GAMEOVER");
+        Application.Quit();
     }
 
     public void gamePause() {

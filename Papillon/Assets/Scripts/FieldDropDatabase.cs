@@ -33,9 +33,9 @@ public class FieldDropDatabase : MonoBehaviour {
     private static void initForest() {
         forest = new List<FieldDropDatabaseElement>();
 
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("나무 조각"), 3, 5, 2, 4));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("돌맹이"), 3, 5, 2, 4));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("과일"), 3, 5, 2, 4));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("나무 조각"), 1, 3, 0, 3));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("돌맹이"), 1, 3, 0, 3));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("과일"), 1, 1, 0, 2));
     }
 }
 

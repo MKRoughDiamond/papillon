@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SetBaseButton : MonoBehaviour {
-
+    GameManager gm;
+    CraftManager cm;
     Map map;
 
     private void Start() {
-        map = GameManager.gm.getBoardManager().getMap();
+        gm = GameManager.gm;
+        cm = gm.getCraftManager();
+        map = gm.getBoardManager().getMap();
     }
 
     public void onClick() {
-        map.setBase();
+        if(cm.craft(1000,1))
+            map.setBase();
     }
 }
