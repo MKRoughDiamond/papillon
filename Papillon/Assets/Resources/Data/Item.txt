@@ -1,13 +1,22 @@
 ﻿# ID NAME DESCRIPTION WEIGHT TYPE
 # ID NAME DESCRIPTION WEIGHT TYPE EFFECT_NAME EFFECT_PARAM1 EFFECT_PARAM2 ...
 # TYPES - 0 : MATERIAL / 1 : USABLE / 2 : WEARABLE / 3 : BUILDINGS
+# ID - MATERIAL : 0~99 / USABLE : 100~199 / WEARABLE : 200~299
 #
 # MATERIALS
-1 나무_조각 단단한_나무_조각 0.1 0
-2 목재 설비_제작에_사용되는_소재 0.5 0
+1 원목 단단한_원목 0.1 0
+2 목재 제작에_사용되는_소재 0.5 0
 3 돌맹이 단단한_돌맹이 0.5 0
+4 철조각 작은_철조각 0.1 0 Damage_With_Prob 10 20
+#
+#
 # USABLES
-4 과일 정체를_모르는_과일 0.1 1 Satiety_Restore 50
+100 과일 정체를_모르는_과일 0.1 1 Satiety_Restore 20
+101 HP포션_소 소량의_체력을_회복 0.5 1 Health_Restore 20
+#
+#
 # WEARABLES
+#
+#
 # BUILDINGS
 1000 기지_건설 기지_건설 0.1 3

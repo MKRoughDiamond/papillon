@@ -4,5 +4,5 @@ using UnityEngine;
 
 // top level wrapper class of all effect
 public abstract class Effect {
-    public string name;
+    public string name;    
 }

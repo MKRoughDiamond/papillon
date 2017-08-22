@@ -60,6 +60,14 @@ public class EffectProcessor {
         player.changeSatiety(value);
     }
 
+    // get damage with probability
+    public void ITEM_Damage_With_Prob(List<int> param) {
+        int value = param[0];
+        int prob = param[1];
+
+        player.getDamageWithProb(value * (-1), prob);
+    }
+
     #endregion
 
     //public bool process(FieldEffect effect) {

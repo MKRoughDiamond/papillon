@@ -178,6 +178,10 @@ public class Map : MonoBehaviour {
         }  
     }
 
+    public int getDistance() {
+        return (int)playerPosition.x + 1;
+    }
+
     public List<List<Field>> getFields() {
         return fields;
     }

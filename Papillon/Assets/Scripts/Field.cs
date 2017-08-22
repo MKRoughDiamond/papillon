@@ -73,4 +73,8 @@ public class FieldItemElement {
         totalCount = count;
         currentCount = count;
     }
+
+    public Item getItem() {
+        return item;
+    }
 }

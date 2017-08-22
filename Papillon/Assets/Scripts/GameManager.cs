@@ -122,6 +122,10 @@ public class GameManager : MonoBehaviour {
         return researchManager;
     }
 
+    public EffectProcessor getEffectProcessor() {
+        return effectProcessor;
+    }
+
     public GameObject getInventory() {
         return inventory;
     }

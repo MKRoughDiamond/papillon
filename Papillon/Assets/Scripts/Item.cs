@@ -42,10 +42,14 @@ public class Item {
     private void LoadIcon()
     {
         Sprite newIcon = Resources.Load<Sprite>("Icon/Item/" + name);
+        Sprite notFound = Resources.Load<Sprite>("Icon/Item/not found");
+
         if (newIcon)
             icon = newIcon;
-        else
+        else {
             Debug.Log("There is no item icon\t" + name);
+            icon = notFound;
+        }
     }
 
     public Sprite getIcon()
@@ -98,5 +102,5 @@ public class ItemEffect : Effect {
     public ItemEffect(string name, List<int> parameters) {
         this.name = name;
         this.parameters = new List<int>(parameters);
-    }
+    } 
 }
