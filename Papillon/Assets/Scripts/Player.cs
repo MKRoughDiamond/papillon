@@ -71,6 +71,11 @@ public class Player {
         armor = Mathf.Min(max_armor, armor + d);
     }
 
+    public void changeEfficiency(int d)
+    {
+        efficiency = efficiency + d;
+    }
+
     public bool isOverLoaded() {
         return itemOverLoaded == true;
     }

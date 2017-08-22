@@ -23,7 +23,7 @@ public class Item {
         this.weight = weight;
         this.effect = effect;
         this.type = type;
-        if (effect.name == "Protection")
+        if (effect.name.Equals("Protection"))
             this.armor = effect.parameters[0];
         LoadIcon();
     }
