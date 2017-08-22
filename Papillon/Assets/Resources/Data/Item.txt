@@ -25,12 +25,12 @@
 #
 #
 # USABLES
-100 그린프루트 20의_허기를_회복 0.1 1 Satiety_Restore 20  
-101 통조림 40의_허기를_회복 0.2 1 Satiety_Restore 40
-102 레드콘 30의_허기를_회복 0.2 1 Satiety_Restore 40
-103 오렌지포테이토 50의_허기를_회복 0.3 1 Satiety_Restore 50
-104 오일리콘 10의_허기를_회복 0.3 1 Satiety_Restore 10
-105 슈퍼포테이토 80의_허기를_회복 0.5 1 Satiety_Restore 80
+100 그린프루트 80의_허기를_회복 0.1 1 Satiety_Restore 80  
+101 통조림 200의_허기를_회복 0.2 1 Satiety_Restore 200
+102 레드콘 60의_허기를_회복 0.2 1 Satiety_Restore 60
+103 오렌지포테이토 100의_허기를_회복 0.3 1 Satiety_Restore 100
+104 오일리콘 50의_허기를_회복 0.3 1 Satiety_Restore 50
+105 슈퍼포테이토 150의_허기를_회복 0.5 1 Satiety_Restore 150
 106 붕대 20의_체력을_회복 0.5 1 Health_Restore 20
 107 의약품 50의_체력을_회복 1 1 Health_Restore 50
 108 연료 운송수단에_쓰이는_연료 5 1 Use_Fuel
