@@ -93,6 +93,9 @@ public static class ITEMTYPE {
     public const int MATERIAL = 0;
     public const int USABLE = 1;
     public const int WEARABLE = 2;
+    public const int SEED = 3;
+    public const int TRANSPORTATION = 4;
+    public const int BUILDING = 5;
 }
 
 public class ItemEffect : Effect {

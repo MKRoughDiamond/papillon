@@ -7,6 +7,9 @@ public class BoardManager : MonoBehaviour {
     private GameManager gm;
     private Map map;
 
+    private List<Base> bases;
+    private int currentBaseIndex;
+
     public void init()
     {
         gm = GameManager.gm;
@@ -47,6 +50,10 @@ public class BoardManager : MonoBehaviour {
         return map;
     }
 
+    public Base getBase() {
+        return bases[currentBaseIndex];
+    }
+
     private void fieldSetup()
     {
         // 상당히 안 좋은 구조...
@@ -59,6 +66,9 @@ public class BoardManager : MonoBehaviour {
 
     private void baseSetup()
     {
+        Field field = map.getPlayerPositionField();
+        currentBaseIndex = field.getIndex();
+
         return;
     }
 

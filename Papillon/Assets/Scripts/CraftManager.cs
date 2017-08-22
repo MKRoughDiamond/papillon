@@ -35,6 +35,10 @@ public class CraftManager : MonoBehaviour {
         foreach(RecipeElement e in ingredients) {
             player.removeItem(e.item.getId(), e.count * craftCount);
         }
+
+        if (product.item.getType() == ITEMTYPE.BUILDING)
+            return true;
+
         player.addItem(product.item.getId(), product.count);
         Debug.Log("Craft Done");
         return true;

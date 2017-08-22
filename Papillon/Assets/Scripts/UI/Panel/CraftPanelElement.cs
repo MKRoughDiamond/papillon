@@ -8,7 +8,7 @@ public class CraftPanelElement : MonoBehaviour {
 
     public Text name;               // name of product
     public Text ingredients;       // list of ingredients
-    public Sprite icon;             // icon of product
+    public Image icon;             // icon of product
 
     private CraftManager cm;
     private Recipe recipe;
@@ -24,7 +24,7 @@ public class CraftPanelElement : MonoBehaviour {
         name.text = this.recipe.getProduct().item.getName() + " x" + this.recipe.getProduct().count.ToString();
         ingredients.text = generateIngredientsText(this.recipe.getIngredients());
 
-        icon = recipe.getProduct().item.getIcon(); 
+        icon.sprite = recipe.getProduct().item.getIcon(); 
     }
 
     // formalize text
