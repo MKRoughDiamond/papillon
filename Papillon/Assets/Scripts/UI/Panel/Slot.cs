@@ -10,7 +10,7 @@ public class Slot : MonoBehaviour{
     
     private GameManager gm;
     private Player player;
-    private GameObject inventory;
+    //private GameObject inventory;
     private Inventory inventoryScript;
     private InventoryElement element;
 
@@ -22,8 +22,8 @@ public class Slot : MonoBehaviour{
         gm = GameManager.gm;
         player = gm.getPlayer();
         element = e;
-        inventory = gm.getInventory(); 
-        inventoryScript = inventory.GetComponent<Inventory>();
+        //inventory = gm.getInventory();
+        inventoryScript = GetComponentInParent<Inventory>();
 
         count.text = e.count.ToString();
         name = e.item.getName();

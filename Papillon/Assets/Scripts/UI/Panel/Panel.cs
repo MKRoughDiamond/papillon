@@ -23,7 +23,14 @@ public class Panel : MonoBehaviour {
     // open panel
     // display all things
     public virtual void open() {
-        gameObject.SetActive(true);
+
+        // close all other panels
+        Panel[] openedPanels = transform.parent.GetComponentsInChildren<Panel>();
+        for (int i = 0; i < openedPanels.Length; i++) {
+            openedPanels[i].close();
+        }
+
+            gameObject.SetActive(true);
     }
 
     // close panel

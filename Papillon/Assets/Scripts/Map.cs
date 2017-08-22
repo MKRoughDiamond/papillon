@@ -159,9 +159,9 @@ public class Map : MonoBehaviour {
 
     // set buttons interactivity
     public void activateButtons() {
-        GameObject setBaseButton = GameObject.Find("Canvas/setBase");
-        GameObject toBaseButton = GameObject.Find("Canvas/toBase");
-        GameObject toFieldButton = GameObject.Find("Canvas/toField");
+        GameObject setBaseButton = GameObject.Find("Canvas/Buttons/setBase");
+        GameObject toBaseButton = GameObject.Find("Canvas/Buttons/toBase");
+        GameObject toFieldButton = GameObject.Find("Canvas/Buttons/toField");
 
         // if player is on base field player can go to base, and not to field, vise versa
         // if explore chance is already used, then player can't build base, can't go to field neither

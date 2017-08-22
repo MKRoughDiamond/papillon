@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
 
     private EffectProcessor effectProcessor;
 
-    private GameObject inventory;
+    //private GameObject inventory;
     private int scene;
 
     // game play related variables
@@ -82,11 +82,11 @@ public class GameManager : MonoBehaviour {
         effectProcessor = new EffectProcessor();
         effectProcessor.init();
 
-        /*
-         * get Inventory
-         */
+        ///*
+        // * get Inventory
+        // */
 
-        inventory = transform.Find("Canvas/InventoryPanel").gameObject;
+        //inventory = transform.Find("Canvas/InventoryPanel").gameObject;
 
         // default scene
         scene = SCENES.MAP;
@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnLevelWasLoaded (int level) {
-        getInventory().SetActive(false);
+        //getInventory().SetActive(false);
         boardManager.boardSetup(level);
     }
 
@@ -126,9 +126,9 @@ public class GameManager : MonoBehaviour {
         return effectProcessor;
     }
 
-    public GameObject getInventory() {
-        return inventory;
-    }
+    //public GameObject getInventory() {
+    //    return inventory;
+    //}
 
 #region Game Play Related Methods
 
