@@ -25,6 +25,7 @@ public class Item {
         this.type = type;
         if (effect.name.Equals("Protection"))
             this.armor = effect.parameters[0];
+
         LoadIcon();
     }
 

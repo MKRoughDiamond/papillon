@@ -88,14 +88,14 @@ public class EffectProcessor {
     {
         int value = param[0];
 
-        player.changeEfficiency(value);
+        //player.changeEfficiency(value);
     }
 
     public void ITEM_Efficiency_Reverse(List<int> param)
     {
         int value = param[0] * -1;
 
-        player.changeEfficiency(value);
+        //player.changeEfficiency(value);
     }
 
     // harvest from seed

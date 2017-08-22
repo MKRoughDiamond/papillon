@@ -17,7 +17,7 @@ public class CultivatePanel : Panel {
         bm = gm.getBoardManager();
         player = gm.getPlayer();
 
-        elementParent = "";
+        elementParent = "Scroll/Viewport/CultivateList";
         state = "CULTIVATING";
 
         gameObject.SetActive(false);
@@ -32,7 +32,7 @@ public class CultivatePanel : Panel {
     }
 
     public void makeList() {
-
+        
         clearList();
 
         List<CultivateElement> list;
@@ -57,13 +57,13 @@ public class CultivatePanel : Panel {
 
         foreach (CultivateElement e in list) {
             // Generate elements
-            GameObject element = Instantiate(panelElement);
-            element.GetComponent<CultivatePanelElement>().init(e);
+            GameObject element = Instantiate(panelElement) as GameObject;
 
             // Attach it to panel scroll list
             // If you change name of object in inspector, you must change below code
             element.transform.SetParent(transform.Find(elementParent));
 
+            element.GetComponent<CultivatePanelElement>().init(e);
         }
     }
 
@@ -82,6 +82,11 @@ public class CultivatePanel : Panel {
     // when enabled ( default list is 'CULTIVATING' )
     private void OnEnable() {
         setState("CULTIVATING");
+        makeList();
+    }
+
+    public override void switchPane(string paneName) {
+        setState(paneName);
         makeList();
     }
 }

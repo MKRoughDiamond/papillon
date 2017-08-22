@@ -21,6 +21,11 @@ public class ItemHolder : MonoBehaviour {
     }
 
     public void setItem(FieldItemElement e) {
+
+        if(e.currentCount < 1) {
+            destroyItem();
+        }
+
         possesion = e;
         loadIcon(possesion.item.getName());
     }

@@ -5,30 +5,40 @@ using UnityEngine;
 /// <summary>
 /// Base 클래스
 /// </summary>
-public class Base : MonoBehaviour {
+public class Base {
 
     private GameManager gm;
     private Player player;
 
     public List<InventoryElement> inventory;    // Items that base holds
 
-    private int idx;
+    private int id;
     private List<CultivateElement> seedList;
     private List<CultivateElement> cultivatingList;
     private List<CultivateElement> doneList;
 
-    public Base(int idx) {
+    public Base(int id) {
 
         gm = GameManager.gm;
         player = gm.getPlayer();
 
-        this.idx = idx;
+        this.id = id;
         cultivatingList = new List<CultivateElement>();
         doneList = new List<CultivateElement>();
     }
 
+    public int getId() {
+        return id;
+    }
+
+    // called when entering base
+    public void updateBaseStates(int day) {
+        updateCultivateState(day);
+    }
+
     #region Cultivation related
 
+    // show all seeds that player have
     public List<CultivateElement> getSeedList(int day) {
 
         List<InventoryElement> inventory = player.getInventory();
@@ -59,7 +69,7 @@ public class Base : MonoBehaviour {
 
     // move finished cultivates to doneList
     public void updateCultivateState(int day) {
-        for(int i = 0; i < cultivatingList.Count; i++) {
+        for(int i = cultivatingList.Count-1; i >= 0; i--) {
             if (cultivatingList[i].isFinished(day)) {
                 doneList.Add(cultivatingList[i]);
                 cultivatingList.RemoveAt(i);
@@ -68,15 +78,22 @@ public class Base : MonoBehaviour {
     }
 
     // harvest from doneList
-    public void harvest(int idx) {
-        gm.doEffect(doneList[idx].getItem().getEffect());
-        doneList.RemoveAt(idx);
+    public void harvest(int id) {
+
+        for(int i = doneList.Count-1; i >= 0; i--) {
+            if(doneList[i].getItem().getId() == id) {
+                gm.doEffect(doneList[i].getItem().getEffect());
+                doneList.RemoveAt(i);
+                return;
+            }
+        }
     }
 
     #endregion
 
     #region inventory related
 
+    // add item to base inventory
     public void addItem(int id, int count) {
 
         if (count == 0)

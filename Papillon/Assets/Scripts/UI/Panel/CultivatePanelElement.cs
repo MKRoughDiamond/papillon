@@ -16,24 +16,25 @@ public class CultivatePanelElement : MonoBehaviour {
     private CultivatePanel panel;
     private CultivateElement element;
 
-    private void Start() {
-        panel = GetComponentInParent<CultivatePanel>();
+    public void init(CultivateElement element) {
 
+        panel = GetComponentInParent<CultivatePanel>();
         gm = GameManager.gm;
         baseObject = gm.getBoardManager().getBase();
-    }
-
-    public void init(CultivateElement element) {
         this.element = element;
 
         name.text = this.element.getItem().getName();
-        day.text = generateDayText(this.element.getRequiredDay());
+        day.text = generateDayText();
         product.text = generateProductText(this.element.getItem().getEffect());
         icon.sprite = this.element.getItem().getIcon();
     }
 
-    private string generateDayText(int day) {
-        return "0 / " + day.ToString();
+    private string generateDayText() {
+
+        int requiredDay = element.getRequiredDay();
+        int passedDay = Mathf.Min(gm.getDay() - element.getStartDay(), requiredDay);
+
+        return passedDay.ToString() + " / " + requiredDay.ToString();
     }
 
     private string generateProductText(ItemEffect effect) {
@@ -52,11 +53,15 @@ public class CultivatePanelElement : MonoBehaviour {
     }
 
     public void onClick() {
-        // 나중에 유동값으로 바꾸자
+        // start cultivating
         if (panel.getState() == "SEED") {
             baseObject.cultivate(element.getItem(), gm.getDay());
             panel.makeList();
+        } else if(panel.getState() == "CULTIVATING") {
+            // do nothing
+        } else if(panel.getState() == "DONE") {
+            baseObject.harvest(element.getItem().getId());
+            panel.makeList();
         }
     }
-
 }

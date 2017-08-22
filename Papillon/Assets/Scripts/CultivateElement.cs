@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CultivateElement : MonoBehaviour {
+public class CultivateElement {
 
     private Item item;
     private int startDay;
@@ -18,7 +18,7 @@ public class CultivateElement : MonoBehaviour {
     }
 
     // get how many days are left
-    public int countLeftDay(int day) {
+    public int getLeftDay(int day) {
         ItemEffect e = item.getEffect();
 
         if (e.name != "Seed") {
@@ -33,7 +33,7 @@ public class CultivateElement : MonoBehaviour {
 
     // check cultivating is done
     public bool isFinished(int day) {
-        return countLeftDay(day) < 0;
+        return getLeftDay(day) < 0;
     }
 
     public Item getItem() {
