@@ -19,6 +19,7 @@ public class Map : MonoBehaviour {
 
     public GameObject canvas;
     public GameObject fieldIcon;
+    public GameObject rocketIcon;
     public GameObject userIcon;
     public GameObject baseIcon;
 
@@ -41,12 +42,12 @@ public class Map : MonoBehaviour {
 
             fields.Add(new List<Field>());
             for (int i = 0; i < Random.Range(1, 5); i++)
-                fields[x].Add(new Field(FIELDTYPE.FOREST));
+                fields[x].Add(new Field(FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)]));
         }
         else
         {
             fields.Add(new List<Field>());
-            fields[x].Add(new Field(FIELDTYPE.FOREST));
+            fields[x].Add(new Field(FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)]));
         }
     }
 
@@ -109,8 +110,14 @@ public class Map : MonoBehaviour {
                 {
                     if (fields[x][y].isBase())
                         generateField(baseIcon, x, y);
-                    else
+                    else if(fields[x][y].getType() == FIELDTYPE.FOREST) {
                         generateField(fieldIcon, x, y);
+                    }
+                    else if (fields[x][y].getType() == FIELDTYPE.ROCKET) {
+                        generateField(rocketIcon, x, y);
+                    }
+
+
                 }
             }
         }

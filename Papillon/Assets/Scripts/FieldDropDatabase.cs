@@ -10,10 +10,12 @@ public class FieldDropDatabase : MonoBehaviour {
     private static List<FieldDropDatabaseElement> forest;
     private static List<FieldDropDatabaseElement> ice;
     private static List<FieldDropDatabaseElement> desert;
+    private static List<FieldDropDatabaseElement> rocket;
 
     // 데이터베이스 규모가 커지면 다른 데이터베이스처럼 FILE I/O로 처리해도 될텐데, 일단은 크기가 작으니 스크립트 내에서 처리.
     public static void init() {
         initForest();
+        initRocket();
     }
 
     // load drop element list according to field type
@@ -25,6 +27,8 @@ public class FieldDropDatabase : MonoBehaviour {
                 return ice;
             case FIELDTYPE.DESERT:
                 return desert;
+            case FIELDTYPE.ROCKET:
+                return rocket;
             default:
                 return forest;
         }
@@ -37,6 +41,16 @@ public class FieldDropDatabase : MonoBehaviour {
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("벽돌"), 1, 3, 0, 3));
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 0, 2));
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("레드콘 씨앗"), 1, 1, 0, 2));
+    }
+
+    private static void initRocket() {
+        rocket = new List<FieldDropDatabaseElement>();
+
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("연료 로켓 엔진"), 0, 0, 1, 1));
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("바이오 로켓 엔진"), 0, 0, 1, 1));
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원자력 로켓 엔진"), 0, 0, 1, 1));
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우주선 날개"), 0, 0, 1, 1));
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우주선 동체"), 0, 0, 1, 1));
     }
 }
 

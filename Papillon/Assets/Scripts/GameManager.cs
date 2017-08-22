@@ -205,6 +205,24 @@ public class GameManager : MonoBehaviour {
         Debug.Log("GAME PAUSE");
     }
 
+    // check rocket launch is possible
+    // and if so, do something (currently game end)
+    public void checkRocketLaunch(Field field) {
+
+        List<FieldItemElement> list = field.getItemList();
+
+        foreach(FieldItemElement e in list) {
+            // 부족한 부품
+            if (e.currentCount == -1) {
+                Debug.Log("To Launch Rocket, you need " + e.getItem().getName());
+                // 플레이어가 해당 부품을 가지고 있음
+                if(getPlayer().checkItemPossession(e.getItem().getId(), 1)) {
+                    Debug.Log("GAME CLEAR!");
+                }
+            }
+        }
+    }
+
 #endregion
 }
 
