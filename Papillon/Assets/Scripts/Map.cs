@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Map : MonoBehaviour {
 
     private GameManager gm;
+    private BoardManager bm;
     private Player player;
 
     private List<List<Field>> fields;
@@ -24,6 +25,7 @@ public class Map : MonoBehaviour {
     public void init() {
 
         gm = GameManager.gm;
+        bm = gm.getBoardManager();
         player = gm.getPlayer();
 
         fields = new List<List<Field>>();
@@ -136,6 +138,7 @@ public class Map : MonoBehaviour {
             Field f = getPlayerPositionField();
             if (f.setBase(baseCount)) {
                 gm.useExploreChance();
+                bm.addBase(baseCount);
                 activateButtons();
                 baseCount++;
                 return true;

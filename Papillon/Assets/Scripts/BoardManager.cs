@@ -8,13 +8,14 @@ public class BoardManager : MonoBehaviour {
     private Map map;
 
     private List<Base> bases;
-    private int currentBaseIndex;
+    private int currentBaseId;
 
     public void init()
     {
         gm = GameManager.gm;
         map = GetComponent<Map>();
         map.init();
+        bases = new List<Base>();
     }
 
     public void boardSetup(int scene) {
@@ -51,7 +52,21 @@ public class BoardManager : MonoBehaviour {
     }
 
     public Base getBase() {
-        return bases[currentBaseIndex];
+        Field field = map.getPlayerPositionField();
+        currentBaseId = field.getIndex();
+
+        for(int i = 0; i < bases.Count; i++) {
+            if (bases[i].getId() == currentBaseId) {
+                return bases[i];
+            }
+        }
+
+        Debug.Log("ERROR: getbase() Illegal Base Id");
+        return new Base(-1);
+    }
+
+    public void addBase(int idx) {
+        bases.Add(new Base(idx));
     }
 
     private void fieldSetup()
@@ -64,11 +79,8 @@ public class BoardManager : MonoBehaviour {
         gm.useExploreChance();
     }
 
-    private void baseSetup()
-    {
-        Field field = map.getPlayerPositionField();
-        currentBaseIndex = field.getIndex();
-
+    private void baseSetup() {
+        getBase().updateBaseStates(gm.getDay());
         return;
     }
 
