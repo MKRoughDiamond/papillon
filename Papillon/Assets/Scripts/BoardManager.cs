@@ -76,6 +76,11 @@ public class BoardManager : MonoBehaviour {
         Field field = map.getPlayerPositionField();
         fieldGenerator.displayField(field);
 
+        // if a field is the rocket field, check game end
+        if(field.getType() == FIELDTYPE.ROCKET) {
+            gm.checkRocketLaunch(field);
+        }
+
         gm.useExploreChance();
     }
 
