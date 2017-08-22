@@ -24,9 +24,9 @@ public class EffectProcessor {
         player = gm.getPlayer();
     }
 
-    public bool process(Effect effect) {
+    public bool process(Effect effect, bool flag = true) {
         if(effect is ItemEffect) {
-            return itemEffectProcess((ItemEffect)effect);
+            return itemEffectProcess((ItemEffect)effect,flag);
         }
         return false;
     }
@@ -34,10 +34,14 @@ public class EffectProcessor {
     #region ItemEffect
 
     private string itemEffectPrefix = "ITEM_"; // tell function is related with item effect
+    private string itemEffectPostfix = "_Reverse";
 
-    public bool itemEffectProcess(ItemEffect effect) {
-
-        MethodInfo method = this.GetType().GetMethod(itemEffectPrefix + effect.name);
+    public bool itemEffectProcess(ItemEffect effect, bool flag) {
+        MethodInfo method;
+        if (flag)
+            method = this.GetType().GetMethod(itemEffectPrefix + effect.name);
+        else
+            method = this.GetType().GetMethod(itemEffectPrefix + effect.name + itemEffectPostfix);
 
         object[] parameters = new object[1];
         parameters[0] = effect.parameters;
@@ -67,6 +71,33 @@ public class EffectProcessor {
 
         player.getDamageWithProb(value * (-1), prob);
     }
+
+    public void ITEM_Protection(List<int> param) {
+        int value = param[0];
+
+        player.changeArmor(value);
+    }
+
+    public void ITEM_Protection_Reverse(List<int> param) {
+        int value = param[0] * -1;
+
+        player.changeArmor(value);
+    }
+
+    public void ITEM_Efficiency(List<int> param)
+    {
+        int value = param[0];
+
+        player.changeEfficiency(value);
+    }
+
+    public void ITEM_Efficiency_Reverse(List<int> param)
+    {
+        int value = param[0] * -1;
+
+        player.changeEfficiency(value);
+    }
+
 
     #endregion
 

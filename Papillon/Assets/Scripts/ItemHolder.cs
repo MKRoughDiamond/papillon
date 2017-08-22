@@ -53,7 +53,7 @@ public class ItemHolder : MonoBehaviour {
         player.changeSatiety(SATIETYPOINTS.COLLECT);
 
         if (itemEffect != null && itemEffect.name.Equals("Damage_With_Prob"))
-            gm.getEffectProcessor().process(itemEffect);
+            gm.doEffect(itemEffect);
 
         possesion.currentCount--;
 

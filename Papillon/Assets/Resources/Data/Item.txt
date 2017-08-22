@@ -1,22 +1,66 @@
 ﻿# ID NAME DESCRIPTION WEIGHT TYPE
 # ID NAME DESCRIPTION WEIGHT TYPE EFFECT_NAME EFFECT_PARAM1 EFFECT_PARAM2 ...
-# TYPES - 0 : MATERIAL / 1 : USABLE / 2 : WEARABLE / 3 : BUILDINGS
-# ID - MATERIAL : 0~99 / USABLE : 100~199 / WEARABLE : 200~299
+# TYPES - 0 : MATERIAL / 1 : USABLE / 2 : WEARABLE / 3 : SEED / 4 : TRANSPORTATION/ 5 : BUILDING
+# ID - MATERIAL : 0~99 / USABLE : 100~199 / WEARABLE : 200~299 / SEED : 300~399/ TRANSPORTATION : 300~399 /
 #
 # MATERIALS
-1 원목 단단한_원목 0.1 0
-2 목재 제작에_사용되는_소재 0.5 0
-3 돌맹이 단단한_돌맹이 0.5 0
-4 철조각 작은_철조각 0.1 0 Damage_With_Prob 10 20
+1 원목 나무 1 0
+2 목재 원목을_가공한_목재 1 0
+3 벽돌 단단한_벽돌 1 0
+4 철_조각 작은_철조각 0.2 0 Damage_With_Prob 5 20
+5 고장난_회로 고장난_회로 0.5 0
+6 티타늄_조각 작은_티타늄_조각 0.4 0 Damage_With_Prob 10 20
+7 천 천 0.2 0
+8 우라늄_셀 우라늄_셀 2 0 Damage_With_Prob 70 40
+9 철_주괴 철_주괴 2 0
+10 티타늄_주괴 티타늄_주괴 4 0
+11 로켓_합금 로켓_합금 5 0
+12 회로 회로 1 0
+13 엔진 엔진 5 0
+14 연료_로켓_엔진 연료_로켓_엔진 30 0
+15 바이오_로켓_엔진 바이오_로켓_엔진 30 0
+16 원자력_로켓_엔진 원자력_로켓_엔진 30 0
+17 우주선_날개 우주선_날개 30 0
+18 우주선_동체 우주선_동체 60 0
 #
 #
 # USABLES
-100 과일 정체를_모르는_과일 0.1 1 Satiety_Restore 20
-101 HP포션_소 소량의_체력을_회복 0.5 1 Health_Restore 20
+100 그린프루트 20의_허기를_회복 0.1 1 Satiety_Restore 20  
+101 통조림 40의_허기를_회복 0.2 1 Satiety_Restore 40
+102 레드콘 30의_허기를_회복 0.2 1 Satiety_Restore 40
+103 오렌지포테이토 50의_허기를_회복 0.3 1 Satiety_Restore 50
+104 오일리콘 10의_허기를_회복 0.3 1 Satiety_Restore 10
+105 슈퍼포테이토 80의_허기를_회복 0.5 1 Satiety_Restore 80
+106 붕대 20의_체력을_회복 0.5 1 Health_Restore 20
+107 의약품 50의_체력을_회복 1 1 Health_Restore 50
+108 연료 운송수단에_쓰이는_연료 5 1 Use_Fuel
+109 바이오매스 운송수단에_쓰이는_연료 6 1 Use_Fuel
 #
 #
 # WEARABLES
+200 천_보호구 천_보호구 5 2 Protection 3
+201 철_보호구 철_보호구 10 2 Protection 5
+202 티타늄_보호구 티타늄_보호구 20 2 Protection 10
+203 작업_슈트 작업_슈트 10 2 Efficiency 2
+204 철_드릴 철_드릴 5 2 Efficiency 2
+205 티타늄_드릴 티타늄_드릴 10 2 Efficiency 4
+#
+#
+# SEEDS (Seed [time] [product] [# of products] [seed] [# of seeds])
+300 레드콘_씨앗 레드콘_씨앗 0.1 3 Seed 2 102 3 300 3
+301 오렌지포테이토_씨앗 오렌지포테이토_씨앗 0.1 3 Seed 3 103 1 301 3
+302 오일리콘_씨앗 오일리콘_씨앗 0.2 3 Seed 3 104 2 302 0
+303 슈퍼포테이토_씨앗 슈퍼포테이토_씨앗 0.4 3 Seed 5 105 1 303 0
+#
+#
+# TRANSPORTATIONS
+400 버기 버기 60 4
+401 트럭 트럭 90 4
 #
 #
 # BUILDINGS
-1000 기지_건설 기지_건설 0.1 3
+1000 기지_건설 기지_건설 0.1 5
+1002 제작_시설_업그레이드_lv_2 제작_시설_업그레이드 0.1 5
+1003 제작_시설_업그레이드_lv_3 제작_시설_업그레이드 0.1 5
+1012 재배_시설_업그레이드_lv_2 재배_시설_업그레이드 0.1 5
+1013 재배_시설_업그레이드_lv_3 재배_시설_업그레이드 0.1 5

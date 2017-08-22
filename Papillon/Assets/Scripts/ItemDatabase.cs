@@ -29,8 +29,8 @@ public class ItemDatabase : MonoBehaviour {
                         line = reader.ReadLine();
                         continue;
                     }
-                        
-                    words = line.Split(' ');
+                    
+                    words = line.TrimEnd(' ').Split(' ');
                     if (words.Length == 5) {
                         // ITEM DB : 'ID NAME DESCRIPTION WEIGHT TYPE'
                         itemList.Add(new Item(
@@ -44,9 +44,8 @@ public class ItemDatabase : MonoBehaviour {
                         // ITEM DB : 'ID NAME DESCRIPTION WEIGHT TYPE EFFECT_NAME EFFECT_PARAMETERS'
 
                         List<int> effect_param = new List<int>();
-                        for(int i = 6; i < words.Length; i++) {
+                        for(int i = 6; i < words.Length; i++)
                             effect_param.Add(int.Parse(words[i]));
-                        }
                         ItemEffect effect = new ItemEffect(words[5], effect_param);
 
                         itemList.Add(new Item(

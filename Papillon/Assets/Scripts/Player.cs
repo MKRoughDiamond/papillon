@@ -10,6 +10,7 @@ public class Player {
     public int max_satiety;
     public int max_armor;
     public float max_weight;
+    public int efficiency;
 
     public int health;
     public int satiety;
@@ -38,10 +39,14 @@ public class Player {
         satiety = max_satiety;
         armor = max_armor;
         updateItemWeightsSum();
+        efficiency = 1;
     }
 
     public void changeHealth(int d) {
-        health = Mathf.Min(max_health, health + d);
+        if (d < 0)
+            health = Mathf.Min(max_health, health + Mathf.Min(d+armor,0));
+        else
+            health = Mathf.Min(max_health, health + d);
 
         if(health <= 0) {
             gm.gameOver();
@@ -124,9 +129,11 @@ public class Player {
             if(inventory[i].item.getId() == id) {
                 inventory[i].updateCount(count);
 
-                if(item.getType() == ITEMTYPE.WEARABLE) {
-                    changeArmor(item.getArmor());
+                if(inventory[i].item.getType() == ITEMTYPE.WEARABLE) {
+                    for(int j=0;j<count;j++)
+                        gm.doEffect(inventory[i].item.getEffect());
                 }
+                break;
             }
         }
         updateItemWeightsSum();
@@ -162,12 +169,12 @@ public class Player {
         for (int i = inventory.Count - 1; i >= 0; i--) {
             if (inventory[i].item.getId() == id) {
 
-                if(inventory[i].count > count) {
+                if(inventory[i].count >= count) {
                     inventory[i].updateCount(-count);
-                    return true;
-                } else if(inventory[i].count == count) {
-                    inventory[i].updateCount(-count);
-                    inventory.RemoveAt(i);
+                    if (inventory[i].item.getType() == ITEMTYPE.WEARABLE)
+                        gm.doEffect(inventory[i].item.getEffect(),false);
+                    if(inventory[i].count==0)
+                        inventory.RemoveAt(i);
                     return true;
                 } else {
                     Debug.Log("ERROR : removeItem() fail - not enough items");

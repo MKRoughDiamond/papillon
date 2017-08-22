@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour {
          *  Initializing player
          *  
          */
-        player = new Player(100, 100, 0, 100f);
+        player = new Player(100, 1000, 0, 100f);
 
         /*
          * Initializing Databases
@@ -132,8 +132,8 @@ public class GameManager : MonoBehaviour {
 
 #region Game Play Related Methods
 
-    public bool doEffect(Effect effect) {
-        return effectProcessor.process(effect);
+    public bool doEffect(Effect effect, bool flag=true) {
+        return effectProcessor.process(effect, flag);
     }
 
     public int getDay() {
@@ -230,7 +230,7 @@ public static class HEALTHPOINTS {
 }
 
 public static class SATIETYPOINTS {
-    public const int MOVE = -10; // when player move on map
-    public const int SLEEP = -5; // when player go to sleep (next day)
-    public const int COLLECT = -1; // when player get item from field
+    public const int MOVE = -100; // when player move on map
+    public const int SLEEP = -50; // when player go to sleep (next day)
+    public const int COLLECT = -10; // when player get item from field
 }
