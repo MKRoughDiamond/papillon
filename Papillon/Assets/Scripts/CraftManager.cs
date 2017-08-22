@@ -39,7 +39,8 @@ public class CraftManager : MonoBehaviour {
         if (product.item.getType() == ITEMTYPE.BUILDING)
             return true;
 
-        player.addItem(product.item.getId(), product.count);
+        player.changeSatiety(SATIETYPOINTS.CRAFTING);
+        player.addItem(product.item.getId(), product.count * craftCount);
         Debug.Log("Craft Done");
         return true;
     }
