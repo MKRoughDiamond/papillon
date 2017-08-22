@@ -113,10 +113,11 @@ public class Player {
 
     // get item from object(itemholder)
     public void addItem(int id, int count) {
-        Item item = ItemDatabase.findItem(id);
 
-        if (item.getType() == 3)
+        if(count == 0)
             return;
+
+        Item item = ItemDatabase.findItem(id);
 
         bool haveItem = checkItemPossession(id, 1);
 

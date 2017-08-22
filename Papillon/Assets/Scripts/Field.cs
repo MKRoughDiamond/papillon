@@ -7,6 +7,7 @@ public class Field {
     private int type;
     // private effects
     private bool isBaseField;
+    private int baseIdx;
 
     List<FieldItemElement> dropItemList;
 
@@ -29,13 +30,14 @@ public class Field {
     }
 
     // set this field to base
-    public bool setBase() {
+    public bool setBase(int idx) {
         if (isBase()) {
             Debug.Log("ALREADY BASE");
             return false;
         }
 
         isBaseField = true;
+        baseIdx = idx;
         // doSomeInitialize();
         return true;
     }
@@ -54,6 +56,10 @@ public class Field {
 
     public int getType() {
         return type;
+    }
+
+    public int getIndex() {
+        return baseIdx;
     }
 }
 

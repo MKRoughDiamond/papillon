@@ -98,6 +98,17 @@ public class EffectProcessor {
         player.changeEfficiency(value);
     }
 
+    // harvest from seed
+    public void ITEM_Seed(List<int> param) {
+        // int day = param[0];
+        int productId = param[1];
+        int productCount = param[2];
+        int seedId = param[3];
+        int seedCount = param[4];
+
+        player.addItem(productId, productCount);
+        player.addItem(seedId, seedCount);
+    }
 
     #endregion
 

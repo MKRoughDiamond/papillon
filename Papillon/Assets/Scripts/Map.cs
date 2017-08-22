@@ -14,6 +14,7 @@ public class Map : MonoBehaviour {
     private List<List<Field>> fields;
     private Vector2 playerPosition;     // current position of the player
     private int eyesight = 8;           // eyesight of player
+    private int baseCount = 0;          // how many bases are built ( for base indexing )
 
     public GameObject canvas;
     public GameObject fieldIcon;
@@ -133,9 +134,10 @@ public class Map : MonoBehaviour {
             return false;
         else {
             Field f = getPlayerPositionField();
-            if (f.setBase()) {
+            if (f.setBase(baseCount)) {
                 gm.useExploreChance();
                 activateButtons();
+                baseCount++;
                 return true;
             }
             return false;
