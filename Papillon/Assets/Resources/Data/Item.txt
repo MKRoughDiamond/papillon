@@ -25,7 +25,7 @@
 #
 #
 # USABLES
-100 그린프루트 80의_허기를_회복 0.1 1 Satiety_Restore 80  
+100 그린프루트 40의_허기를_회복 0.1 1 Satiety_Restore 40  
 101 통조림 200의_허기를_회복 0.2 1 Satiety_Restore 200
 102 레드콘 60의_허기를_회복 0.2 1 Satiety_Restore 60
 103 오렌지포테이토 100의_허기를_회복 0.3 1 Satiety_Restore 100

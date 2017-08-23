@@ -8,14 +8,16 @@ using UnityEngine;
 public class FieldDropDatabase : MonoBehaviour {
 
     private static List<FieldDropDatabaseElement> forest;
-    private static List<FieldDropDatabaseElement> ice;
-    private static List<FieldDropDatabaseElement> desert;
+    private static List<FieldDropDatabaseElement> residential;
+    private static List<FieldDropDatabaseElement> factory;
     private static List<FieldDropDatabaseElement> rocket;
 
     // 데이터베이스 규모가 커지면 다른 데이터베이스처럼 FILE I/O로 처리해도 될텐데, 일단은 크기가 작으니 스크립트 내에서 처리.
     public static void init() {
         initForest();
         initRocket();
+        initResidential();
+        initFactory();
     }
 
     // load drop element list according to field type
@@ -23,10 +25,10 @@ public class FieldDropDatabase : MonoBehaviour {
         switch (type) {
             case FIELDTYPE.FOREST:
                 return forest;
-            case FIELDTYPE.ICE:
-                return ice;
-            case FIELDTYPE.DESERT:
-                return desert;
+            case FIELDTYPE.RESIDENTIAL:
+                return residential;
+            case FIELDTYPE.FACTORY:
+                return factory;
             case FIELDTYPE.ROCKET:
                 return rocket;
             default:
@@ -37,10 +39,34 @@ public class FieldDropDatabase : MonoBehaviour {
     private static void initForest() {
         forest = new List<FieldDropDatabaseElement>();
 
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원목"), 1, 3, 0, 3));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("벽돌"), 1, 3, 0, 3));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 0, 2));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("레드콘 씨앗"), 1, 1, 0, 2));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원목"), 1, 3, 2, 6));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 3, 9));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("레드콘 씨앗"), 1, 1, -7, 2));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("오렌지포테이토 씨앗"), 1, 1, -7, 2));
+    }
+
+    private static void initResidential()
+    {
+        residential = new List<FieldDropDatabaseElement>();
+
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원목"), 1, 3, 0, 2));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 0, 2));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("벽돌"), 2, 3, 2, 6));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("철 조각"), 1, 5, 0, 4));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("고장난 회로"), 1, 2, 0, 2));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("천"), 1, 5, 0, 4));
+    }
+
+    private static void initFactory()
+    {
+        factory = new List<FieldDropDatabaseElement>();
+
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("철 조각"), 2, 3, 2, 6));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("티타늄 조각"), 1, 2, 0, 4));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("벽돌"), 2, 3, 0, 4));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("고장난 회로"), 1, 5, 0, 4));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("철 주괴"), 1, 2, -7, 2));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("티타늄 주괴"), 1, 1, -7, 2));
     }
 
     private static void initRocket() {
