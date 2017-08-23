@@ -25,6 +25,9 @@ public class Map : MonoBehaviour {
     public GameObject factoryIcon;
     public GameObject residentialIcon;
 
+    public GameObject farBlackhole;
+    public GameObject closeBlackhole;
+
     public void init() {
 
         gm = GameManager.gm;
@@ -99,6 +102,8 @@ public class Map : MonoBehaviour {
         int leftMost = (playerPosition.x - 1 < 0) ? 0 : (int)playerPosition.x - 1;
         clearMap();
 
+        generateBlackhole();
+
         // display fields
         for(int x=leftMost; x< leftMost+eyesight; x++) {
             if(x >= fields.Count)
@@ -166,14 +171,26 @@ public class Map : MonoBehaviour {
         }
     }
 
+    private void generateBlackhole() {
+        int dist = getDistance();
+
+        if(dist == 2) {
+            GameObject blackhole = Instantiate(farBlackhole) as GameObject;
+            blackhole.transform.SetParent(canvas.transform, false);
+        } else if (dist == 1) {
+            GameObject blackhole = Instantiate(closeBlackhole) as GameObject;
+            blackhole.transform.SetParent(canvas.transform, false);
+        }
+    }
+
     private void generateField(GameObject icon, int x, int y) {
 
         int startx = -400;
-        int starty = 0;
+        int starty = 50;
         int padx = 150;
-        int pady = 100;
+        int pady = 120;
 
-        GameObject field = Instantiate(icon, new Vector3(startx + (x-playerPosition.x+2) * padx, starty + (y - (fields[x].Count / 2)) * pady, 0), Quaternion.identity) as GameObject;
+        GameObject field = Instantiate(icon, new Vector3(startx + (x-playerPosition.x+2) * padx, starty + (y - (fields[x].Count / 2.0f)) * pady, 0), Quaternion.identity) as GameObject;
         field.GetComponent<UserMoveButton>().updatePosition(x, y);
         field.transform.SetParent(canvas.transform, false);
 
