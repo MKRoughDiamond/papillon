@@ -85,12 +85,14 @@ public class BoardManager : MonoBehaviour {
     }
 
     private void baseSetup() {
+        gm.playBGM("base");
         getBase().updateBaseStates(gm.getDay());
         return;
     }
 
     private void mapSetup()
     {
+        gm.playBGM("map");
         map.displayMap();     
     }
 }
