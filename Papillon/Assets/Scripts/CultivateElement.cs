@@ -33,7 +33,7 @@ public class CultivateElement {
 
     // check cultivating is done
     public bool isFinished(int day) {
-        return getLeftDay(day) < 0;
+        return getLeftDay(day) <= 0;
     }
 
     public Item getItem() {

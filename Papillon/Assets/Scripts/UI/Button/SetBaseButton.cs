@@ -15,6 +15,7 @@ public class SetBaseButton : MonoBehaviour {
 
     public void onClick() {
         if (cm.craft(1000, 1)) {
+            gm.playSE("hammering");
             map.setBase();
         } else {
             Recipe recipe = RecipeDatabase.findRecipe(1000);

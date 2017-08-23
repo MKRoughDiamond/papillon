@@ -67,12 +67,46 @@ public class Base {
         if(upgradeType == BASEUPGRADE.CRAFT) {
             if (cm.craft(BASEUPGRADE.CRAFT_UPGRADE[craftLevel], 1)) {
                 craftLevel++;
+                gm.playSE("hammering");
+                return;
             }
+
+            // upgrade fail
+            Recipe recipe = RecipeDatabase.findRecipe(BASEUPGRADE.CRAFT_UPGRADE[craftLevel]);
+            string msg = "";
+
+            msg += "업그레이드를 위해 다음의 재료가 필요합니다. \n\n";
+
+            List<RecipeElement> ingredients = recipe.getIngredients();
+            foreach (RecipeElement e in ingredients) {
+                msg += e.item.getName() + " x " + e.count.ToString() + "\n";
+            }
+
+            gm.showMessage(msg);
         }
+
         else if(upgradeType == BASEUPGRADE.CULTIVATE) {
             if(cm.craft(BASEUPGRADE.CULTIVATE_UPGRADE[cultivateLevel], 1)) {
                 cultivateLevel++;
+                gm.playSE("hammering");
+                return;
             }
+
+            // upgrade fail
+            Recipe recipe = RecipeDatabase.findRecipe(BASEUPGRADE.CULTIVATE_UPGRADE[cultivateLevel]);
+            string msg = "";
+
+            msg += "업그레이드를 위해 다음의 재료가 필요합니다. \n\n";
+
+            List<RecipeElement> ingredients = recipe.getIngredients();
+            foreach (RecipeElement e in ingredients) {
+                msg += e.item.getName() + " x " + e.count.ToString() + "\n";
+            }
+
+            gm.showMessage(msg);
+
+        } else {
+            return;
         }
     }
 #endregion
@@ -106,6 +140,7 @@ public class Base {
     public void cultivate(Item item, int day) {
         cultivatingList.Add(new CultivateElement(item, day));
         player.removeItem(item.getId(), 1);
+        gm.playSE("grass");
     }
 
     // move finished cultivates to doneList
@@ -120,11 +155,12 @@ public class Base {
 
     // harvest from doneList
     public void harvest(int id) {
-
-        for(int i = doneList.Count-1; i >= 0; i--) {
+        
+        for (int i = doneList.Count-1; i >= 0; i--) {
             if(doneList[i].getItem().getId() == id) {
                 gm.doEffect(doneList[i].getItem().getEffect());
                 doneList.RemoveAt(i);
+                gm.playSE("grass");
                 return;
             }
         }

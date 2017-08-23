@@ -22,6 +22,7 @@ public class UserMoveButton : MonoBehaviour {
             // try move
             if (map.movePlayer(position)) {
                 // sucess
+                gm.playSE("step");
                 gm.useMoveChance();
                 map.displayMap();
             } else {

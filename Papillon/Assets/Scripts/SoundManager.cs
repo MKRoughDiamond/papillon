@@ -49,6 +49,11 @@ public class SoundManager : MonoBehaviour {
         SEDic.Add("collect-soft", 8);
         SEDic.Add("collect-hard", 9);
         SEDic.Add("rocket", 10);
+        SEDic.Add("walk-snow", 11);
+        SEDic.Add("hammering", 12);
+        SEDic.Add("wood-hammering", 13);
+        SEDic.Add("write", 14);
+        SEDic.Add("grass", 15);
     }
 
     public void playBGM(string name) {
