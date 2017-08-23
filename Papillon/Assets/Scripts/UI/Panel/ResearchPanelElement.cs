@@ -28,7 +28,8 @@ public class ResearchPanelElement : MonoBehaviour {
         //description.text = this.tech.getDescription();
         requirements.text = generateRequirementsText(this.tech.requirements);
         point.text = this.tech.getCurrentPoint().ToString() + '/' + this.tech.getResearchPoint().ToString();
-        // icon = this.tech.getIcon();
+
+        icon.sprite = this.tech.getIcon();
     }
 
     // formalize text

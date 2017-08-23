@@ -13,7 +13,7 @@ public class Technology {
 
     private bool isDone;                 // Technology research Done Check
     private bool isSatisfied;            // Technology requirements Done Check
-    private Texture2D icon;
+    private Sprite icon;
 
 
     public Technology(int id, string name, string description, int researchPoint, List<int> requirements) {
@@ -32,7 +32,21 @@ public class Technology {
     }
 
     private void LoadIcon() {
-        // TODO: icon load
+        Sprite newIcon = Resources.Load<Sprite>("Icon/Tech/" + name);
+        Sprite notFound = Resources.Load<Sprite>("Icon/Tech/not found");
+
+        if (newIcon)
+            icon = newIcon;
+        else
+        {
+            Debug.Log("There is no tech icon\t" + name);
+            icon = notFound;
+        }
+    }
+
+    public Sprite getIcon()
+    {
+        return icon;
     }
 
     public int getId() {
