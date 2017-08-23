@@ -40,7 +40,7 @@ public class FieldDropDatabase : MonoBehaviour {
         forest = new List<FieldDropDatabaseElement>();
 
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원목"), 1, 3, 2, 6));
-        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 3, 9));
+        forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 3, 3, 9));
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("레드콘 씨앗"), 1, 1, -7, 2));
         forest.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("오렌지포테이토 씨앗"), 1, 1, -7, 2));
     }
@@ -50,11 +50,12 @@ public class FieldDropDatabase : MonoBehaviour {
         residential = new List<FieldDropDatabaseElement>();
 
         residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원목"), 1, 3, 0, 2));
-        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 1, 0, 2));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("그린프루트"), 1, 3, 0, 2));
         residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("벽돌"), 2, 3, 2, 6));
         residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("철 조각"), 1, 5, 0, 4));
-        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("고장난 회로"), 1, 2, 0, 2));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("고장난 회로"), 1, 2, -4, 2));
         residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("천"), 1, 5, 0, 4));
+        residential.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("통조림"), 1, 1, -2, 2));
     }
 
     private static void initFactory()
@@ -67,6 +68,8 @@ public class FieldDropDatabase : MonoBehaviour {
         factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("고장난 회로"), 1, 5, 0, 4));
         factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("철 주괴"), 1, 2, -7, 2));
         factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("티타늄 주괴"), 1, 1, -7, 2));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("연료"), 2, 3, 2, 6));
+        factory.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우라늄 셀"), 1, 1, -19, 2));
     }
 
     private static void initRocket() {
