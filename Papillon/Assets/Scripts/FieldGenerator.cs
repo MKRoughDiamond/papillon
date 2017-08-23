@@ -17,8 +17,8 @@ public class FieldGenerator : MonoBehaviour {
     public Text fieldPanelText;
 
     public GameObject[] forestTiles;
-    // public GameObject[] iceTiles;
-    // public GameObject[] desertTiles;
+    public GameObject[] factoryTiles;
+    public GameObject[] residentialTiles;
 
     public GameObject itemHolder;
 
@@ -80,10 +80,10 @@ public class FieldGenerator : MonoBehaviour {
         switch (type) {
             case FIELDTYPE.FOREST:
                 return forestTiles;
-            //case FIELDTYPE.ICE:
-            //    return iceTiles;
-            //case FIELDTYPE.DESERT:
-            //    return desertTiles;
+            case FIELDTYPE.FACTORY:
+                return factoryTiles;
+            case FIELDTYPE.RESIDENTIAL:
+                return residentialTiles;
             default:
                 return forestTiles;
         }
