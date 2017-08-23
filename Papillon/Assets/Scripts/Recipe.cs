@@ -7,24 +7,31 @@ public class Recipe {
     public int id;                              // recipe unique id
     public List<RecipeElement> ingredients;     // ingredients needed to generate product
     public RecipeElement product;               // product that will be generated
-    public string requireTech;                  // if specific tech is required for crafting
+    public List<int> requireTech;                  // if specific tech is required for crafting
+    public int craftLevel;
 
     public Recipe(int id, List<RecipeElement> ingredients, RecipeElement product) {
         this.id = id;
         this.ingredients = new List<RecipeElement>(ingredients);
         this.product = product;
-        this.requireTech = "";
+        this.requireTech = null;
+        this.craftLevel = 1;
     }
 
-    public Recipe(int id, List<RecipeElement> ingredients, RecipeElement product, string requireTech) {
+    public Recipe(int id, List<RecipeElement> ingredients, RecipeElement product, List<int> requireTech, int craftLevel) {
         this.id = id;
         this.ingredients = new List<RecipeElement>(ingredients);
         this.product = product;
         this.requireTech = requireTech;
+        this.craftLevel = craftLevel;
     }
 
     public int getId() {
         return id;
+    }
+
+    public int getCraftLevel() {
+        return craftLevel;
     }
 
     public List<RecipeElement> getIngredients() {
@@ -35,7 +42,7 @@ public class Recipe {
         return product;
     }
 
-    public string getRequireTech()
+    public List<int> getRequireTech()
     {
         return requireTech;
     }

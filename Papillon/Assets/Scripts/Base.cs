@@ -44,6 +44,10 @@ public class Base {
         updateCultivateState(day);
     }
 
+    public int getCraftLevel(){
+        return craftLevel;
+    }
+
     #region Base Upgrade ralated
 
     // check base upgrade is possible

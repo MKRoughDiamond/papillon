@@ -43,7 +43,8 @@ public class BoardManager : MonoBehaviour {
             if(day%3==0)
                 if (!map.destroyFrontField())
                     gm.gameOver();
-            map.displayMap();
+                else
+                    map.displayMap();
         }
     }
 

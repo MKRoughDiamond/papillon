@@ -9,12 +9,14 @@ public class CraftPanel : Panel {
     private GameManager gm;
     private Player player;
     private CraftManager cm;
+    private BoardManager bm;
     private ResearchManager rm;
 
     private void Start() {
         gm = GameManager.gm;
         player = gm.getPlayer();
         cm = gm.getCraftManager();
+        bm = gm.getBoardManager();
         rm = gm.getResearchManager();
 
         makeCraftList();
@@ -27,8 +29,28 @@ public class CraftPanel : Panel {
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
-            if (recipe.getId() >= 1000 || !(recipe.getRequireTech()=="" || rm.checkTechDone(recipe.getRequireTech())))
+            if (recipe.getId() >= 1000)
                 continue;
+            else {
+                bool canCraft = true;
+                
+                //is all tech done
+                if(recipe.getRequireTech() != null) { 
+                    foreach (int tech in recipe.getRequireTech()) {
+                        if(!rm.checkTechDone(tech)) {
+                            canCraft = false;
+                            break;
+                        }
+                    }
+                }
+
+                //is base crafting level sufficient
+                if (bm.getBase().getCraftLevel() < recipe.getCraftLevel())
+                    canCraft = false;
+
+                if (!canCraft)
+                    continue;
+            }
             // Generate elements
             GameObject element = Instantiate(panelElement);
             element.GetComponent<CraftPanelElement>().init(recipe);
