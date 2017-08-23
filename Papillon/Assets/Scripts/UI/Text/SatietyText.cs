@@ -9,11 +9,21 @@ public class SatietyText : MonoBehaviour {
 
     public Text satietyText;
 
+    private Color originalColor;
+
     void Start() {
         player = GameManager.gm.getPlayer();
+        originalColor = satietyText.color;
     }
 
     private void Update() {
+
+        if(player.getSatiety() * 10 < player.getMaxSatiety()) {
+            satietyText.color = Color.red;
+        } else {
+            satietyText.color = originalColor;
+        }
+
         satietyText.text = player.getSatiety().ToString() + "/" + player.getMaxSatiety();
     }
 }

@@ -10,11 +10,13 @@ public class CraftPanelElement : MonoBehaviour {
     public Text ingredients;       // list of ingredients
     public Image icon;             // icon of product
 
+    private GameManager gm;
     private CraftManager cm;
     private Recipe recipe;
 
     private void Start() {
-        cm = GameManager.gm.getCraftManager();
+        gm = GameManager.gm;
+        cm = gm.getCraftManager();
     }
 
     // initialize name, ingredients, icon
@@ -45,6 +47,10 @@ public class CraftPanelElement : MonoBehaviour {
 
     // when button is clicked, try craft
     public void onClick() {
-        cm.craft(this.recipe.getId(), 1);
+        if (cm.craft(this.recipe.getId(), 1)) {
+            gm.playSE("wood-hammering");
+        } else {
+            gm.playSE("fail2");
+        }
     }
 }

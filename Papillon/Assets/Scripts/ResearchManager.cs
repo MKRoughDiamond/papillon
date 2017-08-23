@@ -29,8 +29,11 @@ public class ResearchManager : MonoBehaviour {
 
     // progress research
     public void progress(int id, int point) {
-        if (!gm.canPlayerResearch())
+        if (!gm.canPlayerResearch()) {
+            gm.showMessage("연구는 하루에 1회만 진행할 수 있습니다.");
+            gm.playSE("fail2");
             return;
+        }
 
         for(int i = 0; i < availableList.Count; i++) {
 
@@ -51,6 +54,7 @@ public class ResearchManager : MonoBehaviour {
             }
         }
 
+        gm.playSE("write");
         gm.useResearchChance();
     }
 

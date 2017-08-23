@@ -30,7 +30,7 @@ public class PanelTrigger : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
 
     public virtual void generate() {
         //Vector3 position = 
-        Vector3 position = gameObject.transform.position + new Vector3(200, 0f, 0f);
+        Vector3 position = gameObject.transform.position + new Vector3(150, 0f, 0f);
         generatedPanel = Instantiate(panel, position, Quaternion.identity) as GameObject;
         generatedPanel.transform.SetParent(GameObject.Find("Canvas").transform);
         generatedPanel.GetComponent<DescriptionPanel>().setDescriptee(gameObject);
