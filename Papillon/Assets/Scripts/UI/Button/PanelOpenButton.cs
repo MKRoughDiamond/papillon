@@ -13,6 +13,7 @@ public class PanelOpenButton : MonoBehaviour {
     }
 
     public void onClick() {
+        GameManager.gm.playSE("open");
         panelScript.switchPanel();
     }
 }

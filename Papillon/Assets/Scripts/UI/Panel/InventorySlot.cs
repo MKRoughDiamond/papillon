@@ -3,19 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventorySlot : MonoBehaviour{
-
-    public Image icon;
-    public Text count;
+public class InventorySlot : Slot{
     
     private GameManager gm;
     private Player player;
     //private GameObject inventory;
     private Inventory inventoryScript;
     private InventoryElement element;
-
-    private string name;
-    private string description;
 
     public void init(InventoryElement e) {
 
@@ -30,14 +24,6 @@ public class InventorySlot : MonoBehaviour{
         description = e.item.getDescription();
 
         icon.sprite = e.item.getIcon();
-    }
-
-    public string getName() {
-        return name;
-    }
-
-    public string getDescription() {
-        return description;
     }
 
     public void onClick() {

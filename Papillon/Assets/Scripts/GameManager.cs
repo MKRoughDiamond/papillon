@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour {
     private BoardManager boardManager;
     private CraftManager craftManager;
     private ResearchManager researchManager;
+    private SoundManager soundManager;
     private Player player;
 
     private EffectProcessor effectProcessor;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour {
         craftManager.init();
         researchManager = GetComponent<ResearchManager>();
         researchManager.init();
+        soundManager = GetComponentInChildren<SoundManager>();
 
         /*
          * Effect Processor Initializing
@@ -136,6 +138,14 @@ public class GameManager : MonoBehaviour {
         return effectProcessor.process(effect, flag);
     }
 
+    public void playBGM(string name) {
+        soundManager.playBGM(name);
+    }
+
+    public void playSE(string name) {
+        soundManager.playSE(name);
+    }
+
     public int getDay() {
         return day;
     }
@@ -147,9 +157,10 @@ public class GameManager : MonoBehaviour {
         moveChance = true;
         researchChance = true;
 
-        boardManager.nextDay(scene, day);
-
         player.changeSatiety(SATIETYPOINTS.SLEEP);
+        playSE("snore");
+
+        boardManager.nextDay(scene, day);
     }
 
     // check player can explore

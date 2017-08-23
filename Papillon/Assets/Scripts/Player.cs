@@ -160,11 +160,13 @@ public class Player {
                     inventory.RemoveAt(i);
                 }
 
+                gm.playSE("use-item");
                 Debug.Log("USED ITEM");
                 return true;
             }
         }
 
+        gm.playSE("fail2");
         Debug.Log("NOT USABLE ITEM");
         return false;
     }
