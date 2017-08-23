@@ -104,34 +104,32 @@ public class Map : MonoBehaviour {
             if(x >= fields.Count)
                 generateMap(x);
             for (int y=0; y< fields[x].Count; y++) {
-                if (playerPosition.x == x && playerPosition.y == y)
-                {
-                    generateField(userIcon, x, y);
-                }
+
+                if (fields[x][y].isBase())
+                    generateField(baseIcon, x, y);
                 else
                 {
-                    if (fields[x][y].isBase())
-                        generateField(baseIcon, x, y);
-                    else
-                    {
-                        switch(fields[x][y].getType()) {
-                            case FIELDTYPE.FOREST:
-                                generateField(forestIcon, x, y);
-                                break;
-                            case FIELDTYPE.FACTORY:
-                                generateField(factoryIcon, x, y);
-                                break;
-                            case FIELDTYPE.RESIDENTIAL:
-                                generateField(residentialIcon, x, y);
-                                break;
-                            case FIELDTYPE.ROCKET:
-                                generateField(rocketIcon, x, y);
-                                break;
-                            default:
-                                generateField(forestIcon, x, y);
-                                break;
-                        }
+                    switch(fields[x][y].getType()) {
+                        case FIELDTYPE.FOREST:
+                            generateField(forestIcon, x, y);
+                            break;
+                        case FIELDTYPE.FACTORY:
+                            generateField(factoryIcon, x, y);
+                            break;
+                        case FIELDTYPE.RESIDENTIAL:
+                            generateField(residentialIcon, x, y);
+                            break;
+                        case FIELDTYPE.ROCKET:
+                            generateField(rocketIcon, x, y);
+                            break;
+                        default:
+                            generateField(forestIcon, x, y);
+                            break;
                     }
+                }
+
+                if (playerPosition.x == x && playerPosition.y == y) {
+                    generateField(userIcon, x, y);
                 }
             }
         }
