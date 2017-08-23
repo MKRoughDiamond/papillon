@@ -14,6 +14,6 @@ public class HealthText : MonoBehaviour {
     }
 
     private void Update() {
-        healthText.text = "Health: " + player.getHealth().ToString() + "/" + player.getMaxHealth();
+        healthText.text = player.getHealth().ToString() + "/" + player.getMaxHealth();
     }
 }

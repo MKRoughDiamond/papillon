@@ -18,10 +18,12 @@ public class Map : MonoBehaviour {
     private int baseCount = 0;          // how many bases are built ( for base indexing )
 
     public GameObject canvas;
-    public GameObject fieldIcon;
+    public GameObject forestIcon;
     public GameObject rocketIcon;
     public GameObject userIcon;
     public GameObject baseIcon;
+    public GameObject factoryIcon;
+    public GameObject residentialIcon;
 
     public void init() {
 
@@ -110,14 +112,26 @@ public class Map : MonoBehaviour {
                 {
                     if (fields[x][y].isBase())
                         generateField(baseIcon, x, y);
-                    else if(fields[x][y].getType() == FIELDTYPE.FOREST) {
-                        generateField(fieldIcon, x, y);
+                    else
+                    {
+                        switch(fields[x][y].getType()) {
+                            case FIELDTYPE.FOREST:
+                                generateField(forestIcon, x, y);
+                                break;
+                            case FIELDTYPE.FACTORY:
+                                generateField(factoryIcon, x, y);
+                                break;
+                            case FIELDTYPE.RESIDENTIAL:
+                                generateField(residentialIcon, x, y);
+                                break;
+                            case FIELDTYPE.ROCKET:
+                                generateField(rocketIcon, x, y);
+                                break;
+                            default:
+                                generateField(forestIcon, x, y);
+                                break;
+                        }
                     }
-                    else if (fields[x][y].getType() == FIELDTYPE.ROCKET) {
-                        generateField(rocketIcon, x, y);
-                    }
-
-
                 }
             }
         }

@@ -21,9 +21,9 @@ public class Field {
     private void initItemList() {
         List<FieldDropDatabaseElement> list = FieldDropDatabase.load(this.type);
         foreach (FieldDropDatabaseElement e in list) {
-            int objectCount = Random.Range(e.minObjectCount, e.maxObjectCount+1);
+            int objectCount = Mathf.Max(0,Random.Range(e.minObjectCount, e.maxObjectCount+1));
             for (int i = 0; i < objectCount; i++) {
-                int itemCount = Random.Range(e.minItemCount, e.maxItemCount+1);
+                int itemCount = Mathf.Max(0,Random.Range(e.minItemCount, e.maxItemCount+1));
                 dropItemList.Add(new FieldItemElement(e.id, itemCount));
             }
         }
@@ -75,8 +75,8 @@ public class Field {
 
 public static class FIELDTYPE {
     public const int FOREST = 0;
-    public const int ICE = 1;
-    public const int DESERT = 2;
+    public const int RESIDENTIAL = 1;
+    public const int FACTORY = 2;
 
     public const int ROCKET = 11; // APOLLO!!!!!!
 
@@ -84,10 +84,12 @@ public static class FIELDTYPE {
         FOREST,
         FOREST,
         FOREST,
-        FOREST,
-        FOREST,
-        //ICE,
-        //DESERT,
+        RESIDENTIAL,
+        RESIDENTIAL,
+        RESIDENTIAL,
+        FACTORY,
+        FACTORY,
+        FACTORY,
         ROCKET
     };
 }
