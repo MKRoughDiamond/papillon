@@ -24,8 +24,8 @@ public class Inventory : Panel {
         foreach(InventoryElement e in playerInventory) {
             GameObject slot = Instantiate(panelElement, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
             slot.transform.SetParent(transform.Find(elementParent));
-            slot.GetComponent<Slot>().init(e);
-            slot.GetComponent<Image>().sprite = slot.GetComponent<Slot>().icon;
+            slot.GetComponent<InventorySlot>().init(e);
+            //slot.GetComponent<Image>().sprite = slot.GetComponent<Slot>().icon;
         }
     }
 

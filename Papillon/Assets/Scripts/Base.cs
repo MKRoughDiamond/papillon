@@ -8,6 +8,7 @@ using UnityEngine;
 public class Base {
 
     private GameManager gm;
+    private CraftManager cm;
     private Player player;
 
     public List<InventoryElement> inventory;    // Items that base holds
@@ -17,14 +18,21 @@ public class Base {
     private List<CultivateElement> cultivatingList;
     private List<CultivateElement> doneList;
 
+    // base upgrade level
+    private int craftLevel = 1;
+    private int cultivateLevel = 1;
+
     public Base(int id) {
 
         gm = GameManager.gm;
+        cm = gm.getCraftManager();
         player = gm.getPlayer();
 
         this.id = id;
         cultivatingList = new List<CultivateElement>();
         doneList = new List<CultivateElement>();
+
+        inventory = new List<InventoryElement>();
     }
 
     public int getId() {
@@ -35,6 +43,35 @@ public class Base {
     public void updateBaseStates(int day) {
         updateCultivateState(day);
     }
+
+    #region Base Upgrade ralated
+
+    // check base upgrade is possible
+    // ( checks max level of upgrade, not meterial )
+    public bool canUpgradeBase(int upgradeType) {
+        if (upgradeType == BASEUPGRADE.CRAFT) {
+            return BASEUPGRADE.CRAFT_UPGRADE.Length > craftLevel;
+        } else if (upgradeType == BASEUPGRADE.CULTIVATE) {
+            return BASEUPGRADE.CULTIVATE_UPGRADE.Length > cultivateLevel;
+        } else {
+            return false;
+        }
+    }
+
+    // try upgrade base
+    public void upgradeBase(int upgradeType) {
+        if(upgradeType == BASEUPGRADE.CRAFT) {
+            if (cm.craft(BASEUPGRADE.CRAFT_UPGRADE[craftLevel], 1)) {
+                craftLevel++;
+            }
+        }
+        else if(upgradeType == BASEUPGRADE.CULTIVATE) {
+            if(cm.craft(BASEUPGRADE.CULTIVATE_UPGRADE[cultivateLevel], 1)) {
+                cultivateLevel++;
+            }
+        }
+    }
+#endregion
 
     #region Cultivation related
 
@@ -93,6 +130,10 @@ public class Base {
 
     #region inventory related
 
+    public List<InventoryElement> getInventory() {
+        return inventory;
+    }
+
     // add item to base inventory
     public void addItem(int id, int count) {
 
@@ -130,5 +171,35 @@ public class Base {
         return false;
     }
 
+    // remove item
+    // used for crafting or discarding
+    public bool removeItem(int id, int count) {
+        for (int i = inventory.Count - 1; i >= 0; i--) {
+            if (inventory[i].item.getId() == id) {
+
+                if (inventory[i].count >= count) {
+                    inventory[i].updateCount(-count);
+
+                    if (inventory[i].count == 0)
+                        inventory.RemoveAt(i);
+                    return true;
+                } else {
+                    Debug.Log("ERROR : removeItem() fail - not enough items");
+                    return false;
+                }
+            }
+        }
+
+        return false;
+    }
+
     #endregion
+}
+
+public static class BASEUPGRADE {
+    public const int CRAFT = 1;
+    public const int CULTIVATE = 2;
+
+    public static int[] CRAFT_UPGRADE =  new int[] { -1, 1002, 1003 };
+    public static int[] CULTIVATE_UPGRADE = new int[] { -1, 1012, 1013 };
 }
