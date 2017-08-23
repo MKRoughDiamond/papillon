@@ -18,6 +18,6 @@ public class BlackholeText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        blackholeText.text = "Blackhole : behind " + (map.getDistance()) + " section(s)";	
+        blackholeText.text = map.getDistance().ToString();	
 	}
 }

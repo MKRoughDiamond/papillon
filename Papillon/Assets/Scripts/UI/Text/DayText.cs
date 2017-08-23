@@ -14,6 +14,6 @@ public class DayText : MonoBehaviour {
 
     private void Update() {
         int day = gm.getDay();
-        dayText.text = "Day: " + day.ToString();
+        dayText.text = day.ToString();
     }
 }

@@ -14,6 +14,6 @@ public class SatietyText : MonoBehaviour {
     }
 
     private void Update() {
-        satietyText.text = "Satiety: " + player.getSatiety().ToString() + "/" + player.getMaxSatiety();
+        satietyText.text = player.getSatiety().ToString() + "/" + player.getMaxSatiety();
     }
 }
