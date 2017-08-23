@@ -34,10 +34,12 @@ public class CraftPanelElement : MonoBehaviour {
      */
     private string generateIngredientsText(List<RecipeElement> ingredients) {
         string text = "";
+        bool flag = false;
         foreach (RecipeElement e in ingredients) {
-            text += e.item.getName() + " x " + e.count.ToString() + "\n";
+            if (flag) text += "\n";
+            else flag = true;
+            text += e.item.getName() + " x " + e.count.ToString();
         }
-
         return text;
     }
 

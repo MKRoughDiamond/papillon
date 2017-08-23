@@ -40,11 +40,13 @@ public class BoardManager : MonoBehaviour {
     // if day changed
     public void nextDay(int scene, int day) {
         if(scene == SCENES.MAP) {
-            if(day%3==0)
+            if (day % 3 == 0)
                 if (!map.destroyFrontField())
                     gm.gameOver();
                 else
                     map.displayMap();
+            else
+                map.displayMap();
         }
     }
 
