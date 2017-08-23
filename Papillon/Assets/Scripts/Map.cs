@@ -16,6 +16,8 @@ public class Map : MonoBehaviour {
     private Vector2 playerPosition;     // current position of the player
     private int eyesight = 8;           // eyesight of player
     private int baseCount = 0;          // how many bases are built ( for base indexing )
+    private int rocketGenerateLimit = 20;
+    private int rocketGenerateCount;
 
     public GameObject canvas;
     public GameObject forestIcon;
@@ -33,6 +35,7 @@ public class Map : MonoBehaviour {
         gm = GameManager.gm;
         bm = gm.getBoardManager();
         player = gm.getPlayer();
+        rocketGenerateCount = 0;
 
         fields = new List<List<Field>>();
         for (int i = 0; i < eyesight * 2; i++)
@@ -42,18 +45,28 @@ public class Map : MonoBehaviour {
 
     public void generateMap(int x)
     {
-        if(x % 2 == 0)
-        {
-
-            fields.Add(new List<Field>());
-            for (int i = 0; i < Random.Range(1, 5); i++)
-                fields[x].Add(new Field(FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)]));
+        fields.Add(new List<Field>());
+        if (x % 2 == 0) {
+            for (int i = 0; i < Random.Range(1, 5); i++) {
+                while (true) {
+                    int fieldType = FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)];
+                    if(fieldType!=FIELDTYPE.ROCKET || rocketGenerateCount > rocketGenerateLimit) {
+                        fields[x].Add(new Field(fieldType));
+                        break;
+                    }
+                }
+            }
         }
-        else
-        {
-            fields.Add(new List<Field>());
-            fields[x].Add(new Field(FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)]));
+        else {
+            while (true) {
+                int fieldType = FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)];
+                if (fieldType != FIELDTYPE.ROCKET || rocketGenerateCount > rocketGenerateLimit) {
+                    fields[x].Add(new Field(fieldType));
+                    break;
+                }
+            }
         }
+        rocketGenerateCount++;
     }
 
     // move player position
@@ -155,7 +168,16 @@ public class Map : MonoBehaviour {
         return getPlayerPositionField().isBase();
     }
 
-    public bool setBase() {
+    //hardcoding!!!
+    public bool setBase(bool flag = false) {
+        if (flag) {
+            Field f = getPlayerPositionField();
+            if (f.setBase(baseCount)) {
+                bm.addBase(baseCount);
+                baseCount++;
+                return true;
+            }
+        }
         if (isPlayerOnBase())
             return false;
         else {

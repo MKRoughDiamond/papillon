@@ -16,6 +16,8 @@ public class BoardManager : MonoBehaviour {
         map = GetComponent<Map>();
         map.init();
         bases = new List<Base>();
+        map.setBase(true);
+        firstBaseSetup();
     }
 
     public void boardSetup(int scene) {
@@ -91,6 +93,15 @@ public class BoardManager : MonoBehaviour {
         gm.playBGM("base");
         getBase().updateBaseStates(gm.getDay());
         return;
+    }
+
+    private void firstBaseSetup(){
+        Base firstBase = getBase();
+        firstBase.addItem(ItemDatabase.findIdByName("통조림"), Random.Range(1, 3));
+        firstBase.addItem(ItemDatabase.findIdByName("의약품"), Random.Range(1, 3));
+        firstBase.addItem(ItemDatabase.findIdByName("연료"), Random.Range(-2, 6));
+        firstBase.addItem(ItemDatabase.findIdByName("티타늄 주괴"), Random.Range(-8, 1));
+        firstBase.addItem(ItemDatabase.findIdByName("철 주괴"), Random.Range(-8, 1));
     }
 
     private void mapSetup()

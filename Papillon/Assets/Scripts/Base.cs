@@ -141,7 +141,7 @@ public class Base {
     // add item to base inventory
     public void addItem(int id, int count) {
 
-        if (count == 0)
+        if (count <= 0)
             return;
 
         Item item = ItemDatabase.findItem(id);
