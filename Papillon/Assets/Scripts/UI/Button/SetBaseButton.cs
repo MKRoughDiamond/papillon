@@ -14,7 +14,20 @@ public class SetBaseButton : MonoBehaviour {
     }
 
     public void onClick() {
-        if(cm.craft(1000,1))
+        if (cm.craft(1000, 1)) {
             map.setBase();
+        } else {
+            Recipe recipe = RecipeDatabase.findRecipe(1000);
+            string msg = "";
+
+            msg += "다음의 재료가 필요합니다. \n\n";
+
+            List<RecipeElement> ingredients = recipe.getIngredients();
+            foreach (RecipeElement e in ingredients) {
+                msg += e.item.getName() + " x " + e.count.ToString() + "\n";
+            }
+
+            gm.showMessage(msg);
+        }
     }
 }

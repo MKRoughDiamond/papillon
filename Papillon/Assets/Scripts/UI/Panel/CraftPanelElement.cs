@@ -35,7 +35,7 @@ public class CraftPanelElement : MonoBehaviour {
     private string generateIngredientsText(List<RecipeElement> ingredients) {
         string text = "";
         foreach (RecipeElement e in ingredients) {
-            text += e.item.getName() + " x" + e.count.ToString() + "\n";
+            text += e.item.getName() + " x " + e.count.ToString() + "\n";
         }
 
         return text;

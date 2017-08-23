@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
     public bool moveChance;     // whether player can move map or not
     public bool researchChance;     // whether player can research or not
 
+    public GameObject msgPanel;
+
 
     // think this better be Awake.
     private void Awake() {
@@ -145,6 +147,13 @@ public class GameManager : MonoBehaviour {
     public void playSE(string name) {
         soundManager.playSE(name);
     }
+
+    public void showMessage(string text) {
+        GameObject panel = Instantiate(msgPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+        panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
+        panel.GetComponent<MessagePanel>().setText(text);
+    }
+
 
     public int getDay() {
         return day;

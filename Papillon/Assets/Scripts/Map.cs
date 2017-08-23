@@ -172,8 +172,8 @@ public class Map : MonoBehaviour {
 
         int startx = -400;
         int starty = 0;
-        int padx = 100;
-        int pady = 50;
+        int padx = 150;
+        int pady = 100;
 
         GameObject field = Instantiate(icon, new Vector3(startx + (x-playerPosition.x+2) * padx, starty + (y - (fields[x].Count / 2)) * pady, 0), Quaternion.identity) as GameObject;
         field.GetComponent<UserMoveButton>().updatePosition(x, y);
