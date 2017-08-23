@@ -165,6 +165,7 @@ public class Map : MonoBehaviour {
                 bm.addBase(baseCount);
                 activateButtons();
                 baseCount++;
+                displayMap();
                 return true;
             }
             return false;

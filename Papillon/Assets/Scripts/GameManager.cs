@@ -222,7 +222,15 @@ public class GameManager : MonoBehaviour {
 
     public void gameOver() {
         Debug.Log("GAMEOVER");
-        Application.Quit();
+        playBGM("game-over");
+        SceneManager.LoadScene(6);
+    }
+
+    public void gameClear() {
+        Debug.Log("GAMECLEAR");
+        playBGM("rocket-launch");
+        playSE("rocket");
+        SceneManager.LoadScene(7);
     }
 
     public void gamePause() {
@@ -238,11 +246,18 @@ public class GameManager : MonoBehaviour {
         foreach(FieldItemElement e in list) {
             // 부족한 부품
             if (e.currentCount == -1) {
-                Debug.Log("To Launch Rocket, you need " + e.getItem().getName());
+
+                string msg = "이 곳의 잔해로 로켓을 발사하려면 다음의 부품이 필요하다.\n\n";
+                msg += e.getItem().getName();
+                showMessage(msg);
+
                 // 플레이어가 해당 부품을 가지고 있음
-                if(getPlayer().checkItemPossession(e.getItem().getId(), 1)) {
-                    Debug.Log("GAME CLEAR!");
+                if (getPlayer().checkItemPossession(e.getItem().getId(), 1)) {
+                    gameClear();
+                    return;
                 }
+
+
             }
         }
     }

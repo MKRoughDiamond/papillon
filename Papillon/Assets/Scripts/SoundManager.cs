@@ -34,6 +34,7 @@ public class SoundManager : MonoBehaviour {
         BGMDic.Add("base", 1);
         BGMDic.Add("map", 2);
         BGMDic.Add("rocket-launch", 3);
+        BGMDic.Add("game-over", 4);
 
         SEDic = new Dictionary<string, int>();
 
@@ -47,6 +48,7 @@ public class SoundManager : MonoBehaviour {
         SEDic.Add("snore", 7);
         SEDic.Add("collect-soft", 8);
         SEDic.Add("collect-hard", 9);
+        SEDic.Add("rocket", 10);
     }
 
     public void playBGM(string name) {
