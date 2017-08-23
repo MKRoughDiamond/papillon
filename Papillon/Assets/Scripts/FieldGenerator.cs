@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FieldGenerator : MonoBehaviour {
     
     private int fieldSizeX = 10;
     private int fieldSizeY = 10;
-    private int tileSize = 72;
+    private int tileSize = 64;
+
+    private int startX = 20;
+    private int startY = 20;
 
     public Canvas canvas;
+    public Image fieldPanelImage;
+    public Text fieldPanelText;
 
     public GameObject[] forestTiles;
     // public GameObject[] iceTiles;
@@ -40,7 +46,7 @@ public class FieldGenerator : MonoBehaviour {
 
         for (int x = 0; x < fieldSizeX; x++) {
             for (int y = 0; y < fieldSizeY; y++) {
-                GameObject tile = Instantiate(tiles[Random.Range(0, len)], new Vector3(x * tileSize, y * tileSize, 0), Quaternion.identity) as GameObject;
+                GameObject tile = Instantiate(tiles[Random.Range(0, len)], new Vector3(startX + x * tileSize, startY + y * tileSize, 0), Quaternion.identity) as GameObject;
                 tile.transform.SetParent(transform, false);
             }
         }
@@ -53,7 +59,7 @@ public class FieldGenerator : MonoBehaviour {
         List<Vector3> positions = new List<Vector3>();
         for (int x = 0; x < fieldSizeX; x++) {
             for (int y = 0; y < fieldSizeY; y++) {
-                positions.Add(new Vector3(x*tileSize, y*tileSize, 0f));
+                positions.Add(new Vector3(startY + x * tileSize, startY + y * tileSize, 0f));
             }
         }
 
@@ -64,6 +70,7 @@ public class FieldGenerator : MonoBehaviour {
 
             GameObject holder = Instantiate(itemHolder, position, Quaternion.identity) as GameObject;
             holder.GetComponent<ItemHolder>().setItem(itemList[i]);
+            holder.GetComponent<ItemHolder>().setPanel(fieldPanelImage, fieldPanelText);
             holder.transform.SetParent(transform, false);
             positions.RemoveAt(idx);
         }
