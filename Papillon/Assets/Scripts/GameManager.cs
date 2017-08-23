@@ -172,6 +172,10 @@ public class GameManager : MonoBehaviour {
         boardManager.nextDay(scene, day);
     }
 
+    public bool isBlackholeMoveTurn(int day) {
+        return day % 3 == 0;
+    }
+
     // check player can explore
     public bool canPlayerExplore() {
         return exploreChance;

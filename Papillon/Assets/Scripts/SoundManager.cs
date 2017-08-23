@@ -45,6 +45,8 @@ public class SoundManager : MonoBehaviour {
         SEDic.Add("step", 5);
         SEDic.Add("use-item", 6);
         SEDic.Add("snore", 7);
+        SEDic.Add("collect-soft", 8);
+        SEDic.Add("collect-hard", 9);
     }
 
     public void playBGM(string name) {

@@ -15,9 +15,17 @@ public class ItemHolder : MonoBehaviour {
     private GameManager gm;
     private Player player;
 
+    private Image fieldPanelImage;
+    private Text fieldPanelText;
+
     private void Awake() {
         gm = GameManager.gm;
         player = gm.getPlayer();
+    }
+
+    public void setPanel(Image panelImage, Text panelText) {
+        fieldPanelImage = panelImage;
+        fieldPanelText = panelText;
     }
 
     public void setItem(FieldItemElement e) {
@@ -57,11 +65,18 @@ public class ItemHolder : MonoBehaviour {
         player.addItem(possesion.item.getId(), 1);
         player.changeSatiety(SATIETYPOINTS.COLLECT);
 
-        if (itemEffect != null && itemEffect.name.Equals("Damage_With_Prob"))
-            gm.doEffect(itemEffect);
-
+        updateFieldPanel(possesion.item);
         possesion.currentCount--;
 
+        if (possesion.item.getType() == ITEMTYPE.USABLE)
+            gm.playSE("collect-soft");
+        else
+            gm.playSE("collect-hard");
+
+
+        if (itemEffect != null && itemEffect.name.Equals("Damage_With_Prob"))
+            gm.doEffect(itemEffect);
+        
         if(possesion.currentCount < 1) {
             destroyItem();
         } else if (possesion.currentCount * 2 <= possesion.totalCount) {
@@ -78,5 +93,10 @@ public class ItemHolder : MonoBehaviour {
     private void destroyItem() {
         // someDestoryEvent();
         Destroy(gameObject);
+    }
+
+    private void updateFieldPanel(Item item) {
+        fieldPanelImage.sprite = item.getIcon();
+        fieldPanelText.text = item.getName();
     }
 }
