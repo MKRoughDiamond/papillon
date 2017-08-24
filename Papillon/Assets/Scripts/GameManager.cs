@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour {
     public bool researchChance;     // whether player can research or not
 
     public GameObject msgPanel;
+    public GameObject pauseMsgPanel;
 
 
     // think this better be Awake.
@@ -48,8 +49,10 @@ public class GameManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (GameObject.Find("MessagePanel(Clone)") == null)
+            if (GameObject.Find("MessagePanel(Clone)") == null && GameObject.Find("PauseMessagePanel(Clone)") == null)
                 gamePause();
+            else if (GameObject.Find("MessagePanel(Clone)") == null)
+                GameObject.Find("PauseMessagePanel(Clone)").GetComponent<PauseMessagePanel>().close();
             else
                 GameObject.Find("MessagePanel(Clone)").GetComponent<MessagePanel>().close();
     }
@@ -158,12 +161,16 @@ public class GameManager : MonoBehaviour {
     }
 
     public void showMessage(string text, bool flag=false) {
-        GameObject panel = Instantiate(msgPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
-        panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        if(flag)
+        if(flag) {
+            GameObject panel = Instantiate(pauseMsgPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+            panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
             panel.GetComponent<PauseMessagePanel>().setText(text);
-        else
+        }
+        else {
+            GameObject panel = Instantiate(msgPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
+            panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
             panel.GetComponent<MessagePanel>().setText(text);
+        }
     }
 
 
@@ -247,7 +254,7 @@ public class GameManager : MonoBehaviour {
 
     public void gamePause() {
         Debug.Log("GAME PAUSE");
-        showMessage("Game Paused", true);
+        showMessage("게임 중지", true);
     }
 
     // check rocket launch is possible
