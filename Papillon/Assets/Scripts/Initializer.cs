@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Initializer : MonoBehaviour {
 
     private void Start() {
-        Screen.SetResolution(1280, 720, true);
+        Screen.SetResolution(1280, 720, false);
         if (GameManager.gm != null) {
             Destroy(GameManager.gm.gameObject);
             GameManager.gm = null;
