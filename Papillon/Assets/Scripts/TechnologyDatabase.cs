@@ -8,44 +8,36 @@ public class TechnologyDatabase : MonoBehaviour {
 
     private static List<Technology> techList;
 
-    public static void init() {
+    public static void init(TextAsset reader) {
         techList = new List<Technology>();
 
         try {
-            string line;
+            string[] lines;
+            lines = reader.text.Split('\n');
+            foreach (string line in lines)
+            {
+                // for database comment
+                if (line[0] == '#')
+                    continue;
 
-            StreamReader reader = new StreamReader("./Assets/Resources/Data/Technology.txt", Encoding.Default);
+                string[] words = line.Split(' ');
 
-            using (reader) {
-                line = reader.ReadLine();
-                while(line != null) {
+                // TECH DB : 'ID NAME DESCRIPTION POINT (REQUIRE1 REQUIRE2 ... )
 
-                    // for database comment
-                    if (line[0] == '#') {
-                        line = reader.ReadLine();
-                        continue;
-                    }
-
-                    string[] words = line.Split(' ');
-
-                    // TECH DB : 'ID NAME DESCRIPTION POINT (REQUIRE1 REQUIRE2 ... )
-
-                    List<int> requirements = new List<int>();
-                    for(int i=4; i < words.Length; i++) {
-                        requirements.Add(int.Parse(words[i]));
-                    }
-
-                    techList.Add(new Technology(
-                        int.Parse(words[0]),
-                        words[1].Replace('_', ' '),
-                        words[2].Replace('_', ' '),
-                        int.Parse(words[3]),
-                        requirements
-                        ));
-
-                    line = reader.ReadLine();
+                List<int> requirements = new List<int>();
+                for (int i = 4; i < words.Length; i++)
+                {
+                    requirements.Add(int.Parse(words[i]));
                 }
-                reader.Close();
+
+                techList.Add(new Technology(
+                    int.Parse(words[0]),
+                    words[1].Replace('_', ' '),
+                    words[2].Replace('_', ' '),
+                    int.Parse(words[3]),
+                    requirements
+                    ));
+                
             }
         } catch (System.Exception e) {
             Debug.Log("Wrong File" + e);

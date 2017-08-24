@@ -5,7 +5,8 @@ using UnityEngine;
 public class Initializer : MonoBehaviour {
 
     private void Start() {
-        if(GameManager.gm != null) {
+        Screen.SetResolution(1280, 720, true);
+        if (GameManager.gm != null) {
             Destroy(GameManager.gm.gameObject);
             GameManager.gm = null;
         }

@@ -27,6 +27,11 @@ public class GameManager : MonoBehaviour {
     public GameObject msgPanel;
     public GameObject pauseMsgPanel;
 
+    public TextAsset itemText;
+    public TextAsset recipeText;
+    public TextAsset techText;
+
+
 
     // think this better be Awake.
     private void Awake() {
@@ -69,10 +74,14 @@ public class GameManager : MonoBehaviour {
          * Initializing Databases
          * 
          */
-        ItemDatabase.init();
+        itemText = Resources.Load("Data/Item") as TextAsset;
+        recipeText = Resources.Load("Data/Recipe") as TextAsset;
+        techText = Resources.Load("Data/Technology") as TextAsset;
+
+        ItemDatabase.init(itemText);
+        RecipeDatabase.init(recipeText);
+        TechnologyDatabase.init(techText);
         FieldDropDatabase.init();
-        RecipeDatabase.init();
-        TechnologyDatabase.init();
 
         /*
          * Other Managers Initializing
