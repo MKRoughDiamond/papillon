@@ -15,7 +15,7 @@ public class ResearchPanelElement : MonoBehaviour {
     private ResearchManager rm;
     private Technology tech;
 
-    private void Start() {
+    private void Awake() {
         panel = GetComponentInParent<ResearchPanel>();
         rm = GameManager.gm.getResearchManager();
     }
@@ -40,10 +40,18 @@ public class ResearchPanelElement : MonoBehaviour {
     private string generateRequirementsText(List<Requirement> requirements) {
         string text = "";
         foreach (Requirement e in requirements) {
-            text += e.tech.getName() + "\n";
+            if (rm.checkTechDone(e.tech.getId())) {
+                text += e.tech.getName() + "\n";
+            } else {
+                text += highlight(e.tech.getName() + "\n");
+            }
         }
 
         return text;
+    }
+
+    private string highlight(string s, string color = "red") {
+        return "<color=" + color + ">" + s + "</color>";
     }
 
     public void onClick() {

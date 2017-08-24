@@ -46,7 +46,11 @@ public class BoardManager : MonoBehaviour {
                 gm.gameOver();
                 return;
             } 
-        } 
+        }
+
+        if(scene == SCENES.BASE) {
+            getBase().updateBaseStates(day);
+        }
 
         if(scene == SCENES.MAP) {
             map.displayMap();
