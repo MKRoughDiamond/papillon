@@ -44,6 +44,26 @@ public class TechnologyDatabase : MonoBehaviour {
         }
     }
 
+    public static string findNameById(int id) {
+        foreach (Technology tech in techList) {
+            if (tech.getId() == id) {
+                return tech.getName();
+            }
+        }
+
+        return "notExists";
+    }
+
+    public static int findIdByName(string name) {
+        foreach (Technology tech in techList) {
+            if (tech.getName() == name) {
+                return tech.getId();
+            }
+        }
+
+        return 0;
+    }
+
     public static Technology findTechnology(int id) {
         foreach(Technology tech in techList) {
             if(tech.getId() == id) {

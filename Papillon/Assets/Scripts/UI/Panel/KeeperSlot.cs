@@ -42,12 +42,12 @@ public class KeeperSlot : Slot {
         }
         // move base item to player (if possible)
         else if(type == KEEPERSLOTTYPE.BASE) {
-            if (player.isOverLoaded()) {
-                gm.playSE("fail2");
+
+            if(!player.addItem(element.item.getId(), 1)) {
                 Debug.Log("KEEPER MOVE FAIL : PLAYER OVERLOADED!");
                 return;
             }
-            player.addItem(element.item.getId(), 1);
+
             baseObject.removeItem(element.item.getId(), 1);
         }
 

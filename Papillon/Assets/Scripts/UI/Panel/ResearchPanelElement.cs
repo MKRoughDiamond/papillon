@@ -32,6 +32,10 @@ public class ResearchPanelElement : MonoBehaviour {
         icon.sprite = this.tech.getIcon();
     }
 
+    public Technology getTech() {
+        return tech;
+    }
+
     // formalize text
     /*
      * 기술1

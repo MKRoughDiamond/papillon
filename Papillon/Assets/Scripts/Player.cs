@@ -118,10 +118,16 @@ public class Player {
     //}
 
     // get item from object(itemholder)
-    public void addItem(int id, int count) {
+    public bool addItem(int id, int count) {
+
+        if (isOverLoaded()) {
+            gm.showMessage("소지품이 너무 무거워서 가질 수 없습니다!");
+            gm.playSE("fail2");
+            return false;
+        }
 
         if(count == 0)
-            return;
+            return false;
 
         Item item = ItemDatabase.findItem(id);
 
@@ -144,6 +150,8 @@ public class Player {
             }
         }
         updateItemWeightsSum();
+
+        return true;
 
         // FOR DEBUG
         // printInventory();

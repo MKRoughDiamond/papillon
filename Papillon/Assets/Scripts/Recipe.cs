@@ -14,7 +14,7 @@ public class Recipe {
         this.id = id;
         this.ingredients = new List<RecipeElement>(ingredients);
         this.product = product;
-        this.requireTech = null;
+        this.requireTech = new List<int>();
         this.craftLevel = 1;
     }
 

@@ -14,7 +14,7 @@ public class CraftPanel : Panel {
 
     private string elementParent = "Scroll/Viewport/CraftList";
 
-    private void Start() {
+    private void Awake() {
         gm = GameManager.gm;
         player = gm.getPlayer();
         cm = gm.getCraftManager();
@@ -34,27 +34,33 @@ public class CraftPanel : Panel {
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
+
+            bool canCraft = true;
+
+            // don't display upgrades
             if (recipe.getId() >= 1000)
                 continue;
+
             else {
-                bool canCraft = true;
                 
-                //is all tech done
-                if(recipe.getRequireTech() != null) { 
-                    foreach (int tech in recipe.getRequireTech()) {
-                        if(!rm.checkTechDone(tech)) {
-                            canCraft = false;
-                            break;
-                        }
-                    }
-                }
+                // lets not use this 
+
+                ////is all tech done
+                //if(recipe.getRequireTech() != null) { 
+                //    foreach (int tech in recipe.getRequireTech()) {
+                //        if(!rm.checkTechDone(tech)) {
+                //            canCraft = false;
+                //            break;
+                //        }
+                //    }
+                //}
 
                 //is base crafting level sufficient
                 if (bm.getBase().getCraftLevel() < recipe.getCraftLevel())
                     canCraft = false;
 
-                if (!canCraft)
-                    continue;
+                //if (!canCraft)
+                //    continue;
             }
             // Generate elements
             GameObject element = Instantiate(panelElement);
@@ -64,6 +70,10 @@ public class CraftPanel : Panel {
             element.transform.parent = transform.Find(elementParent);
 
             element.GetComponent<CraftPanelElement>().init(recipe);
+
+            // if craft level is not matched, set button not interactable
+            if (!canCraft)
+                element.GetComponent<Button>().interactable = false;
             // element.transform.Find("CraftIcon").GetComponent<Image>().sprite = element.GetComponent<CraftPanelElement>().icon;
 
 
@@ -75,6 +85,10 @@ public class CraftPanel : Panel {
         foreach(Transform t in parent) {
             Destroy(t.gameObject);
         }
+    }
+
+    private void OnEnable() {
+        makeCraftList();
     }
 
 

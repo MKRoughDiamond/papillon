@@ -89,11 +89,17 @@ public class GameManager : MonoBehaviour {
          * **CAUTION**
          * You must initialize managers after initializing databases, player
          * because initializing managers contain loading object, data from database, player
+         * also, order of initializing managers also matters
          */
-        craftManager = GetComponent<CraftManager>();
-        craftManager.init();
+
         researchManager = GetComponent<ResearchManager>();
         researchManager.init();
+        
+        // craftManager references researchManager
+        craftManager = GetComponent<CraftManager>();
+        craftManager.init();
+
+        //
         boardManager = GetComponent<BoardManager>();
         boardManager.init();
         soundManager = GetComponentInChildren<SoundManager>();

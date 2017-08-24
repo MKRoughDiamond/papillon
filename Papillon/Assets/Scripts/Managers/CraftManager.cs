@@ -9,11 +9,13 @@ using UnityEngine;
 public class CraftManager : MonoBehaviour {
 
     private GameManager gm;
+    private ResearchManager rm;
     private Player player;
     List<Recipe> recipeList;
 
     public void init() {
         gm = GameManager.gm;
+        rm = gm.getResearchManager();
         player = gm.getPlayer();
         recipeList = RecipeDatabase.load();
     }
@@ -22,12 +24,20 @@ public class CraftManager : MonoBehaviour {
     public bool craft(int recipeId, int craftCount) {
         Recipe recipe = getRecipe(recipeId);
         List<RecipeElement> ingredients = recipe.getIngredients();
+        List<int> requirements = recipe.getRequireTech();
         RecipeElement product = recipe.getProduct();
         
         foreach(RecipeElement e in ingredients) {
             // player don't have enough item
             if(!player.checkItemPossession(e.item.getId(), e.count * craftCount)) {
                 Debug.Log("NOT ENOUGH ITEM T.T");
+                return false;
+            }
+        }
+
+        foreach(int id in requirements) {
+            if (!rm.checkTechDone(id)) {
+                Debug.Log("TECHNOLOGY NOT SATISFIED");
                 return false;
             }
         }

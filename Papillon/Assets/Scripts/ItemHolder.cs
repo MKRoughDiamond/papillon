@@ -62,7 +62,10 @@ public class ItemHolder : MonoBehaviour {
     // drop one item is holds
     public void dropItem() {
         ItemEffect itemEffect = possesion.getItem().getEffect();
-        player.addItem(possesion.item.getId(), 1);
+        
+        if(!player.addItem(possesion.item.getId(), 1)) {
+            return;
+        }
         player.changeSatiety(SATIETYPOINTS.COLLECT);
 
         updateFieldPanel(possesion.item);

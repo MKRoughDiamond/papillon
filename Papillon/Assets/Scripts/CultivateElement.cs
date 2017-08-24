@@ -31,6 +31,18 @@ public class CultivateElement {
         return requiredDay - passedDay;
     }
 
+    public int getProductId() {
+        ItemEffect e = item.getEffect();
+
+        if (e.name != "Seed") {
+            Debug.Log("ERROR : ITEM IS NOT SEED");
+        }
+
+        int product = e.parameters[1];
+
+        return product;
+    }
+
     // check cultivating is done
     public bool isFinished(int day) {
         return getLeftDay(day) <= 0;

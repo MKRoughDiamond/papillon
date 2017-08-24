@@ -8,10 +8,12 @@ public class CraftPanelElement : MonoBehaviour {
 
     public Text name;               // name of product
     public Text ingredients;       // list of ingredients
+    public Text requirements;
     public Image icon;             // icon of product
 
     private GameManager gm;
     private CraftManager cm;
+    private ResearchManager rm;
     private Player player;
     private Recipe recipe;
 
@@ -29,14 +31,20 @@ public class CraftPanelElement : MonoBehaviour {
         panel = GetComponentInParent<CraftPanel>();
         gm = GameManager.gm;
         cm = gm.getCraftManager();
+        rm = gm.getResearchManager();
         player = gm.getPlayer();
 
         this.recipe = recipe;
         
         name.text = this.recipe.getProduct().item.getName() + " x " + this.recipe.getProduct().count.ToString();
         ingredients.text = generateIngredientsText(this.recipe.getIngredients());
+        requirements.text = generateRequirementsText(this.recipe);
 
         icon.sprite = recipe.getProduct().item.getIcon(); 
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
     }
 
     // formalize text
@@ -59,6 +67,27 @@ public class CraftPanelElement : MonoBehaviour {
                 text += e.item.getName() + " x " + e.count.ToString();
             }
         }
+        return text;
+    }
+
+    private string generateRequirementsText(Recipe recipe) {
+        List<int> requirements = recipe.getRequireTech();
+
+        string text = "";
+        bool flag = false;
+        foreach (int id in requirements) {
+
+            if (flag) text += "\n";
+            else flag = true;
+
+            if (rm.checkTechDone(id)) {
+                text += TechnologyDatabase.findNameById(id);
+            } else {
+                text += highlight(TechnologyDatabase.findNameById(id));
+            }
+            
+        }
+
         return text;
     }
 

@@ -29,6 +29,10 @@ public class CultivatePanelElement : MonoBehaviour {
         icon.sprite = this.element.getItem().getIcon();
     }
 
+    public CultivateElement getElement() {
+        return element;
+    }
+
     private string generateDayText() {
 
         int requiredDay = element.getRequiredDay();
