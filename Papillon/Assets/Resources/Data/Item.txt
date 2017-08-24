@@ -28,8 +28,8 @@
 # USABLES
 100 그린프루트 40의_허기를_회복 0.1 1 Satiety_Restore 40
 101 통조림 200의_허기를_회복 0.2 1 Satiety_Restore 200
-102 레드콘 60의_허기를_회복 0.2 1 Satiety_Restore 60
-103 오렌지포테이토 100의_허기를_회복 0.3 1 Satiety_Restore 100
+102 레드콘 50의_허기를_회복 0.2 1 Satiety_Restore 50
+103 오렌지포테이토 120의_허기를_회복 0.3 1 Satiety_Restore 120
 104 오일리콘 50의_허기를_회복 0.3 1 Satiety_Restore 50
 105 슈퍼포테이토 150의_허기를_회복 0.5 1 Satiety_Restore 150
 106 붕대 20의_체력을_회복 0.5 1 Health_Restore 20
@@ -39,16 +39,16 @@
 #
 #
 # WEARABLES
-200 천_보호구 천으로_된_보호구 5 2 Protection 3
-201 철_보호구 철로_된_보호구 10 2 Protection 5
-202 티타늄_보호구 티타늄으로_된_보호구 20 2 Protection 10
+200 천_보호구 천으로_된_보호구(+보호_3) 5 2 Protection 3
+201 철_보호구 철로_된_보호구(+보호_5) 10 2 Protection 5
+202 티타늄_보호구 티타늄으로_된_보호구(+보호_10) 20 2 Protection 10
 203 작업_슈트 작업_슈트._효율을_높여줌 10 2 Efficiency 2
 204 철_드릴 철_드릴 5 2 Efficiency 2
 205 티타늄_드릴 티타늄_드릴 10 2 Efficiency 4
 #
 #
 # SEEDS (Seed [time] [product] [# of products] [seed] [# of seeds])
-300 레드콘_씨앗 레드콘의_씨앗 0.1 3 Seed 2 102 3 300 2
+300 레드콘_씨앗 레드콘의_씨앗 0.1 3 Seed 2 102 2 300 2
 301 오렌지포테이토_씨앗 오렌지포테이토의_씨앗 0.1 3 Seed 3 103 1 301 2
 302 오일리콘_씨앗 오일리콘의_씨앗 0.2 3 Seed 3 104 2 302 0
 303 슈퍼포테이토_씨앗 슈퍼포테이토의_씨앗 0.4 3 Seed 5 105 1 303 0

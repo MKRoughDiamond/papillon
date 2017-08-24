@@ -18,6 +18,7 @@ public class Map : MonoBehaviour {
     private int baseCount = 0;          // how many bases are built ( for base indexing )
     private int rocketGenerateLimit = 20;
     private int rocketGenerateCount;
+    private bool isEven;
 
     public GameObject canvas;
     public GameObject forestIcon;
@@ -36,6 +37,7 @@ public class Map : MonoBehaviour {
         bm = gm.getBoardManager();
         player = gm.getPlayer();
         rocketGenerateCount = 0;
+        isEven = true;
 
         fields = new List<List<Field>>();
         for (int i = 0; i < eyesight * 2; i++)
@@ -46,7 +48,7 @@ public class Map : MonoBehaviour {
     public void generateMap(int x)
     {
         fields.Add(new List<Field>());
-        if (x % 2 == 0) {
+        if (isEven) {
             for (int i = 0; i < Random.Range(1, 5); i++) {
                 while (true) {
                     int fieldType = FIELDTYPE.TYPES[Random.Range(0, FIELDTYPE.TYPES.Length)];
@@ -66,6 +68,7 @@ public class Map : MonoBehaviour {
                 }
             }
         }
+        isEven = !isEven;
         rocketGenerateCount++;
     }
 
