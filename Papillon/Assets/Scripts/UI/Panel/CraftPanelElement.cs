@@ -12,18 +12,28 @@ public class CraftPanelElement : MonoBehaviour {
 
     private GameManager gm;
     private CraftManager cm;
+    private Player player;
     private Recipe recipe;
 
-    private void Start() {
-        gm = GameManager.gm;
-        cm = gm.getCraftManager();
-    }
+    private CraftPanel panel;
+
+    //private void Awake() {
+    //    gm = GameManager.gm;
+    //    cm = gm.getCraftManager();
+    //    player = gm.getPlayer();
+    //}
 
     // initialize name, ingredients, icon
     public void init(Recipe recipe) {
-        this.recipe = recipe;
 
-        name.text = this.recipe.getProduct().item.getName() + " x" + this.recipe.getProduct().count.ToString();
+        panel = GetComponentInParent<CraftPanel>();
+        gm = GameManager.gm;
+        cm = gm.getCraftManager();
+        player = gm.getPlayer();
+
+        this.recipe = recipe;
+        
+        name.text = this.recipe.getProduct().item.getName() + " x " + this.recipe.getProduct().count.ToString();
         ingredients.text = generateIngredientsText(this.recipe.getIngredients());
 
         icon.sprite = recipe.getProduct().item.getIcon(); 
@@ -38,17 +48,29 @@ public class CraftPanelElement : MonoBehaviour {
         string text = "";
         bool flag = false;
         foreach (RecipeElement e in ingredients) {
+
             if (flag) text += "\n";
             else flag = true;
-            text += e.item.getName() + " x " + e.count.ToString();
+
+            // highlight items player don't have
+            if (!player.checkItemPossession(e.item.getId(), e.count)) {
+                text += highlight(e.item.getName() + " x " + e.count.ToString());
+            } else {
+                text += e.item.getName() + " x " + e.count.ToString();
+            }
         }
         return text;
+    }
+
+    private string  highlight(string s, string color="maroon") {
+        return "<color=" + color + ">" + s + "</color>";
     }
 
     // when button is clicked, try craft
     public void onClick() {
         if (cm.craft(this.recipe.getId(), 1)) {
             gm.playSE("wood-hammering");
+            panel.makeCraftList();
         } else {
             gm.playSE("fail2");
         }

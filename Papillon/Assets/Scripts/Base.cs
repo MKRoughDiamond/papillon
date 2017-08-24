@@ -65,6 +65,7 @@ public class Base {
     // try upgrade base
     public void upgradeBase(int upgradeType) {
         if(upgradeType == BASEUPGRADE.CRAFT) {
+            Debug.Log(cm);
             if (cm.craft(BASEUPGRADE.CRAFT_UPGRADE[craftLevel], 1)) {
                 craftLevel++;
                 gm.playSE("hammering");

@@ -41,15 +41,17 @@ public class BoardManager : MonoBehaviour {
 
     // if day changed
     public void nextDay(int scene, int day) {
+        if (gm.isBlackholeMoveTurn(day)) {
+            if (!map.destroyFrontField()) {
+                gm.gameOver();
+                return;
+            } 
+        } 
+
         if(scene == SCENES.MAP) {
-            if(gm.isBlackholeMoveTurn(day))
-                if (!map.destroyFrontField())
-                    gm.gameOver();
-                else
-                    map.displayMap();
-            else
-                map.displayMap();
+            map.displayMap();
         }
+
     }
 
     public Map getMap() {
