@@ -107,6 +107,10 @@ public class EffectProcessor {
         int seedCount = param[4];
 
         player.addItem(productId, productCount);
+
+        if (rm.checkTechDone(TechnologyDatabase.findIdByName("비료")))
+            seedCount += 1;
+
         player.addItem(seedId, seedCount);
     }
 
