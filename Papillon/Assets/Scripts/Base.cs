@@ -22,6 +22,9 @@ public class Base {
     private int craftLevel = 1;
     private int cultivateLevel = 1;
 
+    // max # of cultivate
+    private int[] max_cultivate = { 0, 10, 20, 40 };
+
     public Base(int id) {
 
         gm = GameManager.gm;
@@ -139,6 +142,12 @@ public class Base {
 
     // start cultivating
     public void cultivate(Item item, int day) {
+
+        if(cultivatingList.Count >= max_cultivate[cultivateLevel]) {
+            gm.showMessage("농장이 가득찼습니다.");
+            return;
+        }
+
         cultivatingList.Add(new CultivateElement(item, day));
         player.removeItem(item.getId(), 1);
         gm.playSE("grass");
