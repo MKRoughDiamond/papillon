@@ -13,10 +13,12 @@ public class ResearchPanelElement : MonoBehaviour {
 
     private ResearchPanel panel;
     private ResearchManager rm;
+    private Player player;
     private Technology tech;
 
     private void Awake() {
         rm = GameManager.gm.getResearchManager();
+        player = GameManager.gm.getPlayer();
     }
 
     // initialize name, description, icon
@@ -62,6 +64,7 @@ public class ResearchPanelElement : MonoBehaviour {
         // 나중에 유동값으로 바꾸자
         if(panel.getState() == "AVAILABLE") {
             rm.progress(tech.id, 20);
+            player.changeSatiety(SATIETYPOINTS.RESEARCH);
             panel.makeResearchList();
         }
     }

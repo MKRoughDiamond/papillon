@@ -80,6 +80,7 @@ public class FieldDropDatabase : MonoBehaviour {
         rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("원자력 로켓 엔진"), 0, 0, 1, 1));
         rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우주선 날개"), 0, 0, 1, 1));
         rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우주선 동체"), 0, 0, 1, 1));
+        rocket.Add(new FieldDropDatabaseElement(ItemDatabase.findIdByName("우주선 생명유지장치"), 0, 0, 1, 1));
     }
 }
 

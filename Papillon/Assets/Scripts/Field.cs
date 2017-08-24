@@ -30,7 +30,7 @@ public class Field {
 
         // YES THIS IS FUCKING HARD-CODING!!
         /*
-         * rocket 필드에는 우주선 구성에 필요한 5개 아이템이 있는데 (count가 0이라 필드 상에 표시되지는 않음)
+         * rocket 필드에는 우주선 구성에 필요한 6개 아이템이 있는데 (count가 0이라 필드 상에 표시되지는 않음)
          * 그 중 랜덤한 하나의 count를 -1로 지정해주고, 이것이 부족한 아이템이 된다
          */
         if(getType() == FIELDTYPE.ROCKET) {

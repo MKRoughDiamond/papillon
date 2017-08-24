@@ -351,4 +351,5 @@ public static class SATIETYPOINTS {
     public const int SLEEP = -50; // when player go to sleep (next day)
     public const int COLLECT = -10; // when player get item from field
     public const int CRAFTING = -5;
+    public const int RESEARCH = -20;
 }

@@ -18,7 +18,7 @@ public class HealthText : MonoBehaviour {
 
     private void Update() {
 
-        if (player.getHealth() * 10 < player.getMaxHealth()) {
+        if (player.getHealth() * 5 < player.getMaxHealth()) {
             healthText.color = Color.red;
         } else {
             healthText.color = originalColor;
