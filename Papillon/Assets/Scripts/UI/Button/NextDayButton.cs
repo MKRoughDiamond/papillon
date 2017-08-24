@@ -21,7 +21,7 @@ public class NextDayButton : MonoBehaviour {
         if (gm.isBlackholeMoveTurn(gm.getDay() + 1)) {
             // player is just in front of blackhole
             if(gm.getBoardManager().getMap().getDistance() == 1 && !alert) {
-                gm.showMessage("이대로 다음 날로 가면 블랙홀에 잡아먹힙니다.\n 살아남을 방법을 궁리해주세요.");
+                gm.showMessage("이대로 자면 우주 먼지가 됩니다!");
                 alert = true;
                 return;
             }
