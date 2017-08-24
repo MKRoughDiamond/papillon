@@ -96,7 +96,7 @@ public class Map : MonoBehaviour {
 
         playerPosition = new Vector2(playerPosition.x - 1, playerPosition.y);
 
-        if (playerPosition.x < 0)
+        if (getDistance() < 1)
             return false;
 
         fields.RemoveAt(0);

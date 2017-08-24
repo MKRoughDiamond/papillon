@@ -70,12 +70,12 @@ public class GameManager : MonoBehaviour {
          * You must initialize managers after initializing databases, player
          * because initializing managers contain loading object, data from database, player
          */
-        boardManager = GetComponent<BoardManager>();
-        boardManager.init();
         craftManager = GetComponent<CraftManager>();
         craftManager.init();
         researchManager = GetComponent<ResearchManager>();
         researchManager.init();
+        boardManager = GetComponent<BoardManager>();
+        boardManager.init();
         soundManager = GetComponentInChildren<SoundManager>();
 
         /*
@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OnLevelWasLoaded (int level) {
+        scene = level;
         //getInventory().SetActive(false);
         boardManager.boardSetup(level);
     }

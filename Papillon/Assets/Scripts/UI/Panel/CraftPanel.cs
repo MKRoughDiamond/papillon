@@ -12,6 +12,8 @@ public class CraftPanel : Panel {
     private BoardManager bm;
     private ResearchManager rm;
 
+    private string elementParent = "Scroll/Viewport/CraftList";
+
     private void Start() {
         gm = GameManager.gm;
         player = gm.getPlayer();
@@ -25,7 +27,10 @@ public class CraftPanel : Panel {
     }
     
     // construct craft list that will be shown on the panel
-    private void makeCraftList() {
+    public void makeCraftList() {
+
+        clearList();
+
         List<Recipe> recipeList = cm.getRecipeList();
 
         foreach(Recipe recipe in recipeList) {
@@ -53,12 +58,22 @@ public class CraftPanel : Panel {
             }
             // Generate elements
             GameObject element = Instantiate(panelElement);
-            element.GetComponent<CraftPanelElement>().init(recipe);
-            // element.transform.Find("CraftIcon").GetComponent<Image>().sprite = element.GetComponent<CraftPanelElement>().icon;
 
             // Attach it to panel scroll list
             // If you change name of object in inspector, you must change below code
-            element.transform.parent = transform.Find("Scroll/Viewport/CraftList");
+            element.transform.parent = transform.Find(elementParent);
+
+            element.GetComponent<CraftPanelElement>().init(recipe);
+            // element.transform.Find("CraftIcon").GetComponent<Image>().sprite = element.GetComponent<CraftPanelElement>().icon;
+
+
+        }
+    }
+
+    private void clearList() {
+        Transform parent = transform.Find(elementParent);
+        foreach(Transform t in parent) {
+            Destroy(t.gameObject);
         }
     }
 

@@ -145,7 +145,7 @@ public class Player {
         updateItemWeightsSum();
 
         // FOR DEBUG
-        printInventory();
+        // printInventory();
     }
 
     // use item

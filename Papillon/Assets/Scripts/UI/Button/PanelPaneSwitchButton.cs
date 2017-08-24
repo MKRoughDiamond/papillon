@@ -14,6 +14,7 @@ public class PanelPaneSwitchButton : MonoBehaviour {
     }
 
     public void onClick() {
+        GameManager.gm.playSE("flip");
         panelScript.switchPane(paneName);
     }
 }
