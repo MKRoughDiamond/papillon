@@ -46,6 +46,14 @@ public class GameManager : MonoBehaviour {
         initGame();
     }
 
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            if (GameObject.Find("MessagePanel(Clone)") == null)
+                gamePause();
+            else
+                GameObject.Find("MessagePanel(Clone)").GetComponent<MessagePanel>().close();
+    }
+
     private void initGame() {
 
         /*
@@ -148,10 +156,13 @@ public class GameManager : MonoBehaviour {
         soundManager.playSE(name);
     }
 
-    public void showMessage(string text) {
+    public void showMessage(string text, bool flag=false) {
         GameObject panel = Instantiate(msgPanel, new Vector3(0f, 0f, 0f), Quaternion.identity) as GameObject;
         panel.transform.SetParent(GameObject.Find("Canvas").transform, false);
-        panel.GetComponent<MessagePanel>().setText(text);
+        if(flag)
+            panel.GetComponent<PauseMessagePanel>().setText(text);
+        else
+            panel.GetComponent<MessagePanel>().setText(text);
     }
 
 
@@ -235,6 +246,7 @@ public class GameManager : MonoBehaviour {
 
     public void gamePause() {
         Debug.Log("GAME PAUSE");
+        showMessage("Game Paused", true);
     }
 
     // check rocket launch is possible
