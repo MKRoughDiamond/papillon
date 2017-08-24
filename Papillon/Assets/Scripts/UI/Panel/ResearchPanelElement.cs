@@ -16,13 +16,13 @@ public class ResearchPanelElement : MonoBehaviour {
     private Technology tech;
 
     private void Awake() {
-        panel = GetComponentInParent<ResearchPanel>();
         rm = GameManager.gm.getResearchManager();
     }
 
     // initialize name, description, icon
     public void init(Technology tech) {
         this.tech = tech;
+        panel = GetComponentInParent<ResearchPanel>();
 
         name.text = this.tech.getName();
         //description.text = this.tech.getDescription();

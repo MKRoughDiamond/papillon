@@ -56,7 +56,8 @@ public class Player {
     public void changeSatiety(int d) {
         satiety = Mathf.Min(max_satiety, satiety + d);
 
-        if(satiety <= 0) {
+        // let's set it to below 0
+        if(satiety < 0) {
             gm.gameOver();
         }
     }

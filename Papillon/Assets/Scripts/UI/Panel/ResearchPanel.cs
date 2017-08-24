@@ -47,12 +47,13 @@ public class ResearchPanel : Panel {
         foreach(Technology tech in techList) {
             // Generate elements
             GameObject element = Instantiate(panelElement);
-            element.GetComponent<ResearchPanelElement>().init(tech);
 
             // Attach it to panel scroll list
             // If you change name of object in inspector, you must change below code
             element.transform.SetParent(transform.Find(elementParent));
 
+            element.GetComponent<ResearchPanelElement>().init(tech);
+            
         }
 
         setButtonColor();
