@@ -171,6 +171,7 @@ public class Player {
 
                 gm.playSE("use-item");
                 Debug.Log("USED ITEM");
+                updateItemWeightsSum();
                 return true;
             }
         }
@@ -192,6 +193,7 @@ public class Player {
                         gm.doEffect(inventory[i].item.getEffect(),false);
                     if(inventory[i].count==0)
                         inventory.RemoveAt(i);
+                    updateItemWeightsSum();
                     return true;
                 } else {
                     Debug.Log("ERROR : removeItem() fail - not enough items");
