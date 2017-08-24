@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Tutorial : MonoBehaviour, IPointerClickHandler {
+public class Tutorial : MonoBehaviour {
 
     public GameObject[] images;
     public GameObject[] panels;
@@ -15,17 +15,31 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler {
 
     int imageIndex = 0;
     int panelIndex = 0;
-    bool[] imageSwitch = new bool[] { false };
+    bool[] imageSwitch = new bool[] {
+        false, false, false, true,
+        false,false,true,false,
+        false,true,true,true,
+        true,false,true,false,
+        true,true,true,false,
+        true,true,false,false,
+        false,false,false,false,
+        true,false,false,false,
+        false,true,true,false,
+        true,false,true,false,
+        false, false,
+    };
 
-    public void OnPointerClick(PointerEventData eventData) {
+    public void onClick() {
         if (start) {
 
-            if(panelIndex >= panels.Length) {
+            Debug.Log("clicked");
+
+            if (panelIndex >= panels.Length) {
                 endTutorial();
             }
 
-            if (panelIndex > 1)
-                panels[panelIndex - 1].SetActive(false);
+            if (panelIndex >= 1)
+                panels[panelIndex-1].SetActive(false);
 
             panels[panelIndex].SetActive(true);
 
@@ -34,11 +48,14 @@ public class Tutorial : MonoBehaviour, IPointerClickHandler {
             }
 
             panelIndex++;
-        }    
+        }
     }
 
     public void startTutorial() {
         start = true;
+        GameObject.Find("StartPanel").SetActive(false);
+
+        panels[panelIndex++].SetActive(true);
     }
 
     public void endTutorial() {

@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour {
                     return;
                 }
             }
+
+            gamePause();
         }
     }
 
@@ -282,14 +284,14 @@ public class GameManager : MonoBehaviour {
     public void gameOver() {
         Debug.Log("GAMEOVER");
         playBGM("game-over");
-        SceneManager.LoadScene(6);
+        SceneManager.LoadScene(7);
     }
 
     public void gameClear() {
         Debug.Log("GAMECLEAR");
         playBGM("rocket-launch");
         playSE("rocket");
-        SceneManager.LoadScene(7);
+        SceneManager.LoadScene(8);
     }
 
     public void gamePause() {
