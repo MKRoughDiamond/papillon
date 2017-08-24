@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CultivatePanel : Panel {
 
@@ -65,6 +66,8 @@ public class CultivatePanel : Panel {
 
             element.GetComponent<CultivatePanelElement>().init(e);
         }
+
+        setButtonColor();
     }
 
     public void clearList() {
@@ -87,6 +90,31 @@ public class CultivatePanel : Panel {
 
     public override void switchPane(string paneName) {
         setState(paneName);
+
         makeList();
+    }
+
+    // set pane button color
+    private void setButtonColor() {
+        
+        // yes this it hardcoding!
+
+        PanelPaneSwitchButton[] buttons = GetComponentsInChildren<PanelPaneSwitchButton>();
+
+        var originalColor = Color.white;
+
+        foreach (PanelPaneSwitchButton b in buttons) {
+            if (b.paneName == state) {
+                var color = b.gameObject.GetComponent<Button>().colors;
+                color.normalColor = Color.black;
+                color.highlightedColor = Color.black;
+                b.gameObject.GetComponent<Button>().colors = color;
+            } else {
+                var color = b.gameObject.GetComponent<Button>().colors;
+                color.normalColor = originalColor;
+                color.highlightedColor = originalColor;
+                b.gameObject.GetComponent<Button>().colors = color;
+            }
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ResearchPanel : Panel {
 
@@ -54,6 +55,8 @@ public class ResearchPanel : Panel {
 
         }
 
+        setButtonColor();
+
     }
 
     private void setState(string newState) {
@@ -87,5 +90,27 @@ public class ResearchPanel : Panel {
         makeResearchList();
     }
 
+    // set pane button color
+    private void setButtonColor() {
 
+        // yes this it hardcoding!
+
+        PanelPaneSwitchButton[] buttons = GetComponentsInChildren<PanelPaneSwitchButton>();
+
+        var originalColor = Color.white;
+
+        foreach (PanelPaneSwitchButton b in buttons) {
+            if (b.paneName == state) {
+                var color = b.gameObject.GetComponent<Button>().colors;
+                color.normalColor = Color.black;
+                color.highlightedColor = Color.black;
+                b.gameObject.GetComponent<Button>().colors = color;
+            } else {
+                var color = b.gameObject.GetComponent<Button>().colors;
+                color.normalColor = originalColor;
+                color.highlightedColor = originalColor;
+                b.gameObject.GetComponent<Button>().colors = color;
+            }
+        }
+    }
 }

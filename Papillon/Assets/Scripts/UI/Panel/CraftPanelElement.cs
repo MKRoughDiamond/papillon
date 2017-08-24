@@ -62,7 +62,7 @@ public class CraftPanelElement : MonoBehaviour {
         return text;
     }
 
-    private string  highlight(string s, string color="maroon") {
+    private string  highlight(string s, string color="red") {
         return "<color=" + color + ">" + s + "</color>";
     }
 
