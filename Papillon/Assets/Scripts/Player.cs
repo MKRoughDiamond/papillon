@@ -64,8 +64,10 @@ public class Player {
 
     public void getDamageWithProb(int d, int prob) {
         int temp = Random.Range(0, 100);
-        if (temp <= prob)
+        if (temp <= prob) {
+            gm.playSE("ugh");
             changeHealth(d);
+        }
     }
 
     public void changeArmor(int d) {

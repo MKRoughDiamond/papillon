@@ -23,7 +23,7 @@ public class Base {
     private int cultivateLevel = 1;
 
     // max # of cultivate
-    private int[] max_cultivate = { 0, 10, 20, 40 };
+    private int[] max_cultivate = { 0, 5, 10, 20 };
 
     public Base(int id) {
 
@@ -50,6 +50,11 @@ public class Base {
     public int getCraftLevel(){
         return craftLevel;
     }
+
+    public int getCultivateLevel() {
+        return cultivateLevel;
+    }
+
 
     #region Base Upgrade ralated
 
@@ -113,9 +118,13 @@ public class Base {
             return;
         }
     }
-#endregion
+    #endregion
 
     #region Cultivation related
+
+    public int getMaxCultivateCount() {
+        return max_cultivate[cultivateLevel];
+    }
 
     // show all seeds that player have
     public List<CultivateElement> getSeedList(int day) {
@@ -143,7 +152,7 @@ public class Base {
     // start cultivating
     public void cultivate(Item item, int day) {
 
-        if(cultivatingList.Count >= max_cultivate[cultivateLevel]) {
+        if(cultivatingList.Count >= getMaxCultivateCount()) {
             gm.showMessage("농장이 가득찼습니다.");
             return;
         }

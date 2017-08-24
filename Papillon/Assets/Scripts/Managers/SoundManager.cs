@@ -54,6 +54,7 @@ public class SoundManager : MonoBehaviour {
         SEDic.Add("wood-hammering", 13);
         SEDic.Add("write", 14);
         SEDic.Add("grass", 15);
+        SEDic.Add("ugh", 16);
     }
 
     public void playBGM(string name) {
