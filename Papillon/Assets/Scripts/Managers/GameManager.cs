@@ -53,13 +53,38 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-            if (GameObject.Find("MessagePanel(Clone)") == null && GameObject.Find("PauseMessagePanel(Clone)") == null)
-                gamePause();
-            else if (GameObject.Find("MessagePanel(Clone)") == null)
-                GameObject.Find("PauseMessagePanel(Clone)").GetComponent<PauseMessagePanel>().close();
-            else
-                GameObject.Find("MessagePanel(Clone)").GetComponent<MessagePanel>().close();
+
+        string[] destroyablePanels = new string[] {
+            "MessagePanel(Clone)",
+            "PauseMessagePanel(Clone)",
+        };
+
+        string[] hidablePanels = new string[] {
+            "InventoryPanel",
+            "CraftPanel",
+            "CultivatePanel",
+            "ResearchPanel"
+        };
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            foreach (string s in destroyablePanels) {
+                GameObject o = GameObject.Find(s);
+
+                if (o != null) {
+                    Destroy(o);
+                    return;
+                }
+            }
+
+            foreach(string s in hidablePanels) {
+                GameObject o = GameObject.Find(s);
+               
+                if (o != null) {
+                    o.SetActive(false);
+                    return;
+                }
+            }
+        }
     }
 
     private void initGame() {
