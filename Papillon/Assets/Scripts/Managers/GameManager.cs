@@ -327,9 +327,9 @@ public class GameManager : MonoBehaviour {
 
 //SCENES
 public static class SCENES {
-    public const int FIELD = 1;
-    public const int MAP = 2;
-    public const int BASE = 3;
+    public const int FIELD = 2;
+    public const int MAP = 3;
+    public const int BASE = 4;
     //public const int LAB = 1;
     //public const int FACTORY = 2;
     //public const int FARM = 3;
