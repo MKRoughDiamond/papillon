@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
         //inventory = transform.Find("Canvas/InventoryPanel").gameObject;
 
         // default scene
-        scene = SCENES.MAP;
+        scene = SCENES.BASE;
 
         // game play variables initialize
         day = 1;
