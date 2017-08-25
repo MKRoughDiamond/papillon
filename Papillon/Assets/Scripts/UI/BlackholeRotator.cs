@@ -12,6 +12,6 @@ public class BlackholeRotator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        r.Rotate(new Vector3(0, 0, -1));
+        r.Rotate(new Vector3(0, 0, 1));
 	}
 }
