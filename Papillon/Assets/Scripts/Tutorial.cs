@@ -30,6 +30,7 @@ public class Tutorial : MonoBehaviour {
     };
 
     public void onClick() {
+
         if (start) {
 
             Debug.Log("clicked");

@@ -63,8 +63,9 @@ public class ResearchPanelElement : MonoBehaviour {
     public void onClick() {
         // 나중에 유동값으로 바꾸자
         if(panel.getState() == "AVAILABLE") {
-            rm.progress(tech.id, 20);
-            player.changeSatiety(SATIETYPOINTS.RESEARCH);
+            if(rm.progress(tech.id, 20)) {
+                player.changeSatiety(SATIETYPOINTS.RESEARCH);
+            }
             panel.makeResearchList();
         }
     }
